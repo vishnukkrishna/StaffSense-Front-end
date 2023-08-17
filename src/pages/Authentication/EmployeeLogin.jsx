@@ -34,8 +34,8 @@ function EmployeeLogin() {
         <Card className="md:w-1/2 md:h-3/5 md:mr-4 lg:mr-4 sm:ml-0 md:ml-60 sm:mt-0 md:mt-60">
           <CardHeader
             variant="gradient"
-            color="gray"
-            className="mb-4 bg-transparent grid h-28 place-items-center mt-8 "
+            // color="gray"
+            className="mb-4 bg-transparent grid h-28 place-items-center mt-8 bg-customColor"
           >
             <Typography variant="h3" color="white">
               Sign In
@@ -66,7 +66,7 @@ function EmployeeLogin() {
           </CardBody>
 
           <CardFooter className="pt-0 mt-6">
-            <Button variant="gradient" fullWidth>
+            <Button className="bg-customColor" fullWidth>
               Sign In
             </Button>
           </CardFooter>

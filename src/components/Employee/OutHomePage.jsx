@@ -292,6 +292,7 @@ function OutHomePage() {
           />
         </div>
       </div>
+      {/* ................................................... */}
       <div className="h-[200px] mt-10">
         <h1 className="text-3xl m-20 p-10">OUR CLIENTELE</h1>
       </div>
