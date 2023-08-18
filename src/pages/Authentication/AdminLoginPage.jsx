@@ -13,17 +13,16 @@ import {
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // Images
-import img from "../../images/login.png";
+import img from "../../images/hrms.png";
 
-function EmployeeLogin() {
+function AdminLoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-
   return (
     <div className="flex flex-col md:flex-row h-screen items-center">
-      <div className="md:w-1/2 ">
+      <div className="md:w-1/2 ml-20">
         <img
           src={img}
           alt="Your Alt Text"
@@ -76,4 +75,4 @@ function EmployeeLogin() {
   );
 }
 
-export default EmployeeLogin;
+export default AdminLoginPage;

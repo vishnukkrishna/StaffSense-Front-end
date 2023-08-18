@@ -12,42 +12,36 @@ import { BiUserCircle, BiMessageDetail } from "react-icons/bi";
 import { SlCalender } from "react-icons/sl";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsListCheck } from "react-icons/bs";
-
-import logo from "../../images/Logo.png";
 function SideBar() {
   return (
-    <Card className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 font-hubballi">
-      <div className="mb-2 p-4 items-center">
-        <div className="mt-6 m-10 w-40 h-30">
-          <img src={logo} alt="Logo" />
-        </div>
-      </div>
-      <List className="mt-32 text-lg">
-        <ListItem>
+    // h-[calc(92vh-2rem)] max-w-[20rem]
+    <Card className="h-[calc(92vh-2rem)] max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 font-hubballi border-r-8 rounded-none">
+      <List className="mt-32 text-lg border border-blue-gray-200 dark:border-gray-700 p-2 space-y-2">
+        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
           <ListItemPrefix>
             <BiUserCircle className="h-5 w-5" />
           </ListItemPrefix>
           Profile
         </ListItem>
-        <ListItem>
+        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
           <ListItemPrefix>
             <BsListCheck className="h-5 w-5" />
           </ListItemPrefix>
           Tasks
         </ListItem>
-        <ListItem>
+        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
           <ListItemPrefix>
             <SlCalender className="h-5 w-5" />
           </ListItemPrefix>
           My Leave
         </ListItem>
-        <ListItem>
+        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
           <ListItemPrefix>
             <AiOutlineClockCircle className="h-5 w-5" />
           </ListItemPrefix>
           Applied Leaves
         </ListItem>
-        <ListItem>
+        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
           <ListItemPrefix>
             <BiMessageDetail className="h-5 w-5" />
           </ListItemPrefix>
@@ -62,7 +56,7 @@ function SideBar() {
             />
           </ListItemSuffix>
         </ListItem>
-        <ListItem>
+        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />
           </ListItemPrefix>
