@@ -1,6 +1,8 @@
 import React from "react";
+import { FiEdit } from "react-icons/fi";
+import { Button } from "@material-tailwind/react";
 
-function AdminTasks() {
+function AdminEmployees() {
   return (
     <div className="relative mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -10,19 +12,19 @@ function AdminTasks() {
               Id
             </th>
             <th scope="col" className="px-6 py-3">
-              Project Name
+              Employee Name
             </th>
             <th scope="col" className="px-6 py-3">
-              Description
+              Department
             </th>
             <th scope="col" className="px-6 py-3">
-              Assigned To
+              Contact Number
             </th>
             <th scope="col" className="px-6 py-3">
-              Start_date
+              Email Address
             </th>
             <th scope="col" className="px-6 py-3">
-              End_date
+              Designation
             </th>
             <th scope="col" className="px-6 py-3">
               Action
@@ -37,12 +39,19 @@ function AdminTasks() {
             >
               1111
             </th>
-            <td className="px-6 py-4">myproject</td>
-            <td className="px-6 py-4">Front End</td>
+            <td className="px-6 py-4">Vishnu</td>
+            <td className="px-6 py-4">Support</td>
+            <td className="px-6 py-4">9876543210</td>
             <td className="px-6 py-4">vishnu@gmail.com</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4 text-green-600">Completed</td>
+            <td className="px-6 py-4">jr.Engineer</td>
+            <td className="px-6 py-4">
+              <div className="flex justify-between w-max gap-4">
+                <FiEdit className="text-black text-3xl" />
+                <Button size="sm" className="bg-customColor">
+                  Block
+                </Button>
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -50,4 +59,4 @@ function AdminTasks() {
   );
 }
 
-export default AdminTasks;
+export default AdminEmployees;

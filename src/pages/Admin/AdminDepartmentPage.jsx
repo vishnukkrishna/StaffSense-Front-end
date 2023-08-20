@@ -1,9 +1,9 @@
 import React from "react";
 import AdminNavBar from "../../components/AdminSideBar/AdminNavBar";
 import AdminSideBar from "../../components/AdminSideBar/AdminSideBar";
-import AdminProject from "../../components/Admin/AdminProjects";
+import AdminDepartments from "../../components/Admin/AdminDepartments";
 
-function AdminProjectPage() {
+function AdminDepartmentPage() {
   return (
     <div>
       <div>
@@ -11,10 +11,10 @@ function AdminProjectPage() {
       </div>
       <div className="flex col-2">
         <AdminSideBar />
-        <AdminProject />
+        <AdminDepartments />
       </div>
     </div>
   );
 }
 
-export default AdminProjectPage;
+export default AdminDepartmentPage;

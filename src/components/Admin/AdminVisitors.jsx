@@ -1,6 +1,6 @@
 import React from "react";
 
-function AdminTasks() {
+function AdminVisitors() {
   return (
     <div className="relative mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -10,19 +10,19 @@ function AdminTasks() {
               Id
             </th>
             <th scope="col" className="px-6 py-3">
-              Project Name
+              Visitor name
             </th>
             <th scope="col" className="px-6 py-3">
-              Description
+              Reason for visit
             </th>
             <th scope="col" className="px-6 py-3">
-              Assigned To
+              Email
             </th>
             <th scope="col" className="px-6 py-3">
-              Start_date
+              Start_time
             </th>
             <th scope="col" className="px-6 py-3">
-              End_date
+              End_time
             </th>
             <th scope="col" className="px-6 py-3">
               Action
@@ -37,12 +37,12 @@ function AdminTasks() {
             >
               1111
             </th>
-            <td className="px-6 py-4">myproject</td>
-            <td className="px-6 py-4">Front End</td>
+            <td className="px-6 py-4">vishnu</td>
+            <td className="px-6 py-4">Interview</td>
             <td className="px-6 py-4">vishnu@gmail.com</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4 text-green-600">Completed</td>
+            <td className="px-6 py-4">04:55:00</td>
+            <td className="px-6 py-4">05:55:00</td>
+            <td className="px-6 py-4 text-green-600">Approved</td>
           </tr>
         </tbody>
       </table>
@@ -50,4 +50,4 @@ function AdminTasks() {
   );
 }
 
-export default AdminTasks;
+export default AdminVisitors;

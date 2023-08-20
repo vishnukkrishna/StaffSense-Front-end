@@ -1,8 +1,9 @@
 import React from "react";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
-function AdminTasks() {
+function AdminDepartments() {
   return (
-    <div className="relative mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
+    <div className="relative mt-60 ml-72  overflow-x-auto shadow-md sm:rounded-lg w-6/12 h-full">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr className="text-lg">
@@ -10,19 +11,7 @@ function AdminTasks() {
               Id
             </th>
             <th scope="col" className="px-6 py-3">
-              Project Name
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Description
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Assigned To
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Start_date
-            </th>
-            <th scope="col" className="px-6 py-3">
-              End_date
+              Department Name
             </th>
             <th scope="col" className="px-6 py-3">
               Action
@@ -37,12 +26,12 @@ function AdminTasks() {
             >
               1111
             </th>
-            <td className="px-6 py-4">myproject</td>
-            <td className="px-6 py-4">Front End</td>
-            <td className="px-6 py-4">vishnu@gmail.com</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4 text-green-600">Completed</td>
+            <td className="px-6 py-4">Python Django</td>
+            <td className="px-6 py-4">
+              <div className="flex flex-row justify-around">
+                <RiDeleteBin6Line className="text-red-500 text-2xl" />
+              </div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -50,4 +39,4 @@ function AdminTasks() {
   );
 }
 
-export default AdminTasks;
+export default AdminDepartments;

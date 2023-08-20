@@ -1,6 +1,6 @@
 import React from "react";
 
-function AdminTasks() {
+function AdminLeaves() {
   return (
     <div className="relative mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -10,13 +10,16 @@ function AdminTasks() {
               Id
             </th>
             <th scope="col" className="px-6 py-3">
-              Project Name
+              Employee name
             </th>
             <th scope="col" className="px-6 py-3">
-              Description
+              Email
             </th>
             <th scope="col" className="px-6 py-3">
-              Assigned To
+              Department
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Reason for leave
             </th>
             <th scope="col" className="px-6 py-3">
               Start_date
@@ -37,12 +40,13 @@ function AdminTasks() {
             >
               1111
             </th>
-            <td className="px-6 py-4">myproject</td>
-            <td className="px-6 py-4">Front End</td>
+            <td className="px-6 py-4">vishnu</td>
             <td className="px-6 py-4">vishnu@gmail.com</td>
+            <td className="px-6 py-4">Python Django</td>
+            <td className="px-6 py-4">Fever</td>
             <td className="px-6 py-4">2023-08-27</td>
             <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4 text-green-600">Completed</td>
+            <td className="px-6 py-4 text-green-600">Approved</td>
           </tr>
         </tbody>
       </table>
@@ -50,4 +54,4 @@ function AdminTasks() {
   );
 }
 
-export default AdminTasks;
+export default AdminLeaves;

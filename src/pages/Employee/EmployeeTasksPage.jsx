@@ -3,7 +3,7 @@ import MenuComponent from "../../components/EmployeeSideBar/MenuComponent";
 import SideBar from "../../components/EmployeeSideBar/SideBar";
 import EmployeeTasks from "../../components/Employee/EmployeeTasks";
 
-function TasksPage() {
+function EmployeeTasksPage() {
   return (
     <div>
       <div>
@@ -17,4 +17,4 @@ function TasksPage() {
   );
 }
 
-export default TasksPage;
+export default EmployeeTasksPage;
