@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../Contexts/AuthContext";
 import {
   Card,
   List,
@@ -17,6 +20,15 @@ import { SiGotomeeting } from "react-icons/si";
 import { BsHeadset, BsBell } from "react-icons/bs";
 
 function AdminSideBar() {
+  const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
+  const handleLogout = () => {
+    console.log("ttttttttttttttttttttttttt");
+    localStorage.removeItem("access_token");
+    setUser(null);
+
+    navigate("/admin");
+  };
   return (
     <Card className="h-[calc(92vh-2rem)] max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 font-hubballi border-r-8 rounded-none">
       <List className="mt-32 text-lg border border-blue-gray-200 dark:border-gray-700 p-2 space-y-2">
@@ -95,7 +107,7 @@ function AdminSideBar() {
           </ListItemPrefix>
           Announcements
         </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
+        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600" type="submit" onClick={handleLogout}>
           <ListItemPrefix>
             <PowerIcon className="h-5 w-5" />
           </ListItemPrefix>

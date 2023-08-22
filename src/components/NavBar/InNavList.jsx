@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../Contexts/AuthContext";
 import {
   Navbar,
   MobileNav,
@@ -10,6 +12,15 @@ import logo from "../../images/Logo.png";
 import { FaUserCircle } from "react-icons/fa";
 
 function InNavList() {
+  const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
+  const handleLogout = () => {
+    console.log("ttttttttttttttttttttttttt");
+    localStorage.removeItem("access_token");
+    setUser(null);
+
+    navigate("/admin");
+  };
   const [openNav, setOpenNav] = useState(false);
 
   React.useEffect(() => {
@@ -122,9 +133,11 @@ function InNavList() {
         <MobileNav open={openNav}>
           {navList}
           <Button
+            type="submit"
             size="sm"
             fullWidth
             className="mb-2 bg-customColor drop-shadow-md"
+            onClick={handleLogout}
           >
             <span>Logout</span>
           </Button>

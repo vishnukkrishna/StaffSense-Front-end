@@ -1,39 +1,52 @@
 import React from "react";
-// import "./App.css";
-import EmployeeLogin from "./pages/Authentication/EmployeeLoginPage";
-import OutHomePage from "./components/Employee/OutHomePage";
-import EmployeeLandingPage from "./components/Employee/EmployeeLandingPage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+// import AdminProtectedRoutes from "./ProtectedRoutes/AdminProtectedRoutes";
+// import UserProtectedRoutes from "./ProtectedRoutes/UserProtectedRoutes";
+import { AuthProvider } from "./components/Contexts/AuthContext";
+import AdminLoginPage from "./pages/Authentication/EmployeeLoginPage";
+import EmployeeLoginPage from "./pages/Authentication/AdminLoginPage";
 import AdminDashBoardPage from "./pages/Admin/AdminDashBoardPage";
-import EmployeeProfilePage from "./pages/Employee/EmployeeProfliePage";
-import AdminProjectPage from "./pages/Admin/AdminProjectPage";
-import AdminTasksPage from "./pages/Admin/AdminTasksPage";
-import EmployeeTasksPage from "./pages/Employee/EmployeeTasksPage";
-import AdminAnnouncementsPage from "./pages/Admin/AdminAnnouncementsPage";
-import AdminEmployeesPage from "./pages/Admin/AdminEmployeesPage";
-import AdminDepartmentPage from "./pages/Admin/AdminDepartmentPage";
-import AdminMeetingsPage from "./pages/Admin/AdminMeetingsPage";
-import AdminLeavesPage from "./pages/Admin/AdminLeavesPage";
-import AdminVisitorPage from "./pages/Admin/AdminVisitorPage";
+import EmployeeLandingPage from "./components/Employee/EmployeeLandingPage";
 
 function App() {
+  const token = localStorage.getItem("access_token");
+  console.log("token here got", token);
   return (
-    <>
-      {/* <EmployeeLogin /> */}
-      {/* <AdminLoginPage/> */}
-      {/* <OutHomePage/> */}
-      {/* <EmployeeLandingPage/> */}
-      {/* <EmployeeProfilePage /> */}
-      {/* <EmployeeTasksPage /> */}
-      {/* <AdminDashBoardPage/> */}
-      {/* <AdminProjectPage /> */}
-      {/* <AdminTasksPage /> */}
-      {/* <AdminAnnouncementsPage/> */}
-      {/* <AdminEmployeesPage /> */}
-      {/* <AdminDepartmentPage/> */}
-      {/* <AdminMeetingsPage /> */}
-      {/* <AdminLeavesPage /> */}
-      <AdminVisitorPage />
-    </>
+    <div className="App">
+      <AuthProvider>
+        <Router>
+          <Routes>
+            {/* Authentication */}
+            <Route
+              path="/admin"
+              element={
+                token ? <Navigate to="/dashboard" /> : <AdminLoginPage />
+              }
+            />
+            <Route
+              path="/user"
+              element={token ? <Navigate to="/home" /> : <EmployeeLoginPage />}
+            />
+
+            {/* Admin Side */}
+            <Route path="/dashboard" element={<AdminDashBoardPage />} />
+
+            {/* Employee Side */}
+            <Route
+              path="/home"
+              element={
+                <EmployeeLandingPage />
+              }
+            />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </div>
   );
 }
 
