@@ -22,7 +22,8 @@ import {
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // Images
-import img from "../../images/hrms.png";
+// import img from "../../images/hrms.png";
+import img from "../../images/login.png";
 
 function EmployeeLoginPage() {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -90,7 +91,7 @@ function EmployeeLoginPage() {
     console.log(email, "this is email");
     console.log(password, "this is password ");
     axios
-      .post(`${BACKEND_BASE_URL}/user/login/`, {
+      .post(`${BACKEND_BASE_URL}/user/userlogin/`, {
         email: email,
         password: password,
       })
@@ -104,7 +105,7 @@ function EmployeeLoginPage() {
         } else if (response.data.error) {
           toast.error("Incorrect email or password. Please try again.");
         } else {
-          console.log(response.data, "this is the data we need ");
+          console.log(response.data.access_token, "this is the data we need ");
           localStorage.setItem("access_token", response.data.access_token);
 
           const tokenData = jwt_decode(response.data.access_token);

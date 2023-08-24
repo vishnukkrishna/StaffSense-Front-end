@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import AuthContext from "../Contexts/AuthContext";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 import {
   Card,
   List,
   ListItem,
   ListItemPrefix,
-  ListItemSuffix,
-  Chip,
 } from "@material-tailwind/react";
-import { PowerIcon } from "@heroicons/react/24/solid";
 import { BiMessageDetail } from "react-icons/bi";
 import { SlCalender } from "react-icons/sl";
 import { AiOutlineDashboard, AiTwotoneCalendar } from "react-icons/ai";
@@ -18,104 +15,90 @@ import { HiOutlineUsers } from "react-icons/hi";
 import { FaUikit, FaProjectDiagram, FaListUl } from "react-icons/fa";
 import { SiGotomeeting } from "react-icons/si";
 import { BsHeadset, BsBell } from "react-icons/bs";
+import { AiOutlineMenuFold } from "react-icons/ai";
 
-function AdminSideBar() {
-  const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
-  const handleLogout = () => {
-    console.log("ttttttttttttttttttttttttt");
-    localStorage.removeItem("access_token");
-    setUser(null);
 
-    navigate("/admin");
+function AdminSidebar() {
+
+  const [open, setOpen] = useState(true)
+  const mediumBreakpoint = 768;
+  const updateOpenState = () => {
+    if (window.innerWidth < mediumBreakpoint) {
+      setOpen(false);
+    } else {
+      setOpen(true);
+    }
   };
+
+  useEffect(() => {
+    updateOpenState();
+    window.addEventListener("resize", updateOpenState);
+    return () => {
+      window.removeEventListener("resize", updateOpenState);
+    };
+  }, []);
+
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState('');
+  const [isFirstClick, setIsFirstClick] = useState(true);
+
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
+
+  useEffect(() => {
+    if (isFirstClick) {
+      setIsFirstClick(false);
+      const path = location.pathname;
+      setActiveLink(path);
+    }
+  }, [isFirstClick, location.pathname]);
+
+  const Menus = [
+    { title: "Dashboard", icon: <AiOutlineDashboard />, path: "/dashboard" },
+    { title: "Employees", icon: <HiOutlineUsers />, path: "/userlist" },
+    { title: "Departments", icon: <FaUikit />, path: "/department" },
+    { title: "Meetings", icon: <SiGotomeeting />, path: "/meeting" },
+    { title: "Chat", icon: <BiMessageDetail />, path: "/chat" },
+    { title: "Leaves", icon: <AiTwotoneCalendar />, path: "/leave" },
+    { title: "Live Projects", icon: <FaProjectDiagram />, path: "/projectlist" },
+    { title: "Tasks", icon: <FaListUl />, path: "/tasklist" },
+    { title: "Visitors", icon: <SlCalender />, path: "/visitor" },
+    { title: "Complaints", icon: <BsHeadset />, path: "/complaint" },
+    { title: "Announcements", icon: <BsBell />, path: "/announcement" },
+  ];
+
   return (
-    <Card className="h-[calc(92vh-2rem)] max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 font-hubballi border-r-8 rounded-none">
-      <List className="mt-32 text-lg border border-blue-gray-200 dark:border-gray-700 p-2 space-y-2">
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <AiOutlineDashboard className="h-5 w-5" />
-          </ListItemPrefix>
-          Dashboard
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <HiOutlineUsers className="h-5 w-5" />
-          </ListItemPrefix>
-          Employees
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <FaUikit className="h-5 w-5" />
-          </ListItemPrefix>
-          Departments
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <SiGotomeeting className="h-5 w-5" />
-          </ListItemPrefix>
-          Meetings
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <BiMessageDetail className="h-5 w-5" />
-          </ListItemPrefix>
-          Chat
-          <ListItemSuffix>
-            <Chip
-              value="1"
-              size="sm"
-              variant="ghost"
-              color="blue-gray"
-              className="rounded-full"
-            />
-          </ListItemSuffix>
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <AiTwotoneCalendar className="h-5 w-5" />
-          </ListItemPrefix>
-          Leaves
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <FaProjectDiagram className="h-5 w-5" />
-          </ListItemPrefix>
-          Live Projects
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <FaListUl className="h-5 w-5" />
-          </ListItemPrefix>
-          Project Tasks
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <SlCalender className="h-5 w-5" />
-          </ListItemPrefix>
-          Visitors
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <BsHeadset className="h-5 w-5" />
-          </ListItemPrefix>
-          Complaints
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600">
-          <ListItemPrefix>
-            <BsBell className="h-5 w-5" />
-          </ListItemPrefix>
-          Announcements
-        </ListItem>
-        <ListItem className="border-b border-blue-gray-300 dark:border-gray-600" type="submit" onClick={handleLogout}>
-          <ListItemPrefix>
-            <PowerIcon className="h-5 w-5" />
-          </ListItemPrefix>
-          Log Out
-        </ListItem>
+    <Card className={`h-full max-w-[20rem] ${open ? "w-72" : "w-20"} p-5 shadow-xl shadow-blue-gray-900/5 font-hubballi ${open && "border-r-8"} rounded-none`}>
+      <AiOutlineMenuFold className={`bg-white text-3xl text-dark-purple absolute -right-3 top-9 border-2 border-black cursor-pointer ${!open && "rotate-180"} `} onClick={() => setOpen(!open)} />
+      <List className={`mt-1 text-base ${open && "border border-blue-gray-200 dark:border-gray-700 space-y-2"}`}>
+        {Menus.map((menu, index) => (
+          <ListItem
+            key={index}
+            className={`${open ? 'border-b border-blue-gray-300 dark:border-gray-600' : ''} ${activeLink === menu.path && open
+              ? 'bg-indigo-500 text-white font-bold rounded-lg shadow-md'
+              : ''
+              }`}
+          >
+            <ListItemPrefix className={`${open ? '' : 'my-3'}`}>
+
+              {menu.icon}
+            </ListItemPrefix>
+            {open && (
+              <Link
+                to={menu.path}
+                onClick={() => handleLinkClick(menu.path)}
+                className={`block py-2 px-7 transition-colors duration-300 rounded-lg ${activeLink === menu.path ? 'hover:bg-indigo-500 hover:text-white' : 'hover:bg-cyan-800 hover:text-white'
+                  }`}
+              >
+                {menu.title}
+              </Link>
+            )}
+          </ListItem>
+        ))}
       </List>
     </Card>
   );
 }
 
-export default AdminSideBar;
+export default AdminSidebar;

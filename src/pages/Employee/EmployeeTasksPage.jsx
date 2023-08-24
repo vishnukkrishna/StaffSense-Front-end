@@ -6,12 +6,12 @@ import EmployeeTasks from "../../components/Employee/EmployeeTasks";
 function EmployeeTasksPage() {
   return (
     <div>
-      <div>
-        <MenuComponent />
-      </div>
-      <div className="flex col-2">
+      <div className="flex col-2 relative">
         <SideBar />
         <EmployeeTasks />
+        <div className="absolute top-0 w-full">
+          <MenuComponent />
+        </div>
       </div>
     </div>
   );

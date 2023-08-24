@@ -1,52 +1,82 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { BACKEND_BASE_URL } from "../../api/Api";
+import axios from "axios";
+import AddTask from "../Modal/AdminModal/AddTask";
 
 function AdminTasks() {
+  const [tasks, setTasks] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_BASE_URL}/project/tasks/`);
+        const data = response.data;
+        console.log(data, "yesss");
+        setTasks(data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+
+    fetchTasks();
+  }, [refresh]);
+
+  const handleProjectAdminChange = () => {
+    setRefresh((prevRefresh) => !prevRefresh);
+  };
   return (
-    <div className="relative mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr className="text-lg">
-            <th scope="col" className="px-6 py-3">
-              Id
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Project Name
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Description
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Assigned To
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Start_date
-            </th>
-            <th scope="col" className="px-6 py-3">
-              End_date
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
-            >
-              1111
-            </th>
-            <td className="px-6 py-4">myproject</td>
-            <td className="px-6 py-4">Front End</td>
-            <td className="px-6 py-4">vishnu@gmail.com</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4">2023-08-27</td>
-            <td className="px-6 py-4 text-green-600">Completed</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <>
+      <div className="mt-10 pl-20">
+        <AddTask onChange={handleProjectAdminChange} />
+      </div>
+      <div className="relative mt-52 mr-36 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr className="text-lg">
+              <th scope="col" className="px-6 py-3">
+                Id
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Project Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Description
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Assigned To
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Start_date
+              </th>
+              <th scope="col" className="px-6 py-3">
+                End_date
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {tasks.map((task) => (
+              <tr key={task.id} className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
+                >
+                  {task.id}
+                </th>
+                <td className="px-6 py-4">{task.project.name}</td>
+                <td className="px-6 py-4">{task.description}</td>
+                <td className="px-6 py-4">{task.assignedTo[0].email}</td>
+                <td className="px-6 py-4">{task.start_date}</td>
+                <td className="px-6 py-4">{task.end_date}</td>
+                <td className="px-6 py-4 text-green-600">{task.state}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
 

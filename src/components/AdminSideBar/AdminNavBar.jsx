@@ -9,11 +9,11 @@ function AdminNavBar() {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
   const handleLogout = () => {
-    console.log("ttttttttttttttttttttttttt");
+    console.log("Logout");
     localStorage.removeItem("access_token");
     setUser(null);
 
-    navigate("/admin");
+    navigate("/");
   };
   return (
     <div className="bg-indigo-500 h-28">
@@ -33,7 +33,7 @@ function AdminNavBar() {
               Joined in August 2023
             </div>
           </div>
-          <Button className="w-23 text-center h-10 mt-9 mr-7" type="submit" onClick={handleLogout}>Logout</Button>
+          <Button className="w-23 text-center h-10 mt-9 mr-7" onClick={handleLogout}>Logout</Button>
         </div>
       </div>
     </div>

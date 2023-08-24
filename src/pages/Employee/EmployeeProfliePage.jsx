@@ -6,12 +6,13 @@ import EmployeeProflie from "../../components/Employee/EmployeeProflie";
 function EmployeeProfilePage() {
   return (
     <div>
-      <div>
-        <MenuComponent />
-      </div>
-      <div className="flex col-2">
+      
+      <div className="flex col-2 relative">
         <SideBar />
         <EmployeeProflie />
+        <div className="absolute top-0 w-full">
+        <MenuComponent />
+      </div>
       </div>
     </div>
   );

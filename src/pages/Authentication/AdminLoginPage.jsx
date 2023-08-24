@@ -20,7 +20,8 @@ import {
 // Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 // Images
-import img from "../../images/login.png";
+import img from "../../images/hrms.png";
+
 
 function AdminLoginPage() {
   const [email, setEmail] = useState("");
@@ -130,9 +131,9 @@ function AdminLoginPage() {
                   )}
                 </div>
               </div>
-              <h3 className="relative left-0  mt-6 md:text-right">
+              {/* <h3 className="relative left-0  mt-6 md:text-right">
                 Forgot your Password <span className="text-red-600">?</span>
-              </h3>
+              </h3> */}
               <CardFooter className="pt-0 mt-6">
                 <Button className="bg-customColor" type="submit" fullWidth>
                   Sign In

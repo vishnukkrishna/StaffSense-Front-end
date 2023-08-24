@@ -7,9 +7,16 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 import logo from "../../images/Logo.png";
+import { useNavigate } from "react-router-dom";
+
 
 function OutNavBar() {
+  const navigate = useNavigate();
   const [openNav, setOpenNav] = useState(false);
+
+  const handleClick = () => {
+    navigate("/user");
+  };
 
   React.useEffect(() => {
     window.addEventListener(
@@ -73,6 +80,7 @@ function OutNavBar() {
             <Button
               size="sm"
               className="hidden lg:inline-block w-36 bg-customColor h-12 text-lg drop-shadow-md"
+              onClick={handleClick}
             >
               <span>Login Now</span>
             </Button>
@@ -121,6 +129,7 @@ function OutNavBar() {
             size="sm"
             fullWidth
             className="mb-2 bg-customColor drop-shadow-md"
+
           >
             <span>Login Now</span>
           </Button>

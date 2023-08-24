@@ -3,7 +3,7 @@ import profile from "../../images/profile-pic.jpg";
 
 function EmployeeProflie() {
   return (
-    <div className="w-full">
+    <div className="w-full mt-20">
       <div className="p-16">
         <div className="p-8 bg-white shadow mt-24">
           <div className="grid grid-cols-1 md:grid-cols-3">
