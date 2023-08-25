@@ -21,7 +21,7 @@ function AddDepartment({ onDepartmentAdded }) {
     axios.post(`${BACKEND_BASE_URL}/user/add_department/`, { name: departmentName })
       .then((response) => {
         if (response.status === 201) {
-          setSuccessMessage('Department added successfully.');
+          // setSuccessMessage('Department added successfully.');
           onDepartmentAdded(response.data);
           handleOpen()
 

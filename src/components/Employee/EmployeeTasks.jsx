@@ -59,11 +59,11 @@ function EmployeeTasks() {
       case "PENDING":
         return "bg-blue-500 text-dark";
       case "IN PROGRESS":
-        return "bg-blue-500 text-white";
+        return "bg-blue-500 text-dark";
       case "COMPLETED":
         return "bg-green-500 text-dark";
       default:
-        return "bg-gray-500 text-white";
+        return "bg-gray-500 text-dark";
     }
   };
 
@@ -127,13 +127,18 @@ function EmployeeTasks() {
                     id="tasks"
                     value={task.state}
                     onChange={(event) => updateTaskStatus(task.id, event.target.value)}
-                    className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 state-select ${getStatusColor(task.state)}`}
+                    className={`${getStatusColor(task.state)} border border-black rounded-md `}
                   >
-                    <option value="NEW">New</option>
-                    <option value="PENDING">Pending</option>
-                    <option value="IN PROGRESS">In Progress</option>
+                    <option value="NEW" hidden={task.state === "PENDING" || task.state === "IN PROGRESS" || task.state === "NEW"}>New</option>
+                    <option value="PENDING" hidden={task.state === "PENDING" || task.state === "IN PROGRESS"}>
+                      Pending
+                    </option>
+                    <option value="IN PROGRESS" hidden={task.state === "IN PROGRESS"}>
+                      In Progress
+                    </option>
                     <option value="COMPLETED">Completed</option>
                   </select>
+
                 )}
               </td>
             </tr>

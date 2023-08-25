@@ -19,6 +19,7 @@ import AdminTasksPage from "./pages/Admin/AdminTasksPage";
 import AdminDepartmentPage from "./pages/Admin/AdminDepartmentPage";
 import EmployeeProfilePage from "./pages/Employee/EmployeeProfliePage";
 import EmployeeTasksPage from "./pages/Employee/EmployeeTasksPage";
+import EditProject from "./components/Modal/AdminModal/EditProject";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -49,11 +50,18 @@ function App() {
               }
             />
             <Route
+              path="/employeedit/:id"
+              element={
+                <AdminUserProfileEdit />
+              }
+            />
+            <Route
               path="/projectlist"
               element={
                 <AdminProjectPage />
               }
             />
+            <Route path="/editproject/:projectId" element={<EditProject />} />
             <Route
               path="/tasklist"
               element={
@@ -122,7 +130,9 @@ function App() {
               element={
                 <EmployeeTasksPage />
               }
+
             />
+
           </Routes>
         </Router>
       </AuthProvider>

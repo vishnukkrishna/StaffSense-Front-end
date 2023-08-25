@@ -7,9 +7,7 @@ import AddEmployee from "../Modal/AdminModal/AddEmployee";
 import { BACKEND_BASE_URL } from "../../api/Api";
 import Swal from 'sweetalert2';
 
-
 function AdminEmployees() {
-
   const [employees, setEmployees] = useState([]);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
@@ -46,7 +44,6 @@ function AdminEmployees() {
     });
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -54,7 +51,7 @@ function AdminEmployees() {
           `${BACKEND_BASE_URL}/user/employelist/`
         );
         setEmployees(response.data);
-        console.log("12", response.data);
+        console.log("Employee data:", response.data);
       } catch (error) {
         console.error("Error fetching employee data:", error);
       }
@@ -67,11 +64,13 @@ function AdminEmployees() {
     const [isOpen, setIsOpen] = useState(false);
     const [shouldReload, setShouldReload] = useState(false);
 
-    const openModal = () => {
+    const openModal = (e) => {
+      e.preventDefault();
       setIsOpen(true);
     };
 
-    const closeModal = () => {
+    const closeModal = (e) => {
+      e.preventDefault();
       setIsOpen(false);
       setShouldReload(true);
     };
@@ -119,15 +118,17 @@ function AdminEmployees() {
 
     return (
       <div>
-        <button
+        <Button
           onClick={openModal}
-          className="modal-trigger bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          size="sm"
+          className={`${isBlocked ? 'bg-red-900' : 'bg-green-700'
+            } hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded`}
         >
-          {isBlocked ? "Unblock" : "Block"}
-        </button>
+          {isBlocked ? 'Unblock' : 'Block'}
+        </Button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
-            <div className="bg-white w-64 p-6 rounded shadow-lg">
+            <div className="bg-blue-gray-200 w-64 p-6 rounded shadow-lg border-8">
               <div className="text-gray-800 mb-4">
                 {isBlocked
                   ? "Are you sure you want to unblock this employee?"
@@ -215,9 +216,10 @@ function AdminEmployees() {
                       <Link to={`/employeedit/${employee.id}`}>
                         <FiEdit className="text-black text-3xl cursor-pointer" />
                       </Link>
-                      <Button onClick={BlockModal} size="sm" className="bg-indigo-500">
-                        Block
-                      </Button>
+                      <BlockModal
+                        employeeId={employee.id}
+                        isBlocked={employee.is_blocked}
+                      />
                     </div>
                   </td>
                 </tr>

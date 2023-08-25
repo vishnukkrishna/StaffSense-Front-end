@@ -2,29 +2,27 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "./../../api/Api";
 import Swal from "sweetalert2";
-import { Link, useNavigate } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import AddProject from "../Modal/AdminModal/AddProject";
+import EditProject from "../Modal/AdminModal/EditProject";
 
 function AdminProjects() {
   const [project, setProject] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const Navigate = useNavigate();
+
+  const handleEditSubmission = () => {
+    fetchProjectData();
+
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchProjectData();
-      setProject(data);
-    };
-
-    fetchData();
+    fetchProjectData();
   }, [refresh]);
 
   const fetchProjectData = async () => {
     try {
       const response = await axios.get(`${BACKEND_BASE_URL}/project/projects/`);
-      return response.data;
+      setProject(response.data);
     } catch (error) {
       console.error("Error fetching Project data:", error);
       return [];
@@ -103,9 +101,9 @@ function AdminProjects() {
                 <td className="px-6 py-4">{project.start_date}</td>
                 <td className="px-6 py-4">{project.end_date}</td>
                 <td className="px-6 py-4">
-                  <div className="flex flex-row justify-around">
-                    <FiEdit className="text-black text-2xl" />
-                    <RiDeleteBin6Line className="text-red-500 text-2xl" onClick={() => handleDelete(project.id)} />
+                  <div className="flex flex-row justify-around cursor-pointer">
+                    <EditProject id={project.id} onEditSubmission={handleEditSubmission} />
+                    <RiDeleteBin6Line className="text-red-500 text-3xl" onClick={() => handleDelete(project.id)} />
                   </div>
                 </td>
               </tr>

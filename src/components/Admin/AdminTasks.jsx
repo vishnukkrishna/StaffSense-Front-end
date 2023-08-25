@@ -24,6 +24,21 @@ function AdminTasks() {
   const handleProjectAdminChange = () => {
     setRefresh((prevRefresh) => !prevRefresh);
   };
+
+  const getStatusColor = (state) => {
+    switch (state) {
+      case "NEW":
+        return "bg-yellow-400 text-dark";
+      case "PENDING":
+        return "bg-blue-500 text-dark";
+      case "IN PROGRESS":
+        return "bg-blue-500 text-dark";
+      case "COMPLETED":
+        return "bg-green-500 text-dark";
+      default:
+        return "bg-gray-500 text-dark";
+    }
+  };
   return (
     <>
       <div className="mt-10 pl-20">
@@ -70,7 +85,11 @@ function AdminTasks() {
                 <td className="px-6 py-4">{task.assignedTo[0].email}</td>
                 <td className="px-6 py-4">{task.start_date}</td>
                 <td className="px-6 py-4">{task.end_date}</td>
-                <td className="px-6 py-4 text-green-600">{task.state}</td>
+                <td>
+                <span className={`p-2 rounded ${getStatusColor(task.state)}`} >
+                {task.state}
+                </span>
+                </td>
               </tr>
             ))}
           </tbody>
