@@ -5,8 +5,8 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-// import AdminProtectedRoutes from "./ProtectedRoutes/AdminProtectedRoutes";
-// import UserProtectedRoutes from "./ProtectedRoutes/UserProtectedRoutes";
+import AdminProtectedRoutes from "./ProtectedRoutes/AdminProtectedRoutes";
+import UserProtectedRoutes from "./ProtectedRoutes/UserProtectedRoutes";
 import { AuthProvider } from "./components/Contexts/AuthContext";
 import EmployeeLoginPage from "./pages/Authentication/EmployeeLoginPage";
 import AdminLoginPage from "./pages/Authentication/AdminLoginPage";
@@ -20,6 +20,7 @@ import AdminDepartmentPage from "./pages/Admin/AdminDepartmentPage";
 import EmployeeProfilePage from "./pages/Employee/EmployeeProfliePage";
 import EmployeeTasksPage from "./pages/Employee/EmployeeTasksPage";
 import EditProject from "./components/Modal/AdminModal/EditProject";
+import EditEmployeeDetails from "./components/Modal/AdminModal/EditEmployeeDetails";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -42,36 +43,56 @@ function App() {
             />
 
             {/* Admin Side */}
-            <Route path="/dashboard" element={<AdminDashBoardPage />} />
+            <Route path="/dashboard" element={
+              <AdminProtectedRoutes>
+                <AdminDashBoardPage />
+              </AdminProtectedRoutes>
+            }
+            />
             <Route
               path="/userlist"
               element={
-                <AdminEmployeesPage />
+                <AdminProtectedRoutes>
+                  <AdminEmployeesPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
               path="/employeedit/:id"
               element={
-                <AdminUserProfileEdit />
+                <AdminProtectedRoutes>
+                  <EditEmployeeDetails />
+                </AdminProtectedRoutes>
               }
             />
             <Route
               path="/projectlist"
               element={
-                <AdminProjectPage />
+                <AdminProtectedRoutes>
+                  <AdminProjectPage />
+                </AdminProtectedRoutes>
               }
             />
-            <Route path="/editproject/:projectId" element={<EditProject />} />
+            <Route path="/editproject/:projectId" element={
+              <AdminProtectedRoutes>
+                <EditProject />
+              </AdminProtectedRoutes>
+            }
+            />
             <Route
               path="/tasklist"
               element={
-                <AdminTasksPage />
+                <AdminProtectedRoutes>
+                  <AdminTasksPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
               path="/department"
               element={
-                <AdminDepartmentPage />
+                <AdminProtectedRoutes>
+                  <AdminDepartmentPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
@@ -116,23 +137,27 @@ function App() {
             <Route
               path="/home"
               element={
-                <EmployeeLandingPage />
+                <UserProtectedRoutes>
+                  <EmployeeLandingPage />
+                </UserProtectedRoutes>
               }
             />
             <Route
               path="/profileuser"
               element={
-                <EmployeeProfilePage />
+                <UserProtectedRoutes>
+                  <EmployeeProfilePage />
+                </UserProtectedRoutes>
               }
             />
             <Route
               path="/usertask"
               element={
-                <EmployeeTasksPage />
+                <UserProtectedRoutes>
+                  <EmployeeTasksPage />
+                </UserProtectedRoutes>
               }
-
             />
-
           </Routes>
         </Router>
       </AuthProvider>
