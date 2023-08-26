@@ -79,7 +79,7 @@ function AddTask() {
                 }}
             >
                 <DialogHeader>Add Task</DialogHeader>
-                <DialogBody divider>
+                <DialogBody divider className="font-fontHubballi text-lg font-semibold">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4">
                             <label htmlFor="inputField1" className="block text-gray-700">Task Name</label>

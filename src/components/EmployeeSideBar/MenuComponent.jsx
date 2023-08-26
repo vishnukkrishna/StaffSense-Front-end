@@ -16,7 +16,7 @@ function MenuComponent() {
     navigate("/");
   };
   return (
-    <div className="bg-indigo-500 h-28">
+    <div className="bg-indigo-500 h-28 font-fontHubballi text-xl">
       <div className="flex justify-between">
         <div className="flex justify-end mt-10 ml-16 m-10 w-40 h-30 cursor-pointer">
           <img src={logo} alt="Logo" />
@@ -33,7 +33,7 @@ function MenuComponent() {
               Joined in August 2023
             </div>
           </div>
-          <Button className="w-23 text-center h-10 mt-9 mr-7" onClick={handleLogout}>Logout</Button>
+          <Button className="w-23 text-center h-10 mt-9 mr-7 hover:bg-gray-800" onClick={handleLogout}>Logout</Button>
         </div>
       </div>
     </div>

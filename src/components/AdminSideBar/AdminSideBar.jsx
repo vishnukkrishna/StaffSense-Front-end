@@ -15,7 +15,7 @@ import { HiOutlineUsers } from "react-icons/hi";
 import { FaUikit, FaProjectDiagram, FaListUl } from "react-icons/fa";
 import { SiGotomeeting } from "react-icons/si";
 import { BsHeadset, BsBell } from "react-icons/bs";
-import { AiOutlineMenuFold } from "react-icons/ai";
+import { BsCaretLeftSquareFill } from "react-icons/bs";
 
 
 function AdminSidebar() {
@@ -69,9 +69,9 @@ function AdminSidebar() {
   ];
 
   return (
-    <Card className={`h-full max-w-[20rem] ${open ? "w-72" : "w-20"} p-5 shadow-xl shadow-blue-gray-900/5 font-hubballi ${open && "border-r-8"} rounded-none`}>
-      <AiOutlineMenuFold className={`bg-white text-3xl text-dark-purple absolute -right-3 top-9 border-2 border-black cursor-pointer ${!open && "rotate-180"} `} onClick={() => setOpen(!open)} />
-      <List className={`mt-1 text-base ${open && "border border-blue-gray-200 dark:border-gray-700 space-y-2"}`}>
+    <Card className={`h-full max-w-[20rem] ${open ? "w-72" : "w-20"} p-5 shadow-lg shadow-indigo-300 font-hubballi ${open && "border-r-8"} rounded-none`}>
+      <BsCaretLeftSquareFill className={`bg-white text-3xl text-dark-purple absolute -right-3 top-9 border-2 cursor-pointer ${!open && "rotate-180"} `} onClick={() => setOpen(!open)} />
+      <List className={`mt-1 text-lg font-black font-fontHubballi ${open && "border border-blue-gray-200 dark:border-gray-700 space-y-2"}`}>
         {Menus.map((menu, index) => (
           <ListItem
             key={index}

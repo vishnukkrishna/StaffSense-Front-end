@@ -91,7 +91,7 @@ function EditProject({ id, onEditSubmission }) {
             >
 
                 <DialogHeader>Edit Project</DialogHeader>
-                <DialogBody divider>
+                <DialogBody divider className="font-fontHubballi text-xl">
 
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4">

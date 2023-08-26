@@ -120,7 +120,7 @@ function AddEmployee() {
                 }}
             >
                 <DialogHeader>Add Employee</DialogHeader>
-                <DialogBody divider>
+                <DialogBody divider className="font-fontHubballi text-lg font-bold">
                     <form action="" onSubmit={formik.handleSubmit}>
                         <div className="mb-4">
                             <label htmlFor="inputField1" className="block text-gray-700">User Name</label>

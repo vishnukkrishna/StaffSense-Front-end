@@ -49,7 +49,7 @@ function AddDepartment({ onDepartmentAdded }) {
         }}
       >
         <DialogHeader>Add Department</DialogHeader>
-        <DialogBody divider>
+        <DialogBody divider className='font-fontHubballi font-bold text-lg'>
           <div>
             <label htmlFor="inputField3" className="block text-gray-700">Department Name</label>
             <input

@@ -9,8 +9,8 @@ import { BiUserCircle, BiMessageDetail } from "react-icons/bi";
 import { SlCalender } from "react-icons/sl";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { BsListCheck } from "react-icons/bs";
-import { AiOutlineMenuFold } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
+import { BsCaretLeftSquareFill } from 'react-icons/bs'
 
 function SideBar() {
 
@@ -60,9 +60,9 @@ function SideBar() {
   return (
     <div className="h-screen">
 
-      <Card className={`h-full max-w-[20rem] ${open ? "w-72" : "w-20"} p-5 shadow-xl shadow-blue-gray-900/5 font-hubballi ${open && "border-r-8"} rounded-none h-full`}>
-        <AiOutlineMenuFold className={`bg-white text-3xl mt-28 text-dark-purple absolute -right-3 top-9 border-2 border-black cursor-pointer ${!open && "rotate-180"}`} onClick={() => setOpen(!open)} />
-        <List className={`mt-52 text-base ${open && "border border-blue-gray-200 dark:border-gray-700 space-y-2 h-full"}`}>
+      <Card className={`h-full max-w-[20rem] ${open ? "w-72" : "w-20"} p-5 shadow-xl shadow-indigo-400 ${open && "border-r-8"} rounded-none h-full`}>
+        <BsCaretLeftSquareFill className={`bg-white text-3xl mt-28 text-dark-purple absolute -right-3 top-9 border-2 cursor-pointer ${!open && "rotate-180"}`} onClick={() => setOpen(!open)} />
+        <List className={`mt-52 text-lg font-fontHubballi ${open && "border border-blue-gray-200 dark:border-gray-700 space-y-2 h-full"}`}>
           {Menus.map((menu, index) => (
             <ListItem
               key={index}

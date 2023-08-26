@@ -59,7 +59,7 @@ function AddProject() {
                 }}
             >
                 <DialogHeader>Add Project</DialogHeader>
-                <DialogBody divider>
+                <DialogBody divider className="font-fontHubballi font-bold text-lg">
                     <form onSubmit={handleSubmit}>
                         <div className="mb-4">
                             <label htmlFor="inputField1" className="block text-gray-700">Project Name</label>

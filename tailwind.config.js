@@ -8,6 +8,9 @@ module.exports = withMT({
         customColor: "#0C1E40",
         bgColor: "#F8F8F8",
       },
+      fontFamily: {
+        fontHubballi:"Hubballi",
+      },
     },
   },
   plugins: [],

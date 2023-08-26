@@ -44,7 +44,7 @@ function AdminTasks() {
       <div className="mt-10 pl-20">
         <AddTask onChange={handleProjectAdminChange} />
       </div>
-      <div className="relative mt-52 mr-36 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
+      <div className="relative font-fontHubballi mt-52 mr-36 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr className="text-lg">
@@ -73,7 +73,7 @@ function AdminTasks() {
           </thead>
           <tbody>
             {tasks.map((task) => (
-              <tr key={task.id} className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
+              <tr key={task.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"

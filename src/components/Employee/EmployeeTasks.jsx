@@ -68,7 +68,7 @@ function EmployeeTasks() {
   };
 
   return (
-    <div className="relative mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
+    <div className="relative font-fontHubballi mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr className="text-lg text-center">
@@ -100,7 +100,7 @@ function EmployeeTasks() {
         </thead>
         <tbody>
           {tasks.map((task) => (
-            <tr key={task.id} className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
+            <tr key={task.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
               <th
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -127,7 +127,7 @@ function EmployeeTasks() {
                     id="tasks"
                     value={task.state}
                     onChange={(event) => updateTaskStatus(task.id, event.target.value)}
-                    className={`${getStatusColor(task.state)} border border-black rounded-md `}
+                    className={`${getStatusColor(task.state)} border cursor-pointer border-black rounded-md `}
                   >
                     <option value="NEW" hidden={task.state === "PENDING" || task.state === "IN PROGRESS" || task.state === "NEW"}>New</option>
                     <option value="PENDING" hidden={task.state === "PENDING" || task.state === "IN PROGRESS"}>
