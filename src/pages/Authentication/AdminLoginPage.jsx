@@ -7,6 +7,7 @@ import { BACKEND_BASE_URL } from "../../api/Api";
 import AuthContext from "../../components/Contexts/AuthContext";
 import jwt_decode from "jwt-decode";
 import { toast, ToastContainer } from "react-toastify";
+import { Helmet } from 'react-helmet'
 // Material Tailwind
 import {
   Card,
@@ -81,69 +82,76 @@ function AdminLoginPage() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen items-center">
-      <div className="md:w-1/2 ">
-        <img
-          src={img}
-          alt="Your Alt Text"
-          className="w-full h-auto md:h-full object-cover max-w-full"
-        />
-      </div>
-      <div className=" h-full flex-grow">
-        <Card className="md:w-1/2 md:h-3/5 md:mr-4 lg:mr-4 sm:ml-0 md:ml-60 sm:mt-0 md:mt-60">
-          <CardHeader
-            variant="gradient"
-            // color="gray"
-            className="mb-4 bg-transparent grid h-28 place-items-center mt-8 bg-customColor"
-          >
-            <Typography variant="h3" color="white">
-              Sign In
-            </Typography>
-          </CardHeader>
-          <form action="" onSubmit={submit}>
-            <CardBody className="flex flex-col gap-4 mt-16">
-              <div className="relative">
-                <Input
-                  id="email"
-                  value={email}
-                  type="email"
-                  label="Email"
-                  size="lg"
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-
-              <div className="relative">
-                <Input
-                  type={passwordVisible ? "text" : "password"}
-                  label="Password"
-                  size="lg"
-                  id="password"
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                  {passwordVisible ? (
-                    <AiOutlineEyeInvisible onClick={togglePasswordVisibility} />
-                  ) : (
-                    <AiOutlineEye onClick={togglePasswordVisibility} />
-                  )}
+    <>
+      <Helmet>
+        <title>
+          Admin Login | Staffsense
+        </title>
+      </Helmet>
+      <div className="flex flex-col md:flex-row h-screen items-center">
+        <div className="md:w-1/2 ">
+          <img
+            src={img}
+            alt="Your Alt Text"
+            className="w-full h-auto md:h-full object-cover max-w-full"
+          />
+        </div>
+        <div className=" h-full flex-grow">
+          <Card className="md:w-1/2 md:h-3/5 md:mr-4 lg:mr-4 sm:ml-0 md:ml-60 sm:mt-0 md:mt-60">
+            <CardHeader
+              variant="gradient"
+              // color="gray"
+              className="mb-4 bg-transparent grid h-28 place-items-center mt-8 bg-customColor"
+            >
+              <Typography variant="h3" color="white">
+                Sign In
+              </Typography>
+            </CardHeader>
+            <form action="" onSubmit={submit}>
+              <CardBody className="flex flex-col gap-4 mt-16">
+                <div className="relative">
+                  <Input
+                    id="email"
+                    value={email}
+                    type="email"
+                    label="Email"
+                    size="lg"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
-              </div>
-              {/* <h3 className="relative left-0  mt-6 md:text-right">
+
+                <div className="relative">
+                  <Input
+                    type={passwordVisible ? "text" : "password"}
+                    label="Password"
+                    size="lg"
+                    id="password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                    {passwordVisible ? (
+                      <AiOutlineEyeInvisible onClick={togglePasswordVisibility} />
+                    ) : (
+                      <AiOutlineEye onClick={togglePasswordVisibility} />
+                    )}
+                  </div>
+                </div>
+                {/* <h3 className="relative left-0  mt-6 md:text-right">
                 Forgot your Password <span className="text-red-600">?</span>
               </h3> */}
-              <CardFooter className="pt-0 mt-6">
-                <Button className="bg-customColor" type="submit" fullWidth>
-                  Sign In
-                </Button>
-              </CardFooter>
-            </CardBody>
-          </form>
-        </Card>
+                <CardFooter className="pt-0 mt-6">
+                  <Button className="bg-customColor" type="submit" fullWidth>
+                    Sign In
+                  </Button>
+                </CardFooter>
+              </CardBody>
+            </form>
+          </Card>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

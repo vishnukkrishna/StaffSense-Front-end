@@ -30,7 +30,7 @@ function OutNavBar() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           Home
@@ -40,7 +40,7 @@ function OutNavBar() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           Company
@@ -50,7 +50,7 @@ function OutNavBar() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           Our Features
@@ -60,7 +60,7 @@ function OutNavBar() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           About us

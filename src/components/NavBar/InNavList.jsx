@@ -38,7 +38,7 @@ function InNavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           Home
@@ -48,7 +48,7 @@ function InNavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           Hall Booking
@@ -58,7 +58,7 @@ function InNavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           Visitor Registration
@@ -68,7 +68,7 @@ function InNavList() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-normal text-lg"
+        className="p-1 font-semibold text-2xl font-fontHubballi"
       >
         <a href="#" className="flex items-center">
           Requests & Complaints
