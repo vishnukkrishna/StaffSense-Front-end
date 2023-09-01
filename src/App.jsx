@@ -21,6 +21,8 @@ import EmployeeProfilePage from "./pages/Employee/EmployeeProfliePage";
 import EmployeeTasksPage from "./pages/Employee/EmployeeTasksPage";
 import EditProject from "./components/Modal/AdminModal/EditProject";
 import EditEmployeeDetails from "./components/Modal/AdminModal/EditEmployeeDetails";
+import AdminAnnouncementsPage from "./pages/Admin/AdminAnnouncementsPage";
+import EmployeeComplaintPage from "./pages/Employee/EmployeeComplaintPage";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -128,7 +130,7 @@ function App() {
             <Route
               path="/announcement"
               element={
-                <AdminTasksPage />
+                <AdminAnnouncementsPage />
               }
             />
 
@@ -155,6 +157,14 @@ function App() {
               element={
                 <UserProtectedRoutes>
                   <EmployeeTasksPage />
+                </UserProtectedRoutes>
+              }
+            />
+            <Route
+              path="/usercomplaints"
+              element={
+                <UserProtectedRoutes>
+                  <EmployeeComplaintPage />
                 </UserProtectedRoutes>
               }
             />

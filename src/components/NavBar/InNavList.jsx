@@ -70,7 +70,7 @@ function InNavList() {
         color="blue-gray"
         className="p-1 font-semibold text-2xl font-fontHubballi"
       >
-        <a href="#" className="flex items-center">
+        <a href="/usercomplaints" className="flex items-center">
           Requests & Complaints
         </a>
       </Typography>
@@ -93,7 +93,7 @@ function InNavList() {
             </Link>
             <Button
               size="sm"
-              className="hidden lg:inline-block w-36 bg-customColor h-12 text-lg drop-shadow-md"
+              className="hidden lg:inline-block rounded-full w-36 bg-customColor h-12 text-lg drop-shadow-md"
               onClick={handleLogout}
             >
               <span>LOGOUT</span>

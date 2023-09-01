@@ -8,7 +8,6 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 import { BACKEND_BASE_URL } from '../../../api/Api';
-import { useNavigate } from 'react-router-dom';
 
 function AddDepartment({ onDepartmentAdded }) {
   const [open, setOpen] = React.useState(false);

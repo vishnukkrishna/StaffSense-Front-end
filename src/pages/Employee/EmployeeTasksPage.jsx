@@ -6,18 +6,24 @@ import { Helmet } from 'react-helmet'
 
 function EmployeeTasksPage() {
   return (
-    <div>
+    // <div className="bg-red-500 h-screen">
+    <div className="h-screen">
       <Helmet>
-        <title>Employee Task | Staffsense</title>
+        <title>
+          Employee Task | Staffsense
+        </title>
       </Helmet>
-      <div className="flex col-2 relative">
+      <div className="w-full">
+          <MenuComponent />
+      </div>
+      <div className="flex min-h-screen">
         <SideBar />
         <EmployeeTasks />
-        <div className="absolute top-0 w-full">
-          <MenuComponent />
-        </div>
+        
       </div>
     </div>
+
+    // </div>
   );
 }
 

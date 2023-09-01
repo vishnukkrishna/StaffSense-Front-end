@@ -68,8 +68,9 @@ function EmployeeTasks() {
   };
 
   return (
-    <div className="relative font-fontHubballi mt-72 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
-      <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    
+    <div className="font-fontHubballi mt-52 px-10 overflow-x-auto w-full h-full">
+      <table className="w-full shadow-md sm:rounded-lg text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr className="text-lg text-center">
             <th scope="col" className="px-6 py-3">

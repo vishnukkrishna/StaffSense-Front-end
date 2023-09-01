@@ -14,7 +14,7 @@ function AddTask() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
 
-    const [refresh, setRefresh] = useState(false);
+    // const [refresh, setRefresh] = useState(false);
     const [employees, setEmployees] = useState([]);
     const [projects, setProjects] = useState([]);
     const [formData, setFormData] = useState({
@@ -175,8 +175,6 @@ function AddTask() {
                         </DialogFooter>
                     </form>
                 </DialogBody>
-
-
             </Dialog>
         </>
     )

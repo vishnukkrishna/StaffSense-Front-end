@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InNavList from "../NavBar/InNavList";
 import img1 from "../../images/image2.png";
 import image1 from "../../images/header-smartphone.png";
@@ -7,13 +7,13 @@ import image3 from "../../images/Customer service.png";
 import b2 from "../../images/b2.png";
 import logo from "../../images/Logo.png";
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom';
 
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { FaStar } from "react-icons/fa";
-
 import { Button } from "@material-tailwind/react";
-
 import { Typography } from "@material-tailwind/react";
+import { fetchAnnouncements } from '../../data/AnnouncementApi'
 
 const LINKS = [
   {
@@ -30,6 +30,23 @@ const LINKS = [
 const currentYear = new Date().getFullYear();
 
 function EmployeeLandingPage() {
+
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    fetchAnnouncementData();
+  }, []);
+
+  const fetchAnnouncementData = async () => {
+    try {
+      const data = await fetchAnnouncements();
+      console.log(data, "anithing");
+      setAnnouncements(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -114,8 +131,8 @@ function EmployeeLandingPage() {
                 <div className="p-4 bg-gray-100 mt-3 border-t flex justify-center items-center">
                   <img className="w-full h-5/6 mt-4" src={image3} alt="" />
                 </div>
-                <Button className="bg-customColor mt-14">
-                  Register your Complaints
+                <Button className="bg-customColor mt-14" >
+                  <Link to="/usercomplaints">Register your Complaints</Link>
                 </Button>
                 <div className="flex justify-center items-center space-x-4 cursor-pointer"></div>
               </div>
@@ -126,31 +143,19 @@ function EmployeeLandingPage() {
           <div className="flex font-hubballi mt-10 bg-bgColor flex-col-reverse lg:flex-row">
             <div className="w-full lg:w-1/2 p-4">
               <div className="text-center">
-                <h1 className="font-extrabold text-2xl lg:text-3xl xl:text-5xl">
+                <h1 className="font-extrabold text-2xl lg:text-3xl xl:text-5xl mt-6">
                   Announcements
                 </h1>
               </div>
-              <div className="flex flex-col p-6 md:p-10 lg:p-20">
-                <div className="mt-5 flex items-center">
-                  <FaStar className="mr-2" />
-                  <h1 className="text-3xl">Tech Fest</h1>
+              {announcements.map((announcement) => (
+                <div key={announcement.id} className="flex flex-col p-20">
+                  <div className="mt-5 flex items-center">
+                    <FaStar className="mr-2" />
+                    <h1 className="text-3xl">{announcement.event}</h1>
+                  </div>
+                  <p className="p-2 ml-7 text-2xl">{announcement.note}</p>
                 </div>
-                <p className="p-2 text-2xl">IT tech fest on 20th July</p>
-
-                <div className="mt-5 flex items-center">
-                  <FaStar className="mr-2" />
-                  <h1 className="text-3xl">Cultural Events</h1>
-                </div>
-                <p className="p-2 ml-7 text-2xl">IT tech fest on 20th July</p>
-
-                <div className="mt-5 flex items-center">
-                  <FaStar className="mr-2" />
-                  <h1 className="text-3xl">Onam Celebrations</h1>
-                </div>
-                <p className="p-2 ml-7 text-2xl">
-                  Hi team experts, we are planning to celebrate Onam
-                </p>
-              </div>
+              ))}
             </div>
             <div className="w-full lg:w-1/2 p-4">
               <img

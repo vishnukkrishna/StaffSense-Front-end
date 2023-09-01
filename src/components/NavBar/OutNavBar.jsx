@@ -79,14 +79,14 @@ function OutNavBar() {
             <div className="mr-4 hidden lg:block">{navList}</div>
             <Button
               size="sm"
-              className="hidden lg:inline-block w-36 bg-customColor h-12 text-lg drop-shadow-md"
+              className="hidden lg:inline-block rounded-full w-36 bg-customColor h-12 text-lg drop-shadow-md"
               onClick={handleClick}
             >
               <span>Login Now</span>
             </Button>
             <IconButton
               variant="text"
-              className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+              className="ml-auto h-6 w- text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
               ripple={false}
               onClick={() => setOpenNav(!openNav)}
             >

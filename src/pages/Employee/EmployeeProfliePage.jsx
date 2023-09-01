@@ -6,18 +6,18 @@ import { Helmet } from 'react-helmet'
 
 function EmployeeProfilePage() {
   return (
-    <div>
+    <div className="h-screen">
       <Helmet>
         <title>
           Employee Profile | Staffsense
         </title>
       </Helmet>
-      <div className="flex col-2 relative">
-        <SideBar />
-        <EmployeeProflie />
-        <div className="absolute top-0 w-full">
+      <div className="w-full">
         <MenuComponent />
       </div>
+      <div className="flex min-h-screen">
+        <SideBar />
+        <EmployeeProflie />
       </div>
     </div>
   );

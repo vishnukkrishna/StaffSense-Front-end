@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OutNavBar from "../NavBar/OutNavBar";
 import img from "../../images/image1.png";
 import img1 from "../../images/image2.png";
@@ -19,7 +19,7 @@ import {
 } from "react-icons/ai";
 import { BiLogoFacebookCircle, BiDownArrow } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
-
+import { fetchAnnouncements } from '../../data/AnnouncementApi'
 import { Typography } from "@material-tailwind/react";
 
 const LINKS = [
@@ -37,6 +37,22 @@ const LINKS = [
 const currentYear = new Date().getFullYear();
 
 function OutHomePage() {
+  const [announcements, setAnnouncements] = useState([]);
+
+  useEffect(() => {
+    fetchAnnouncementData();
+  }, []);
+
+  const fetchAnnouncementData = async () => {
+    try {
+      const data = await fetchAnnouncements();
+      console.log(data, "anithing");
+      setAnnouncements(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -267,27 +283,15 @@ function OutHomePage() {
             <h1 className="text-center font-extrabold text-2xl lg:text-3xl xl:text-5xl mt-6">
               Announcements
             </h1>
-            <div className="flex flex-col p-20">
-              <div className="mt-5 flex items-center">
-                <FaStar className="mr-2" />
-                <h1 className="text-3xl">Tech Fest</h1>
+            {announcements.map((announcement) => (
+              <div key={announcement.id} className="flex flex-col p-20">
+                <div className="mt-5 flex items-center">
+                  <FaStar className="mr-2" />
+                  <h1 className="text-3xl"> {announcement.event}</h1>
+                </div>
+                <p className="p-2 ml-7 text-2xl"> {announcement.note}</p>
               </div>
-              <p className="p-2 ml-7 text-2xl">IT tech fest on 20th July</p>
-
-              <div className="mt-5 flex items-center">
-                <FaStar className="mr-2" />
-                <h1 className="text-3xl">Cultural Events</h1>
-              </div>
-              <p className="p-2 ml-7 text-2xl">IT tech fest on 20th July</p>
-
-              <div className="mt-5 flex items-center">
-                <FaStar className="mr-2" />
-                <h1 className="text-3xl">Onam Celebrations</h1>
-              </div>
-              <p className="p-2 ml-7 text-2xl">
-                Hi team experts, we are planning to celebrate Onam
-              </p>
-            </div>
+            ))}
           </div>
           <div className="w-1/2 p-4">
             <img
