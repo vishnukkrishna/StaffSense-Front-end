@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   Button,
   Dialog,
@@ -23,6 +25,8 @@ function AddDepartment({ onDepartmentAdded }) {
           // setSuccessMessage('Department added successfully.');
           onDepartmentAdded(response.data);
           handleOpen()
+          toast.success("Add Department Successfully");
+
 
         } else {
           setErrorMessage('Error adding department.');
@@ -30,11 +34,13 @@ function AddDepartment({ onDepartmentAdded }) {
       })
       .catch((error) => {
         console.error(error);
+        toast.error("Failed");
         setErrorMessage('Error adding department.');
       });
   };
   return (
     <>
+      <ToastContainer />
       <Button onClick={handleOpen} className="w-40 bg-indigo-500 text-center h-10">
         Add Department
       </Button>

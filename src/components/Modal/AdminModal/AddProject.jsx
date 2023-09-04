@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../../api/Api";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
     Button,
     Dialog,
@@ -36,7 +37,6 @@ function AddProject() {
             console.error("Error creating project:", error);
 
             if (error.response && error.response.data && error.response.data.detail) {
-                // Display the backend error message in the toaster
                 toast.error(error.response.data.detail);
             } else {
                 toast.error("Failed to add project. Please try again later.");
@@ -46,6 +46,7 @@ function AddProject() {
 
     return (
         <>
+            <ToastContainer />
             <Button onClick={handleOpen} className="w-40 bg-indigo-500 text-center h-10">
                 Add Project
             </Button>

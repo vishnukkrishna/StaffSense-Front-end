@@ -4,7 +4,8 @@ export const EmployeeValidationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  department: Yup.string().required("Department is required"),
+  // department: Yup.string().required("Department is required"),
+  designation: Yup.string().required("Designation is required"),
 });
 
 export const EmployeeLoginSchema = Yup.object({

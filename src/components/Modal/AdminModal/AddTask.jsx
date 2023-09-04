@@ -10,7 +10,7 @@ import {
     DialogFooter,
 } from "@material-tailwind/react";
 
-function AddTask() {
+function AddTask({ onChange }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
 
@@ -55,11 +55,11 @@ function AddTask() {
             .then((response) => {
                 onChange();
                 toast.success("Task added successfully!");
-
                 closeModal();
+                onChange()
             })
             .catch((error) => {
-                toast.error("Failed to add Task. ");
+                // toast.error("Failed to add Task. ");
                 console.error(error);
             });
     };

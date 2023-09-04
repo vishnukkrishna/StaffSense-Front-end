@@ -12,7 +12,6 @@ function AdminProjects() {
 
   const handleEditSubmission = () => {
     fetchProjectData();
-
   };
 
   useEffect(() => {

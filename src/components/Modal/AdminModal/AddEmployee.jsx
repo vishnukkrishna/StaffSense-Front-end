@@ -16,7 +16,7 @@ function AddEmployee() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
     const [isOpen, setIsOpen] = useState(false);
-    const [departments, setDepartments] = useState([]);
+    // const [departments, setDepartments] = useState([]);
 
     const toggleModal = () => {
         setIsOpen(!isOpen);
@@ -26,30 +26,30 @@ function AddEmployee() {
         setIsOpen(false);
     };
 
-    const fetchDepartments = async () => {
-        try {
-            const response = await axios.get(`${BACKEND_BASE_URL}/user/departments/`);
-            const data = response.data;
-            setDepartments(data);
-        } catch (error) {
-            console.error("Error:", error);
-        }
-    };
+    // const fetchDepartments = async () => {
+    //     try {
+    //         const response = await axios.get(`${BACKEND_BASE_URL}/user/departments/`);
+    //         const data = response.data;
+    //         setDepartments(data);
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // };
 
-    useEffect(() => {
-        fetchDepartments();
-    }, []);
+    // useEffect(() => {
+    //     fetchDepartments();
+    // }, []);
 
     const handleSubmit = (values) => {
 
-        console.log("welcomr", values);
+        console.log("welcome", values);
         const generatedTemporaryPassword = Math.random().toString(36).slice(-8);
 
         console.log(generatedTemporaryPassword, "bbbbbbbbb");
 
-        console.log(values.department, values.username, "xzxzxz");
+        console.log(values.designation, values.username, "xzxzxz");
         const employeeData = {
-            department: values.department,
+            designation: values.designation,
             username: values.username,
             email: values.email,
 
@@ -60,19 +60,21 @@ function AddEmployee() {
         closeModal();
     };
 
-    const registerEmployee = (employeeData) => {
+    const registerEmployee = async (employeeData) => {
         console.log("employeeData:", employeeData);
 
-        axios
+        console.log("ffffffffffffffffffffffffffffffffffffffff");
+
+        await axios
             .post(`${BACKEND_BASE_URL}/user/registration/`, employeeData)
             .then((response) => {
                 if (response.status === 200) {
                     const tokens = response.data.tokens;
                     console.log("Tokens:", tokens);
                     toast.success("Employee added successfully");
-                    setTimeout(() => {
-                        closeModal();
-                    }, 1000);
+                    // setTimeout(() => {
+                    //     closeModal();
+                    // }, 1000);
                 } else {
                     console.log("Received unexpected status code:", response.status);
                     toast.error("Failed to add employee. Please try again.");
@@ -87,7 +89,7 @@ function AddEmployee() {
 
     const formik = useFormik({
         initialValues: {
-            department: "",
+            designation: "",
             username: "",
             email: "",
         },
@@ -99,7 +101,10 @@ function AddEmployee() {
     });
 
     if (Object.keys(formik.errors).length > 0) {
-        console.log("Validation failed. Errors:", formik.errors);
+        console.log("Validation failed. Fields with errors:");
+        for (const field in formik.errors) {
+            console.log(field);
+        }
     } else {
         console.log("Validation passed. Submitting the form...");
     }
@@ -123,7 +128,7 @@ function AddEmployee() {
                 <DialogBody divider className="font-fontHubballi text-lg font-bold">
                     <form action="" onSubmit={formik.handleSubmit}>
                         <div className="mb-4">
-                            <label htmlFor="inputField1" className="block text-gray-700">User Name</label>
+                            <label htmlFor="inputField1" className="block text-gray-700">Username</label>
                             <input
                                 type="text"
                                 name="username"
@@ -158,31 +163,26 @@ function AddEmployee() {
                                 </p>
                             )}
                         </div>
-                        <div>
-                            <label htmlFor="inputField3" className="block text-gray-700">Department</label>
-                            <select
-                                name="department"
-                                id="department"
-                                className={`border border-gray-300 rounded-md p-3 w-full ${formik.errors.department && formik.touched.department
+                        <div className="mb-4">
+                            <label htmlFor="inputField3" className="block text-gray-700">
+                                Designation
+                            </label>
+                            <input
+                                type="text"
+                                name="designation"
+                                id="designation"
+                                className={`border border-gray-300 rounded-md p-2 w-full ${formik.errors.designation && formik.touched.designation
                                     ? "border-red-500"
                                     : "border-gray-300"
                                     } text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white`}
-                                {...formik.getFieldProps("department")}
-                            >
-                                <option value="option1">Select department</option>
-                                {departments.map((department) => (
-                                    <option key={department.id} value={department.id}>
-                                        {department.name}
-                                    </option>
-                                ))}
-                            </select>
-                            {formik.errors.department && formik.touched.department && (
+                                {...formik.getFieldProps("designation")}
+                            />
+                            {formik.errors.designation && formik.touched.designation && (
                                 <p className="text-red-500 text-sm">
-                                    {formik.errors.department}
+                                    {formik.errors.designation}
                                 </p>
                             )}
                         </div>
-
                         <DialogFooter>
                             <Button
                                 variant="text"

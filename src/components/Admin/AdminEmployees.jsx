@@ -1,31 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { Button, IconButton, Input } from "@material-tailwind/react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
-import { Button } from "@material-tailwind/react";
 import AddEmployee from "../Modal/AdminModal/AddEmployee";
 import { BACKEND_BASE_URL } from "../../api/Api";
 import Swal from 'sweetalert2';
+import EditEmployee from "../Modal/AdminModal/EditEmployee";
+import { FaSearch } from "react-icons/fa";
 
 function AdminEmployees() {
   const [employees, setEmployees] = useState([]);
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(0);
-  const handlePageChange = (selectedPage) => {
-    setCurrentPage(selectedPage.selected);
-  };
+  // const [search, setSearch] = useState("");
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 4
 
-  const itemsPerPage = 3;
-  const offset = currentPage * itemsPerPage;
-  const paginatedData = employees.slice(offset, offset + itemsPerPage);
-  const pageCount = Math.ceil(employees.length / itemsPerPage);
+  // async function searchUser(keyword) {
+  //   try {
+  //     const response = await axios.get(`${BACKEND_BASE_URL}/user/adminsearchEmployee/?search=${keyword}`);
+  //     setEmployees(response.data);
+  //   } catch (error) {
+  //     console.error("Error searching employees:", error);
+  //   }
+  // }
 
-  const filteredData = paginatedData.filter((employee) => {
-    const EmployeeNameMatch = employee.first_name
-      .toLowerCase()
-      .includes(search.toLowerCase());
-    return EmployeeNameMatch;
-  });
+
 
   const handleBlockUser = () => {
     Swal.fire({
@@ -44,19 +43,18 @@ function AdminEmployees() {
     });
   };
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        `${BACKEND_BASE_URL}/user/employelist/`
+      );
+      setEmployees(response.data);
+      console.log("Employee data:", response.data);
+    } catch (error) {
+      console.error("Error fetching employee data:", error);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `${BACKEND_BASE_URL}/user/employelist/`
-        );
-        setEmployees(response.data);
-        console.log("Employee data:", response.data);
-      } catch (error) {
-        console.error("Error fetching employee data:", error);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -170,65 +168,91 @@ function AdminEmployees() {
         <AddEmployee />
       </div>
       <div className="font-fontHubballi relative mt-36 mr-44 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
-        {filteredData.length > 0 ? (
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xl text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-              <tr className="text-lg">
-                <th scope="col" className="px-6 py-3">
-                  Id
+        {/* <div className="relative flex w-full gap-2 md:w-max ml-96 mt-2">
+          <Input
+            type="search"
+            label="Type here..."
+            className="pr-20"
+            onChange={e => searchUser(e.target.value)}
+            containerProps={{
+              className: "min-w-[288px]",
+            }}
+            icon={<FaSearch className="h-5 w-5" />}
+          />
+        </div> */}
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-7">
+          <thead className="text-xl text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr className="text-lg">
+              <th scope="col" className="px-6 py-3">
+                Id
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Employee Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Department
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Contact Number
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Email Address
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Designation
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((employee) => (
+              <tr key={employee.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
+                <th
+                  scope="row"
+                  className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
+                >
+                  {employee.id}
                 </th>
-                <th scope="col" className="px-6 py-3">
-                  Employee Name
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Department
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Contact Number
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Email Address
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Designation
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Action
-                </th>
+                <td className="px-6 py-4">{employee.first_name} {employee.last_name}</td>
+                <td className="px-6 py-4">{employee.department_name}</td>
+                <td className="px-6 py-4">{employee.phone}</td>
+                <td className="px-6 py-4">{employee.email}</td>
+                <td className="px-6 py-4">{employee.designation}</td>
+                <td className="px-6 py-4">
+                  <div className="flex justify-between w-max gap-4">
+                    <EditEmployee id={employee.id} Action={fetchData} />
+                    <BlockModal
+                      employeeId={employee.id}
+                      isBlocked={employee.is_blocked}
+                    />
+                  </div>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((employee) => (
-                <tr key={employee.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
-                  >
-                    {employee.id}
-                  </th>
-                  <td className="px-6 py-4">{employee.first_name} {employee.last_name}</td>
-                  <td className="px-6 py-4">{employee.department_name}</td>
-                  <td className="px-6 py-4">{employee.phone}</td>
-                  <td className="px-6 py-4">{employee.email}</td>
-                  <td className="px-6 py-4">{employee.designation}</td>
-                  <td className="px-6 py-4">
-                    <div className="flex justify-between w-max gap-4">
-                      <Link to={`/employeedit/${employee.id}`}>
-                        <FiEdit className="text-black text-3xl cursor-pointer" />
-                      </Link>
-                      <BlockModal
-                        employeeId={employee.id}
-                        isBlocked={employee.is_blocked}
-                      />
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No Employees found.</p>
-        )}
+            ))}
+          </tbody>
+        </table>
+        {/* Pagination */}
+        <div className="flex mt-10 justify-center items-center gap-4">
+          <Button
+            variant="text"
+            className="flex items-center gap-2 rounded-full"
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+            disabled={currentPage === 1}
+          >
+            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />Previous
+          </Button>
+          <div className="flex items-center gap-2">pages {currentPage} of {Math.ceil(employees.length / itemPerPage)}</div>
+          <Button
+            variant="text"
+            className="flex items-center gap-2 rounded-full"
+            disabled={currentPage === Math.ceil(employees.length / itemPerPage)}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+          >
+            Next <ArrowRightIcon strokeWidth={2} className="h-4 w-4" />
+          </Button>
+        </div>
       </div>
     </>
   );

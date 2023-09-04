@@ -68,7 +68,7 @@ function EmployeeTasks() {
   };
 
   return (
-    
+
     <div className="font-fontHubballi mt-52 px-10 overflow-x-auto w-full h-full">
       <table className="w-full shadow-md sm:rounded-lg text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -139,7 +139,6 @@ function EmployeeTasks() {
                     </option>
                     <option value="COMPLETED">Completed</option>
                   </select>
-
                 )}
               </td>
             </tr>

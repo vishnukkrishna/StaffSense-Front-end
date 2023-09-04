@@ -37,7 +37,7 @@ function AdminAnnouncements() {
   const handleDeleteAnnouncement = async (announcementId) => {
     try {
       const result = await Swal.fire({
-        title: 'Do you really want to delete this department?',
+        title: 'Do you really want to delete this announcement?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Yes, delete it!',
@@ -92,7 +92,7 @@ function AdminAnnouncements() {
                 <td className="px-6 py-4">{announcement.event}</td>
                 <td className="px-6 py-4">{announcement.note}</td>
                 <td className="px-6 py-4">
-                  <div className="flex flex-row justify-around">
+                  <div className="flex flex-row justify-around cursor-pointer">
                     <RiDeleteBin6Line className="text-red-500 text-2xl" onClick={() => handleDeleteAnnouncement(announcement.id)} />
                   </div>
                 </td>

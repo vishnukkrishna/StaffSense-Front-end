@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../../api/Api";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
     Button,
     Dialog,
@@ -64,11 +66,13 @@ function EditProject({ id, onEditSubmission }) {
                 formData
             );
             console.log("Project updated successfully");
+            toast.success("Edit successfully");
             onEditSubmission();
             setOpen(false);
             navigate("/projectlist");
         } catch (error) {
             console.error("Error updating project:", error);
+            toast.error("Failed");
         }
     };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios';
-// import { toast, ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
     Button,
     Dialog,
@@ -12,7 +12,8 @@ import {
 import AuthContext from "../../Contexts/AuthContext";
 import { BACKEND_BASE_URL } from '../../../api/Api';
 
-function AddComplaint() {
+function AddComplaint({ Action }) {
+    const [open, setOpen] = useState(false);
     const { user } = useContext(AuthContext);
     const handleOpen = () => setOpen(!open);
     const [formData, setFormData] = useState({
@@ -46,14 +47,20 @@ function AddComplaint() {
                 `${BACKEND_BASE_URL}/complaint/complaints/`,
                 dataToSend
             );
+            Action()
             console.log(response.data);
             toast.success("Complaint submitted successfully");
+
             setFormData({
                 ...formData,
                 description: "",
+
             });
 
-            setRefresh(!refresh);
+            // setRefresh(!refresh);
+
+            setOpen(false);
+
         } catch (error) {
             toast.error("Failed to submit complaint");
             console.error(error);
@@ -69,14 +76,14 @@ function AddComplaint() {
     }
     return (
         <>
-            {/* <ToastContainer /> */}
-            <Button onClick={handleOpen} className="w-40 bg-indigo-500 text-clip h-12">
+            <ToastContainer />
+            <Button onClick={() => setOpen(true)} className="w-40 bg-indigo-500 text-clip h-12">
                 Add Complaints
             </Button>
             <Dialog
-                size="xs"
+                size="sm"
                 open={open}
-                handler={handleOpen}
+                handler={() => setOpen(false)}
                 animate={{
                     mount: { scale: 1, y: 0 },
                     unmount: { scale: 0.9, y: -100 },
@@ -85,13 +92,13 @@ function AddComplaint() {
                 <DialogHeader>Add Complaints</DialogHeader>
                 <DialogBody divider className='font-fontHubballi font-bold text-lg'>
                     <form onSubmit={handleFormSubmit}>
-                        <div>
+                        {/* <div>
                             <label htmlFor="inputField3" className="block text-gray-700">Employee id</label>
                             <input
                                 id="employee"
                                 type="text"
                                 name="employee"
-                                value={formData.employee}
+                             
                                 onChange={handleChange}
                                 required
                                 className="border border-gray-300 rounded-md p-2 w-full"
@@ -103,7 +110,7 @@ function AddComplaint() {
                                 id="username"
                                 type="text"
                                 name="username"
-                                value={formData.username}
+                              
                                 onChange={handleChange}
                                 required
                                 className="border border-gray-300 rounded-md p-2 w-full"
@@ -115,18 +122,18 @@ function AddComplaint() {
                                 id="email"
                                 type="email"
                                 name="email"
-                                value={formData.email}
+                             
                                 onChange={handleChange}
                                 required
                                 className="border border-gray-300 rounded-md p-2 w-full"
                             />
-                        </div>
+                        </div> */}
                         <div>
                             <label htmlFor="inputField3" className="block text-gray-700">Complaint</label>
                             <textarea
                                 id="description"
                                 name="description"
-                                value={formData.description}
+
                                 onChange={handleChange}
                                 className="border border-gray-300 rounded-md p-2 w-full h-32"
                             ></textarea>
@@ -135,7 +142,7 @@ function AddComplaint() {
                             <Button
                                 variant="text"
                                 color="red"
-                                onClick={handleOpen}
+                                onClick={() => setOpen(false)}
                                 className="mr-1"
                             >
                                 <span>Cancel</span>

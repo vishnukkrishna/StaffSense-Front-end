@@ -7,6 +7,7 @@ import { BACKEND_BASE_URL } from "../../api/Api";
 import AuthContext from "../../components/Contexts/AuthContext";
 import jwt_decode from "jwt-decode";
 import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Helmet } from 'react-helmet'
 // Material Tailwind
 import {
@@ -45,7 +46,7 @@ function AdminLoginPage() {
       );
 
       console.log(data, "hhhhhhh");
-
+      toast.success("Login Successfully");
       localStorage.setItem("access_token", data.access_token);
 
       const tokenData = jwt_decode(data.access_token);
@@ -58,12 +59,12 @@ function AdminLoginPage() {
         is_admin: tokenData.is_admin,
       };
       console.log(LoggedInUser, "loged userrrrr");
+      toast.success("Login Successfully");
       setUser(LoggedInUser);
 
       const accessToken = localStorage.getItem("access_token");
 
       console.log("Access Token:", accessToken);
-
       navigate("/dashboard");
     } catch (error) {
       console.error("error in token fetch: ", error.message);
@@ -88,6 +89,7 @@ function AdminLoginPage() {
           Admin Login | Staffsense
         </title>
       </Helmet>
+      <ToastContainer />
       <div className="flex flex-col md:flex-row h-screen items-center">
         <div className="md:w-1/2 ">
           <img
