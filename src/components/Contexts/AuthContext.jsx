@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     // const access_token = Cookies.get("access_token")
     const access_token = localStorage.getItem("access_token");
 
-    console.log(access_token);
+    console.log(access_token, "Employeeeeeee");
     if (access_token) {
       const decoded_token = jwt_decode(access_token);
       const {

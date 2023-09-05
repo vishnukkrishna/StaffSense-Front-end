@@ -49,7 +49,7 @@ function AdminTasks() {
       <div className="mt-10 pl-20">
         <AddTask onChange={handleProjectAdminChange} />
       </div>
-      <div className="relative font-fontHubballi mt-52 mr-36 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
+      <div className="relative font-fontHubballi mt-52 mr-32 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr className="text-lg">
@@ -58,6 +58,9 @@ function AdminTasks() {
               </th> */}
               <th scope="col" className="px-6 py-3">
                 Project Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Task Name
               </th>
               <th scope="col" className="px-6 py-3">
                 Description
@@ -86,8 +89,9 @@ function AdminTasks() {
                   {task.id}
                 </th> */}
                 <td className="px-6 py-4">{task.project.name}</td>
+                <td className="px-6 py-4">{task.name}</td>
                 <td className="px-6 py-4">{task.description}</td>
-                <td className="px-6 py-4">{task.assignedTo[0].email}</td>
+                <td className="px-6 py-4">{task.assignedTo[0]?.email}</td>
                 <td className="px-6 py-4">{task.start_date}</td>
                 <td className="px-6 py-4">{task.end_date}</td>
                 <td>

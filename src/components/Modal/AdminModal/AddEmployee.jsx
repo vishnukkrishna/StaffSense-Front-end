@@ -11,6 +11,8 @@ import { BACKEND_BASE_URL } from "../../../api/Api";
 import { toast, Toaster } from "react-hot-toast";
 import { EmployeeValidationSchema } from "../../../validations/FormValidation";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddEmployee() {
     const [open, setOpen] = React.useState(false);
@@ -197,9 +199,9 @@ function AddEmployee() {
                             </Button>
                         </DialogFooter>
                     </form>
+                    <ToastContainer />
                 </DialogBody>
 
-                <Toaster />
             </Dialog>
         </>
     );

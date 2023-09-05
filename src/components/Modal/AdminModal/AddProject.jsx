@@ -11,7 +11,7 @@ import {
     DialogFooter,
 } from "@material-tailwind/react";
 
-function AddProject() {
+function AddProject({ Action }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
     const [formData, setFormData] = useState({
@@ -26,13 +26,41 @@ function AddProject() {
     };
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // Convert start_date and end_date to Date objects
+        const startDate = new Date(formData.start_date);
+        const endDate = new Date(formData.end_date);
+
+        // Check if start_date is greater than end_date
+        if (startDate > endDate) {
+            toast.error("Start Date cannot be greater than End Date");
+            return;
+        }
+
+        // Check if start_date is in the future
+        const currentDate = new Date();
+        // if (startDate > currentDate) {
+        //     toast.error("Start Date cannot be in the future");
+        //     return;
+        // }
+
+        // Make the POST request if all validations pass
         try {
             const response = await axios.post(
                 `${BACKEND_BASE_URL}/project/projects/`,
                 formData
             );
-            onChange();
+            // Reset the form fields
+            setFormData({
+                name: "",
+                description: "",
+                start_date: "",
+                end_date: "",
+            });
             toast.success("Project added successfully!");
+            Action()
+            handleOpen(); // Close the dialog after successful submission
         } catch (error) {
             console.error("Error creating project:", error);
 
@@ -43,6 +71,8 @@ function AddProject() {
             }
         }
     };
+
+
 
     return (
         <>

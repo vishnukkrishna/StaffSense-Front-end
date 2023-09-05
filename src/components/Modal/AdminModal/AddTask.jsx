@@ -53,13 +53,12 @@ function AddTask({ onChange }) {
         axios
             .post(`${BACKEND_BASE_URL}/project/tasks/`, formData)
             .then((response) => {
+                console.log(response.data,"qwertyuiiiiiiiiiiiiiiiiiiiii");
                 onChange();
                 toast.success("Task added successfully!");
-                closeModal();
-                onChange()
             })
             .catch((error) => {
-                // toast.error("Failed to add Task. ");
+                toast.error("Failed to add Task. ");
                 console.error(error);
             });
     };

@@ -14,7 +14,6 @@ import {
 import { FiEdit } from "react-icons/fi";
 
 function EditProject({ id, onEditSubmission }) {
-    // const { projectId } = useParams();
     console.log("ID received:", id);
     const navigate = useNavigate();
     const handleOpen = () => setOpen(!open);
@@ -27,9 +26,8 @@ function EditProject({ id, onEditSubmission }) {
         end_date: "",
     });
 
-    // const handleOpen = () => {
-    //     setOpen(true);
-    // };
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
 
     useEffect(() => {
         const fetchProjectData = async () => {
@@ -45,6 +43,8 @@ function EditProject({ id, onEditSubmission }) {
                     start_date: response.data.start_date || "",
                     end_date: response.data.end_date || "",
                 });
+                setStartDate(response.data.start_date || "");
+                setEndDate(response.data.end_date || "");
             } catch (error) {
                 console.error("Error fetching project data:", error);
             }
@@ -57,8 +57,45 @@ function EditProject({ id, onEditSubmission }) {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
+    const handleStartDateChange = (event) => {
+        const newStartDate = event.target.value;
+        if (newStartDate > endDate) {
+            toast.error("Start Date cannot be after End Date");
+        } else {
+            setStartDate(newStartDate);
+            setFormData({ ...formData, [event.target.name]: newStartDate })
+        }
+    };
+
+    const handleEndDateChange = (event) => {
+        const newEndDate = event.target.value;
+        if (newEndDate < startDate) {
+            toast.error("End Date cannot be before Start Date");
+        } else {
+            setEndDate(newEndDate);
+
+        }
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        const startDateObj = new Date(startDate);
+        const endDateObj = new Date(endDate);
+
+        const currentDate = new Date();
+        if (new Date(formData.start_date) < currentDate) {
+            toast.error("Passed date cant be start date");
+            return;
+        }
+        if (new Date(formData.start_date) > new Date(formData.end_date)) {
+            toast.error("Start should be before end date")
+            return;
+        }
+
+
+        setFormData({ ...formData, ['start_date']: endDateObj })
+        setFormData({ ...formData, ['end_date']: startDateObj })
 
         try {
             await axios.put(
@@ -66,7 +103,7 @@ function EditProject({ id, onEditSubmission }) {
                 formData
             );
             console.log("Project updated successfully");
-            toast.success("Edit successfully");
+            toast.success("Update Successfully");
             onEditSubmission();
             setOpen(false);
             navigate("/projectlist");
@@ -75,7 +112,6 @@ function EditProject({ id, onEditSubmission }) {
             toast.error("Failed");
         }
     };
-
 
     return (
         <>

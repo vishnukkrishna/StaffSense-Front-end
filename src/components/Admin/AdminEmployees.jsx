@@ -7,13 +7,14 @@ import { BACKEND_BASE_URL } from "../../api/Api";
 import Swal from 'sweetalert2';
 import EditEmployee from "../Modal/AdminModal/EditEmployee";
 import { FaSearch } from "react-icons/fa";
+// import { logout } from "../../pages/Authentication/Auth";
 
 function AdminEmployees() {
   const [employees, setEmployees] = useState([]);
   // const [search, setSearch] = useState("");
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemPerPage = 4
+  const itemPerPage = 3
 
   // async function searchUser(keyword) {
   //   try {
@@ -60,7 +61,7 @@ function AdminEmployees() {
 
   const BlockModal = ({ employeeId, isBlocked }) => {
     const [isOpen, setIsOpen] = useState(false);
-    const [shouldReload, setShouldReload] = useState(false);
+    // const [shouldReload, setShouldReload] = useState(false);
 
     const openModal = (e) => {
       e.preventDefault();
@@ -70,26 +71,26 @@ function AdminEmployees() {
     const closeModal = (e) => {
       e.preventDefault();
       setIsOpen(false);
-      setShouldReload(true);
+      // setShouldReload(true);
     };
 
-    useEffect(() => {
-      if (shouldReload) {
-        window.location.reload();
-        setShouldReload(false);
-      }
-    }, [shouldReload]);
+    // useEffect(() => {
+    //   if (shouldReload) {
+    //     window.location.reload();
+    //     setShouldReload(false);
+    //   }
+    // }, [shouldReload]);
 
     const handleBlockEmployee = () => {
       setIsOpen(false);
       blockEmployee(employeeId);
-      window.location.reload();
+      // window.location.reload();
     };
 
     const handleUnblockEmployee = () => {
       setIsOpen(false);
       unblockEmployee(employeeId);
-      window.location.reload();
+      // window.location.reload();
     };
 
     const blockEmployee = (employeeId) => {
@@ -97,6 +98,7 @@ function AdminEmployees() {
         .put(`${BACKEND_BASE_URL}/user/blockemployees/${employeeId}/`)
         .then((response) => {
           console.log("Employee blocked successfully");
+          fetchData()
         })
         .catch((error) => {
           console.error("Error blocking employee:", error);
@@ -114,15 +116,85 @@ function AdminEmployees() {
         });
     };
 
+
+    // const [isOpen, setIsOpen] = useState(false);
+    // const [shouldReload, setShouldReload] = useState(false);
+
+    // const openModal = (e) => {
+    //   e.preventDefault();
+    //   setIsOpen(true);
+    // };
+
+    // const closeModal = (e) => {
+    //   e.preventDefault();
+    //   setIsOpen(false);
+    //   setShouldReload(true);
+    // };
+
+    // useEffect(() => {
+    //   if (shouldReload) {
+    //     window.location.reload();
+    //     setShouldReload(false);
+    //   }
+    // }, [shouldReload]);
+
+    // const blockEmployee = async (employeeId) => {
+    //   try {
+    //     const response = await axios.put(
+    //       `${BACKEND_BASE_URL}/user/blockemployees/${employeeId}/`
+    //     );
+    //     console.log("Employee blocked successfully", response.data);
+
+    //     // Logout the user after blocking
+    //     // const logoutAction = logout();
+    //     // return logoutAction;
+    //   } catch (error) {
+    //     console.error("Error blocking employee:", error);
+    //   }
+    // };
+
+    // const unblockEmployee = async (employeeId) => {
+    //   try {
+    //     const response = await axios.put(
+    //       `${BACKEND_BASE_URL}/user/unblockemployees/${employeeId}/`
+    //     );
+    //     console.log("Employee unblocked successfully", response.data);
+
+    //     // Logout the user after unblocking
+    //     // const logoutAction = logout();
+    //     // return logoutAction;
+    //   } catch (error) {
+    //     console.error("Error unblocking employee:", error);
+    //   }
+    // };
+
+    // const handleBlockEmployee = () => {
+    //   setIsOpen(false);
+    //   blockEmployee(employeeId).then((logoutAction) => {
+    //     // Redirect to the login page
+    //     return logoutAction;
+    //   });
+    // };
+
+    // const handleUnblockEmployee = () => {
+    //   setIsOpen(false);
+    //   unblockEmployee(employeeId).then((logoutAction) => {
+    //     // Redirect to the login page
+    //     return logoutAction;
+    //   });
+    // };
+
+
+
     return (
       <div>
         <Button
           onClick={openModal}
           size="sm"
-          className={`${isBlocked ? 'bg-red-900' : 'bg-green-700'
+          className={`${isBlocked ? "bg-red-900" : "bg-green-700"
             } hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded`}
         >
-          {isBlocked ? 'Unblock' : 'Block'}
+          {isBlocked ? "Unblock" : "Block"}
         </Button>
         {isOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -223,7 +295,7 @@ function AdminEmployees() {
                 <td className="px-6 py-4">
                   <div className="flex justify-between w-max gap-4">
                     <EditEmployee id={employee.id} Action={fetchData} />
-                    <BlockModal
+                    <BlockModal Action={fetchData}
                       employeeId={employee.id}
                       isBlocked={employee.is_blocked}
                     />

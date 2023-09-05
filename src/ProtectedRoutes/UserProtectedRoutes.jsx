@@ -1,23 +1,40 @@
 import jwt_decode from "jwt-decode";
-import { React, useContext } from "react";
+import { React, useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 const UserProtectedRoutes = ({ children, ...rest }) => {
+  // useEffect(() => {
+  //   const checkAuth = async () => {
+  //     try {
+  //       const response = await axios.get("/api/check-auth"); // Replace with your API endpoint
+  //       const { isAuthenticated } = response.data;
+
+  //       if (!isAuthenticated) {
+  //         localStorage.removeItem("jwtToken");
+  //         window.location.replace("/user");
+  //       }
+  //     } catch (error) {
+  //     }
+  //   };
+
+  //   checkAuth();
+  // }, []);
+
   const token = localStorage.getItem("access_token");
   console.log("token in protected", token);
   if (token) {
     const usertoken = jwt_decode(token);
     console.log("user token", usertoken);
+    // if (usertoken.is_active === false) {
+    //   <Navigate to="/user" />
+    // }
     const is_admin = usertoken?.is_admin;
     if (is_admin) {
-      // User is  an admin, redirect to the user page
       return <Navigate to="/user" />;
     } else {
-      // User is not admin, so allow access to the protected route
       return <>{children}</>;
     }
   } else {
-    // Token is not present, redirect to the admin page
     return <Navigate to="/user" />;
   }
 };

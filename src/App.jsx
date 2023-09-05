@@ -24,7 +24,6 @@ import EditEmployeeDetails from "./components/Modal/AdminModal/EditEmployeeDetai
 import AdminAnnouncementsPage from "./pages/Admin/AdminAnnouncementsPage";
 import EmployeeComplaintPage from "./pages/Employee/EmployeeComplaintPage";
 import AdminComplaintsPage from "./pages/Admin/AdminComplaintsPage";
-import EditEmployeePassword from "./components/Modal/EmployeeModal/EditEmployeePassword";
 
 function App() {
   const token = localStorage.getItem("access_token");

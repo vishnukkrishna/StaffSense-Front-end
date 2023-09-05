@@ -21,6 +21,7 @@ function AdminProjects() {
   const fetchProjectData = async () => {
     try {
       const response = await axios.get(`${BACKEND_BASE_URL}/project/projects/`);
+      const sortedProjects = response.data.sort((a, b) => a.id - b.id);
       setProject(response.data);
     } catch (error) {
       console.error("Error fetching Project data:", error);
@@ -59,7 +60,7 @@ function AdminProjects() {
   return (
     <>
       <div className="mt-10 pl-20">
-        <AddProject onChange={handleAdminChange} />
+        <AddProject Action={handleAdminChange} />
       </div>
 
       <div className="relative mt-52 mr-40 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
