@@ -73,9 +73,9 @@ function EmployeeTasks() {
       <table className="w-full shadow-md sm:rounded-lg text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr className="text-lg text-center">
-            <th scope="col" className="px-6 py-3">
+            {/* <th scope="col" className="px-6 py-3">
               Id
-            </th>
+            </th> */}
             <th scope="col" className="px-6 py-3">
               Project Name
             </th>
@@ -84,6 +84,9 @@ function EmployeeTasks() {
             </th>
             <th scope="col" className="px-6 py-3">
               Description
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Assigned From
             </th>
             <th scope="col" className="px-6 py-3">
               Assigned To
@@ -102,15 +105,16 @@ function EmployeeTasks() {
         <tbody>
           {tasks.map((task) => (
             <tr key={task.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
-              <th
+              {/* <th
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
               >
                 {task.id}
-              </th>
+              </th> */}
               <td className="px-6 py-4">{task.project.name}</td>
               <td className="px-6 py-4">{task.name}</td>
               <td className="px-6 py-4">{task.description}</td>
+              <td className="px-6 py-4">staffsense222@gmail.com</td>
               <td className="px-6 py-4">{task.assignedTo[0].email}</td>
               <td className="px-6 py-4">{task.start_date}</td>
               <td className="px-6 py-4">{task.end_date}</td>

@@ -14,6 +14,8 @@ function AdminTasks() {
         const response = await axios.get(`${BACKEND_BASE_URL}/project/tasks/`);
         const data = response.data;
         console.log(data, "yesss");
+        const sortedTask = response.data.sort((a, b) => a.id - b.id);
+        setTasks(sortedTask);
         // toast.success("Task submitted successfully");
         setTasks(data);
       } catch (error) {

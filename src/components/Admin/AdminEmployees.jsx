@@ -50,6 +50,8 @@ function AdminEmployees() {
         `${BACKEND_BASE_URL}/user/employelist/`
       );
       setEmployees(response.data);
+      const sortedEmployees = response.data.sort((a, b) => a.id - b.id);
+      setEmployees(sortedEmployees);
       console.log("Employee data:", response.data);
     } catch (error) {
       console.error("Error fetching employee data:", error);

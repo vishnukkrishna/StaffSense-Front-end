@@ -17,6 +17,7 @@ function EditProject({ id, onEditSubmission }) {
     console.log("ID received:", id);
     const navigate = useNavigate();
     const handleOpen = () => setOpen(!open);
+    const [employees, setEmployees] = useState([]);
     const [project, setProject] = useState({});
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
@@ -24,10 +25,12 @@ function EditProject({ id, onEditSubmission }) {
         description: "",
         start_date: "",
         end_date: "",
+        assignedTo: "",
     });
 
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [selectedAssignedTo, setSelectedAssignedTo] = useState(""); // State to store the selected employee
 
     useEffect(() => {
         const fetchProjectData = async () => {
@@ -35,6 +38,12 @@ function EditProject({ id, onEditSubmission }) {
                 const response = await axios.get(
                     `${BACKEND_BASE_URL}/project/projects/${id}`
                 );
+                axios
+                    .get(`${BACKEND_BASE_URL}/user/employelist/`)
+                    .then((response) => {
+                        setEmployees(response.data);
+                    })
+                    .catch((error) => { });
                 console.log(response.data, "ghghghghghghghg");
                 setProject(response.data);
                 setFormData({
@@ -42,9 +51,11 @@ function EditProject({ id, onEditSubmission }) {
                     description: response.data.description || "",
                     start_date: response.data.start_date || "",
                     end_date: response.data.end_date || "",
+                    assignedTo: response.data.assignedTo || "",
                 });
                 setStartDate(response.data.start_date || "");
                 setEndDate(response.data.end_date || "");
+                setSelectedAssignedTo(response.data.assignedTo); // Set the selectedAssignedTo
             } catch (error) {
                 console.error("Error fetching project data:", error);
             }
@@ -52,6 +63,11 @@ function EditProject({ id, onEditSubmission }) {
 
         fetchProjectData();
     }, [id]);
+    const handleAssignedToChange = (event) => {
+        const selectedValue = event.target.value;
+        setFormData({ ...formData, assignedTo: selectedValue });
+    };
+
 
     const handleChange = (event) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -63,7 +79,7 @@ function EditProject({ id, onEditSubmission }) {
             toast.error("Start Date cannot be after End Date");
         } else {
             setStartDate(newStartDate);
-            setFormData({ ...formData, [event.target.name]: newStartDate })
+            setFormData({ ...formData, [event.target.name]: newStartDate });
         }
     };
 
@@ -73,7 +89,6 @@ function EditProject({ id, onEditSubmission }) {
             toast.error("End Date cannot be before Start Date");
         } else {
             setEndDate(newEndDate);
-
         }
     };
 
@@ -85,17 +100,16 @@ function EditProject({ id, onEditSubmission }) {
 
         const currentDate = new Date();
         if (new Date(formData.start_date) < currentDate) {
-            toast.error("Passed date cant be start date");
+            toast.error("Passed date can't be the start date");
             return;
         }
         if (new Date(formData.start_date) > new Date(formData.end_date)) {
-            toast.error("Start should be before end date")
+            toast.error("Start should be before the end date");
             return;
         }
 
-
-        setFormData({ ...formData, ['start_date']: endDateObj })
-        setFormData({ ...formData, ['end_date']: startDateObj })
+        setFormData({ ...formData, ["start_date"]: endDateObj });
+        setFormData({ ...formData, ["end_date"]: startDateObj });
 
         try {
             await axios.put(
@@ -156,14 +170,29 @@ function EditProject({ id, onEditSubmission }) {
                                 className="border border-gray-300 rounded-md p-2 w-full h-32"
                             ></textarea>
                         </div>
-
+                        <div className="mb-4">
+                            <label htmlFor="inputField1" className="block text-gray-700">Assigned To</label>
+                            <select
+                                name="assignedTo"
+                                value={selectedAssignedTo} // Use selectedAssignedTo for the default value
+                                onChange={handleAssignedToChange} // Handle changes in the dropdown
+                                className="border border-gray-300 rounded-md p-3 w-full"
+                            >
+                                <option value="">Select an employee</option>
+                                {employees.map((employee) => (
+                                    <option key={employee.id} value={employee.id}>
+                                        {employee.email}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                         <div>
                             <label htmlFor="inputField3" className="block text-gray-700">Start Date</label>
                             <input
                                 type="date"
                                 name="start_date"
                                 defaultValue={project.start_date}
-                                onChange={handleChange}
+                                onChange={handleStartDateChange}
                                 className="border border-gray-300 rounded-md p-2 w-full"
                             />
                         </div>
@@ -173,7 +202,7 @@ function EditProject({ id, onEditSubmission }) {
                                 type="date"
                                 name="end_date"
                                 defaultValue={project.end_date}
-                                onChange={handleChange}
+                                onChange={handleEndDateChange}
                                 className="border border-gray-300 rounded-md p-2 w-full"
                             />
                         </div>
@@ -198,4 +227,4 @@ function EditProject({ id, onEditSubmission }) {
     )
 }
 
-export default EditProject
+export default EditProject;

@@ -5,9 +5,9 @@ import { BACKEND_BASE_URL } from "../../api/Api";
 import profile from "../../images/profile-pic.jpg";
 import EditEmployeeProfile from "../Modal/EmployeeModal/EditEmployeeProfile";
 import EditEmployeePassword from "../Modal/EmployeeModal/EditEmployeePassword";
+import { Collapse } from "@material-tailwind/react";
 
-function EmployeeProflie() {
-
+function EmployeeProfile() {
   const [userData, setUserData] = useState(null);
   const { user } = useContext(AuthContext);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -15,9 +15,7 @@ function EmployeeProflie() {
   const user_id = user && user.user_id;
 
   useEffect(() => {
-
     fetchUserData();
-
   }, [user]);
 
   const handleFileChange = (event) => {
@@ -74,11 +72,14 @@ function EmployeeProflie() {
               </div>
               <div className="relative">
                 <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-                  <div className="flex justify-end  h-30 w-30 cursor-pointer">
+                  <div className="flex justify-end h-30 w-30 cursor-pointer">
                     {userData.profile_pic ? (
-                      <img src={`${BACKEND_BASE_URL}${userData.profile_pic}`} alt="Logo" />
+                      <img
+                        src={`${BACKEND_BASE_URL}${userData.profile_pic}`}
+                        alt="Profile"
+                      />
                     ) : previewURL ? (
-                      <img src={profile} alt="Logo" />
+                      <img src={profile} alt="Profile" />
                     ) : (
                       <div className="w-48 h-48 bg-indigo-100 flex justify-center items-center rounded-full shadow-2xl">
                         <label htmlFor="upload" className="cursor-pointer">
@@ -114,19 +115,29 @@ function EmployeeProflie() {
 
             <div className="mt-20 text-center border-b pb-12">
               <h1 className="text-4xl font-semibold text-gray-700">
-                <h1 className="text-4xl font-semibold text-gray-700">
-                  {userData.first_name + " " + userData.last_name}
-                </h1>
-
+                {userData.first_name + " " + userData.last_name}
               </h1>
-              <p className="font-light text-gray-600 mt-3 text-lg">{userData.designation}</p>
+              <p className="font-light text-gray-600 mt-3 text-lg">
+                {userData.designation}
+              </p>
             </div>
           </div>
           <div className="bg-white p-3 shadow-sm rounded-sm">
             <div className="flex items-center space-x-2 font-extrabold text-2xl text-gray-900 leading-8">
               <span className="text-indigo-500">
-                <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                <svg
+                  className="h-5"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
                 </svg>
               </span>
               <span className="tracking-wide">ABOUT</span>
@@ -151,13 +162,16 @@ function EmployeeProflie() {
                 </div>
                 <div className="grid grid-cols-2">
                   <div className="px-4 py-2 font-semibold">Department</div>
-                  <div className="px-4 py-2">{userData.department ? userData.department.name : ""}</div>
+                  <div className="px-4 py-2">
+                    {userData.department ? userData.department.name : ""}
+                  </div>
                 </div>
                 <div className="grid grid-cols-2">
                   <div className="px-4 py-2 font-semibold">Email</div>
                   <div className="px-4 py-2">
-                    <a className="text-blue-800" href={userData.email}>{userData.email}</a>
-
+                    <a className="text-blue-800" href={userData.email}>
+                      {userData.email}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -171,4 +185,4 @@ function EmployeeProflie() {
   );
 }
 
-export default EmployeeProflie;
+export default EmployeeProfile;

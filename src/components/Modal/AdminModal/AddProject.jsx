@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../../api/Api";
 import { toast, ToastContainer } from "react-toastify";
@@ -14,12 +14,23 @@ import {
 function AddProject({ Action }) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(!open);
+    const [employees, setEmployees] = useState([]);
     const [formData, setFormData] = useState({
         name: "",
         description: "",
         start_date: "",
         end_date: "",
+        assignedTo: "",
     });
+
+    useEffect(() => {
+        axios
+            .get(`${BACKEND_BASE_URL}/user/employelist/`)
+            .then((response) => {
+                setEmployees(response.data);
+            })
+            .catch((error) => { });
+    }, []);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -47,9 +58,14 @@ function AddProject({ Action }) {
 
         // Make the POST request if all validations pass
         try {
+            console.log(formData, "formdataaaaaaaaaaaaaaaaaaaaaa");
             const response = await axios.post(
                 `${BACKEND_BASE_URL}/project/projects/`,
-                formData
+                {
+                    ...formData,
+                    // Send the assignedTo value as an email
+                    assignedTo: formData.assignedTo,
+                }
             );
             // Reset the form fields
             setFormData({
@@ -57,9 +73,10 @@ function AddProject({ Action }) {
                 description: "",
                 start_date: "",
                 end_date: "",
+                assignedTo: "",
             });
             toast.success("Project added successfully!");
-            Action()
+            Action();
             handleOpen(); // Close the dialog after successful submission
         } catch (error) {
             console.error("Error creating project:", error);
@@ -71,6 +88,7 @@ function AddProject({ Action }) {
             }
         }
     };
+
 
 
 
@@ -114,7 +132,24 @@ function AddProject({ Action }) {
                                 className="border border-gray-300 rounded-md p-2 w-full h-32"
                             ></textarea>
                         </div>
+                        <div className="mb-4">
+                            <label htmlFor="inputField1" className="block text-gray-700">Assigned To</label>
+                            <select
+                                name="assignedTo"
+                                type="number"
+                                value={formData.assignedTo}
+                                onChange={handleChange}
+                                className="border border-gray-300 rounded-md p-3 w-full"
+                            >
+                                <option value="">Select an employee</option>
+                                {employees.map((employee) => (
+                                    <option key={employee.id} value={employee.id}>
+                                        {employee.email}
+                                    </option>
+                                ))}
+                            </select>
 
+                        </div>
                         <div>
                             <label htmlFor="inputField3" className="block text-gray-700">Start Date</label>
                             <input

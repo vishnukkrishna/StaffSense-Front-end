@@ -9,10 +9,23 @@ import EditProject from "../Modal/AdminModal/EditProject";
 function AdminProjects() {
   const [project, setProject] = useState([]);
   const [refresh, setRefresh] = useState(false);
+  const [employees, setEmployees] = useState([]);
 
   const handleEditSubmission = () => {
     fetchProjectData();
   };
+  const getAssignedToEmail = (assignedToId) => {
+    const employee = employees.find((emp) => emp.id === assignedToId);
+    return employee ? employee.email : "";
+  };
+  useEffect(() => {
+    axios
+      .get(`${BACKEND_BASE_URL}/user/employelist/`)
+      .then((response) => {
+        setEmployees(response.data);
+      })
+      .catch((error) => { });
+  }, []);
 
   useEffect(() => {
     fetchProjectData();
@@ -21,8 +34,10 @@ function AdminProjects() {
   const fetchProjectData = async () => {
     try {
       const response = await axios.get(`${BACKEND_BASE_URL}/project/projects/`);
+      console.log(response, "resposeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       const sortedProjects = response.data.sort((a, b) => a.id - b.id);
       setProject(response.data);
+      console.log(response.data, "oooooooooooooooooooo");
     } catch (error) {
       console.error("Error fetching Project data:", error);
       return [];
@@ -67,14 +82,17 @@ function AdminProjects() {
         <table className="w-full font-fontHubballi text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr className="text-lg">
-              <th scope="col" className="px-6 py-3">
+              {/* <th scope="col" className="px-6 py-3">
                 Id
-              </th>
+              </th> */}
               <th scope="col" className="px-6 py-3">
                 Project Name
               </th>
               <th scope="col" className="px-6 py-3">
                 Description
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Assigned To
               </th>
               <th scope="col" className="px-6 py-3">
                 Start_date
@@ -90,14 +108,15 @@ function AdminProjects() {
           <tbody>
             {project.map((project) => (
               <tr className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700" key={project.id}>
-                <th
+                {/* <th
                   scope="row"
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                 >
                   {project.id}
-                </th>
+                </th> */}
                 <td className="px-6 py-4">{project.name}</td>
                 <td className="px-6 py-4">{project.description}</td>
+                <td className="px-6 py-4">{getAssignedToEmail(project.assignedTo)}</td>
                 <td className="px-6 py-4">{project.start_date}</td>
                 <td className="px-6 py-4">{project.end_date}</td>
                 <td className="px-6 py-4">

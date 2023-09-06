@@ -59,7 +59,7 @@ function OutHomePage() {
         <title>HomePage | Staffsense</title>
       </Helmet>
       <div className="font-hubballi">
-        <div className="font-hubballi">
+        <div className="font-hubballi w-full">
           <OutNavBar />
         </div>
         <div className="flex flex-col lg:flex-row items-center">
