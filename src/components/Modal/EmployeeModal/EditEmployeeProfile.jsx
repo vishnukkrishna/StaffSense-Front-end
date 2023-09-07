@@ -26,6 +26,8 @@ function EditEmployeeProfile({ Action }) {
     const Navigate = useNavigate();
     const [departments, setDepartments] = useState([]);
     const [selectedDepartment, setSelectedDepartment] = useState("");
+    const [phoneNumberError, setPhoneNumberError] = useState("");
+
     const [formData, setFormData] = useState({
         employee_name: "",
         department_name: "",
@@ -80,12 +82,28 @@ function EditEmployeeProfile({ Action }) {
         fetchUserDetails();
     }, [id]);
     const handleChange = (e) => {
+        const { name, value } = e.target;
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value,
+            [name]: value,
         });
-        console.log(formData);
+
+        // Phone number validation
+        if (name === "contact_number") {
+            const phoneNumberPattern = /^[0-9 -]{10}$/; // This regex pattern allows only 10-digit numbers
+
+            if (!phoneNumberPattern.test(value)) {
+                setPhoneNumberError("Please enter a valid 10-digit phone number.");
+                toast.error("Please enter a valid 10-digit phone number."); // Toast error message
+            } else {
+                setPhoneNumberError(""); // Reset the error message if the format is valid
+            }
+        }
+
+
+
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -99,7 +117,7 @@ function EditEmployeeProfile({ Action }) {
             formDataToSend.append("phone", formData.contact_number);
             formDataToSend.append("email_address", formData.email_address);
             formDataToSend.append("designation", formData.designation);
-        
+
             const response = await axios.put(
                 `${BACKEND_BASE_URL}/user/edit/${id}/`,
                 formDataToSend,
@@ -113,7 +131,7 @@ function EditEmployeeProfile({ Action }) {
             console.log(response.data);
             Action()
             Navigate("/profileuser");
-        
+
         } catch (error) {
             console.log(error);
             // Handle error
@@ -137,7 +155,7 @@ function EditEmployeeProfile({ Action }) {
 
                 <DialogHeader>Edit Employee Details</DialogHeader>
                 <DialogBody divider className="font-fontHubballi text-xl">
-
+                    <ToastContainer />
                     <form onSubmit={handleSubmit}>
                         {/* <div className="mb-4">
                             <label htmlFor="inputField1" className="block text-gray-700">Employee Username</label>
@@ -162,7 +180,6 @@ function EditEmployeeProfile({ Action }) {
                                 name="first_name"
                                 value={formData.first_name}
                                 onChange={handleChange}
-                                required
                                 className="border border-gray-300 rounded-md p-2 w-full"
                             />
                         </div>
@@ -175,7 +192,6 @@ function EditEmployeeProfile({ Action }) {
                                 name="last_name"
                                 value={formData.last_name}
                                 onChange={handleChange}
-                                required
                                 className="border border-gray-300 rounded-md p-2 w-full"
                             />
                         </div>
@@ -183,14 +199,17 @@ function EditEmployeeProfile({ Action }) {
                             <label htmlFor="inputField3" className="block text-gray-700">Contact Number</label>
                             <input
                                 id="contact_number"
-                                type="text"
+                                type="tel" // Change the input type to "tel"
                                 name="contact_number"
+                                pattern="[0-9]{10}" // Use the pattern attribute to enforce 10 digits
                                 value={formData.contact_number}
                                 onChange={handleChange}
-                                required
                                 className="border border-gray-300 rounded-md p-2 w-full"
                             />
+                            {phoneNumberError && <p className="text-red-500">{phoneNumberError}</p>}
                         </div>
+
+
                         {/* <div>
                             <label htmlFor="inputField3" className="block text-gray-700">Email Address</label>
                             <input
@@ -212,7 +231,6 @@ function EditEmployeeProfile({ Action }) {
                                 name="designation"
                                 value={formData.designation}
                                 onChange={handleChange}
-                                required
                                 className="border border-gray-300 rounded-md p-2 w-full"
                             />
                         </div>

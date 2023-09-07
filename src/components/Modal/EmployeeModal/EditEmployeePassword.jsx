@@ -28,23 +28,31 @@ function EditEmployeePassword() {
     console.log(user, "hiiiiiiiiiiiii");
     const ChangePass = async (e) => {
         e.preventDefault();
+
+        // Password validation rules
+        const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
         try {
             if (pass1 === pass2) {
-                const res = await axios.post(`${BACKEND_BASE_URL}/user/changepass/`, {
-                    oldpass,
-                    password: pass1,
-                    user_id: user.user_id,
-                });
-                if (res.data.msg === 500) {
-                    toast.error("Old Password Not match");
+                if (!passwordPattern.test(pass1)) {
+                    toast.error("Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, and one digit.");
                 } else {
-                    e.target.reset();
-                    localStorage.removeItem("access_token");
-                    setUser(null);
-                    toast.success("Password changed");
-                    navigate("/user");
+                    const res = await axios.post(`${BACKEND_BASE_URL}/user/changepass/`, {
+                        oldpass,
+                        password: pass1,
+                        user_id: user.user_id,
+                    });
+                    if (res.data.msg === 500) {
+                        toast.error("Old Password Not match");
+                    } else {
+                        e.target.reset();
+                        localStorage.removeItem("access_token");
+                        setUser(null);
+                        toast.success("Password changed");
+                        navigate("/user");
+                    }
+                    console.log(res.data);
                 }
-                console.log(res.data);
             } else {
                 toast.error("Passwords didn't match");
             }
@@ -52,6 +60,7 @@ function EditEmployeePassword() {
             toast.error("Something went wrong...");
         }
     };
+
 
     return (
         <>
@@ -70,7 +79,7 @@ function EditEmployeePassword() {
 
                 <DialogHeader>Edit Employee Password</DialogHeader>
                 <DialogBody divider className="font-fontHubballi text-xl">
-
+                    <ToastContainer />
                     <form onSubmit={ChangePass}>
                         <div className="mb-4">
                             <label htmlFor="textareaField" className="block text-gray-700">

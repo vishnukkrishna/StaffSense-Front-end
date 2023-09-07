@@ -37,7 +37,28 @@ const LINKS = [
 const currentYear = new Date().getFullYear();
 
 function OutHomePage() {
+  const [showToTopButton, setShowToTopButton] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
+
+  const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleScroll = () => {
+    if (window.scrollY > 200) {
+      setShowToTopButton(true);
+    } else {
+      setShowToTopButton(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     fetchAnnouncementData();
@@ -302,10 +323,10 @@ function OutHomePage() {
           </div>
         </div>
         {/* ................................................... */}
-        <div className="h-[200px] mt-10">
+        {/* <div className="h-[200px] mt-10">
           <h1 className="text-3xl m-20 p-10">OUR CLIENTELE</h1>
-        </div>
-        <footer className="relative w-full">
+        </div> */}
+        <footer className="relative w-full mt-10">
           <div className="mx-auto w-full max-w-7xl px-8">
             <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
               <div className="w-40 h-30">
@@ -348,6 +369,16 @@ function OutHomePage() {
               </Typography>
             </div>
           </div>
+          {showToTopButton && (
+            <button
+              id="to-top-button"
+              onClick={goToTop}
+              title="Go To Top"
+              className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-14 h-14 rounded-full drop-shadow-2xl bg-customColor text-white text-3xl font-bold"
+            >
+              &uarr;
+            </button>
+          )}
         </footer>
       </div>
     </>

@@ -32,6 +32,27 @@ const currentYear = new Date().getFullYear();
 function EmployeeLandingPage() {
 
   const [announcements, setAnnouncements] = useState([]);
+  const [showToTopButton, setShowToTopButton] = useState(false);
+
+  const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleScroll = () => {
+    if (window.scrollY > 200) {
+      setShowToTopButton(true);
+    } else {
+      setShowToTopButton(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     fetchAnnouncementData();
@@ -210,6 +231,16 @@ function EmployeeLandingPage() {
               </Typography>
             </div>
           </div>
+          {showToTopButton && (
+            <button
+              id="to-top-button"
+              onClick={goToTop}
+              title="Go To Top"
+              className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-14 h-14 rounded-full drop-shadow-2xl bg-customColor text-white text-3xl font-bold"
+            >
+              &uarr;
+            </button>
+          )}
         </footer>
       </div>
     </>

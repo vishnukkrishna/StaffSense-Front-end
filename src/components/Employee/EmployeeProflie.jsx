@@ -6,6 +6,8 @@ import profile from "../../images/profile-pic.jpg";
 import EditEmployeeProfile from "../Modal/EmployeeModal/EditEmployeeProfile";
 import EditEmployeePassword from "../Modal/EmployeeModal/EditEmployeePassword";
 import { Collapse } from "@material-tailwind/react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EmployeeProfile() {
   const [userData, setUserData] = useState(null);
@@ -109,6 +111,7 @@ function EmployeeProfile() {
               </div>
               <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
                 <EditEmployeeProfile Action={fetchUserData} />
+                {/* <ToastContainer /> */}
                 <EditEmployeePassword />
               </div>
             </div>
