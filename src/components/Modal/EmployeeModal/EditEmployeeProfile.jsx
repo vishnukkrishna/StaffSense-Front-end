@@ -241,18 +241,19 @@ function EditEmployeeProfile({ Action }) {
                                 id="department"
                                 className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                 onChange={handleChange}
+                                value={formData.department_id} // Use the value prop to set the selected value
                             >
                                 <option value="">Select department</option>
                                 {departments.map((department) => (
                                     <option
                                         key={department.name}
                                         value={department.id}
-                                        selected={formData.department_id === department.id}
                                     >
                                         {department.name}
                                     </option>
                                 ))}
                             </select>
+
                         </div>
 
                         <DialogFooter>

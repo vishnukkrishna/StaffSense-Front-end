@@ -17,8 +17,10 @@ function EmployeeProfile() {
   const user_id = user && user.user_id;
 
   useEffect(() => {
-    fetchUserData();
-  }, [user]);
+    if (user_id) {
+      fetchUserData();
+    }
+  }, [user, user_id]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];

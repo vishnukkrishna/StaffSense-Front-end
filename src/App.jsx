@@ -24,6 +24,7 @@ import EditEmployeeDetails from "./components/Modal/AdminModal/EditEmployeeDetai
 import AdminAnnouncementsPage from "./pages/Admin/AdminAnnouncementsPage";
 import EmployeeComplaintPage from "./pages/Employee/EmployeeComplaintPage";
 import AdminComplaintsPage from "./pages/Admin/AdminComplaintsPage";
+import Spinner from "./components/Spinner/Spinner";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -137,6 +138,7 @@ function App() {
 
             {/* Employee Side */}
             <Route path="/" element={<OutHomePage />} />
+            <Route path="/spinner" element={<Spinner />} />
             <Route
               path="/home"
               element={
