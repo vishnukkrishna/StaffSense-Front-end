@@ -4,9 +4,6 @@ import InNavList from "../../components/NavBar/InNavList";
 import { Helmet } from "react-helmet";
 
 function EmployeeComplaintPage() {
-
-
-
     return (
         <div>
             <Helmet>

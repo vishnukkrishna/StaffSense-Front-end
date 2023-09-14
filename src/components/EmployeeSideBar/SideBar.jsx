@@ -20,12 +20,12 @@ function SideBar() {
     },
     {
       name: "My Leave",
-      link: "/myleave",
+      link: "/userleave",
       icon: SlCalender
     },
     {
       name: "Applied Leaves",
-      link: "/leaves",
+      link: "/userapplied",
       icon: AiOutlineClockCircle
     },
     {

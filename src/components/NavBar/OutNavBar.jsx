@@ -5,9 +5,15 @@ import {
   Typography,
   Button,
   IconButton,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
 import logo from "../../images/Logo.png";
 import { useNavigate } from "react-router-dom";
+import { BsBell } from 'react-icons/bs'
+import { Badge } from "@material-tailwind/react";
 
 
 function OutNavBar() {
@@ -78,6 +84,27 @@ function OutNavBar() {
             </div>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
+              <div className="mr-3 cursor-pointer">
+                <Menu
+                  animate={{
+                    mount: { y: 0 },
+                    unmount: { y: 25 },
+                  }}
+                >
+                  <MenuHandler>
+                    <div>
+
+                      <Badge content={0} className="" max={999} color="red">
+                        <BsBell className="w-7 h-7 text-customColor" />
+                      </Badge>
+                    </div>
+                  </MenuHandler>
+                  <MenuList className="mt-5">
+                    <MenuItem>Menu Item 1</MenuItem>
+                    <MenuItem>Menu Item 2</MenuItem>
+                  </MenuList>
+                </Menu>
+              </div>
               <Button
                 size="sm"
                 className="hidden lg:inline-block rounded-full w-36 bg-customColor h-12 text-lg drop-shadow-md"

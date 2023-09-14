@@ -9,11 +9,17 @@ import {
   Button,
   IconButton,
   Avatar,
+  Menu,
+  MenuHandler,
+  MenuList,
+  MenuItem,
 } from "@material-tailwind/react";
 import logo from "../../images/Logo.png";
 import { BACKEND_BASE_URL } from "../../api/Api";
 import AuthContext from "../Contexts/AuthContext";
 import { FaUserCircle } from "react-icons/fa";
+import { BsBell } from 'react-icons/bs'
+import { Badge } from "@material-tailwind/react";
 
 function InNavList() {
   // let { userProfile } = useContext(AuthContext)
@@ -102,8 +108,8 @@ function InNavList() {
       </Typography>
     </ul>
   );
-  if(userData){
-}
+  if (userData) {
+  }
   return (
     <div>
       <div className="pt-24">
@@ -114,9 +120,30 @@ function InNavList() {
             </div>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
+              <div className="mr-3 cursor-pointer">
+                <Menu
+                  animate={{
+                    mount: { y: 0 },
+                    unmount: { y: 25 },
+                  }}
+                >
+                  <MenuHandler>
+                    <div>
+
+                      <Badge content={0} className="" max={999} color="red">
+                        <BsBell className="w-7 h-7 text-customColor" />
+                      </Badge>
+                    </div>
+                  </MenuHandler>
+                  <MenuList className="mt-5">
+                    <MenuItem>Menu Item 1</MenuItem>
+                    <MenuItem>Menu Item 2</MenuItem>
+                  </MenuList>
+                </Menu>
+              </div>
               <Link
                 to="/profileuser"
-              className="w-10 h-10 rounded-full bg-customColor flex items-center justify-center"
+                className="w-10 h-10 rounded-full bg-customColor flex items-center justify-center"
               >
                 {/* <FaUserCircle className="text-white text-3xl md:text-4xl" /> */}
                 <img className="rounded-full w-20 h-15" src={img} alt="" />

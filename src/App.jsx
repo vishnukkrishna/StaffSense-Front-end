@@ -25,6 +25,8 @@ import AdminAnnouncementsPage from "./pages/Admin/AdminAnnouncementsPage";
 import EmployeeComplaintPage from "./pages/Employee/EmployeeComplaintPage";
 import AdminComplaintsPage from "./pages/Admin/AdminComplaintsPage";
 import Spinner from "./components/Spinner/Spinner";
+import EmployeeLeavePage from "./pages/Employee/EmployeeLeavePage";
+import EmployeeAppliedLeavePage from "./pages/Employee/EmployeeAppliedLeavePage";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -171,6 +173,23 @@ function App() {
                 </UserProtectedRoutes>
               }
             />
+            <Route
+              path="/userleave"
+              element={
+                <UserProtectedRoutes>
+                  <EmployeeLeavePage />
+                </UserProtectedRoutes>
+              }
+            />
+            <Route
+              path="/userapplied"
+              element={
+                <UserProtectedRoutes>
+                  <EmployeeAppliedLeavePage />
+                </UserProtectedRoutes>
+              }
+            />
+
           </Routes>
         </Router>
       </AuthProvider>
