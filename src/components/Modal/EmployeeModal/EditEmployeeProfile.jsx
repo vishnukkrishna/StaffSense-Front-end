@@ -31,7 +31,6 @@ function EditEmployeeProfile({ Action }) {
     const [formData, setFormData] = useState({
         employee_name: "",
         department_name: "",
-        contact_number: "",
         email_address: "",
         designation: "",
         employee_id: "",

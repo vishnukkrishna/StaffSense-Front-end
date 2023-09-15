@@ -13,9 +13,11 @@ function AdminChatsPage() {
             <div>
                 <AdminNavBar />
             </div>
-            <div className="flex col-2">
+            <div className="flex">
                 <AdminSidebar />
-                <AdminChat />
+                <div className="w-full flex justify-center">
+                    <AdminChat />
+                </div>
             </div>
         </div>
     )

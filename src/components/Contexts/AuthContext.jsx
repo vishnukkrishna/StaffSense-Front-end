@@ -41,6 +41,7 @@ export const AuthProvider = ({ children }) => {
         username: username,
       };
       console.log(user);
+      console.log(is_admin);
       setUser(decoded_token);
     }
   }, []);

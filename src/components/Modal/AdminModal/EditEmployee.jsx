@@ -32,7 +32,6 @@ function EditEmployee({ id, Action }) {
         employee_username: "",
         employee_first_name: "",
         employee_last_name: "",
-        contact_number: "",
     });
 
     const fetchDepartments = async () => {
