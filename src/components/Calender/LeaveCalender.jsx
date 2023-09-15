@@ -11,7 +11,7 @@ function LeaveCalender() {
     const localizer = momentLocalizer(moment);
     const { user } = useContext(AuthContext);
 
-    console.log(user, "......vbvbbvb...........");
+    console.log(user, ".................");
 
     const [isLoading, setIsLoading] = useState(true);
     const [leaveData, setLeaveData] = useState([]);

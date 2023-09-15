@@ -33,7 +33,6 @@ function AdminComplaints() {
                     status: newStatus,
                 }
             );
-
             fetchComplaints();
         } catch (error) {
             console.error(error);
@@ -55,7 +54,7 @@ function AdminComplaints() {
 
     return (
         <>
-            <div className="mt-44 ml-36 overflow-x-auto shadow-md sm:rounded-lg w-3/5 h-full">
+            <div className="mt-44 ml-64 overflow-x-auto shadow-md sm:rounded-lg w-3/5 h-full">
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr className="text-lg text-center">

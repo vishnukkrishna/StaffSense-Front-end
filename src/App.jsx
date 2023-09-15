@@ -27,6 +27,9 @@ import AdminComplaintsPage from "./pages/Admin/AdminComplaintsPage";
 import Spinner from "./components/Spinner/Spinner";
 import EmployeeLeavePage from "./pages/Employee/EmployeeLeavePage";
 import EmployeeAppliedLeavePage from "./pages/Employee/EmployeeAppliedLeavePage";
+import AdminLeavesPage from "./pages/Admin/AdminLeavesPage";
+import EmployeeChatPage from "./pages/Employee/EmployeeChatPage";
+import AdminChatsPage from "./pages/Admin/AdminChatsPage";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -108,9 +111,11 @@ function App() {
               }
             />
             <Route
-              path="/chat"
+              path="/adminchat"
               element={
-                <AdminTasksPage />
+                <AdminProtectedRoutes>
+                  <AdminChatsPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
@@ -135,6 +140,14 @@ function App() {
               path="/announcement"
               element={
                 <AdminAnnouncementsPage />
+              }
+            />
+            <Route
+              path="/adminleave"
+              element={
+                <AdminProtectedRoutes>
+                  <AdminLeavesPage />
+                </AdminProtectedRoutes>
               }
             />
 
@@ -186,6 +199,14 @@ function App() {
               element={
                 <UserProtectedRoutes>
                   <EmployeeAppliedLeavePage />
+                </UserProtectedRoutes>
+              }
+            />
+            <Route
+              path="/userchats"
+              element={
+                <UserProtectedRoutes>
+                  <EmployeeChatPage />
                 </UserProtectedRoutes>
               }
             />

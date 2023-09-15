@@ -30,7 +30,7 @@ function SideBar() {
     },
     {
       name: "Help Desk",
-      link: "/chats",
+      link: "/userchats",
       icon: BiMessageDetail
     },
   ];
