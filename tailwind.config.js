@@ -7,9 +7,14 @@ module.exports = withMT({
       colors: {
         customColor: "#0C1E40",
         bgColor: "#F8F8F8",
+        backGround: "#FEFFFE",
       },
       fontFamily: {
-        fontHubballi:"Hubballi",
+        fontHubballi: "Hubballi",
+        sansserif: "Titillium Web",
+      },
+      boxShadow: {
+        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
       },
     },
   },

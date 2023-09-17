@@ -14,6 +14,7 @@ import { FaStar } from "react-icons/fa";
 import { Button } from "@material-tailwind/react";
 import { Typography } from "@material-tailwind/react";
 import { fetchAnnouncements } from '../../data/AnnouncementApi'
+import { IoIosArrowDown } from 'react-icons/io'
 
 const LINKS = [
   {
@@ -232,14 +233,16 @@ function EmployeeLandingPage() {
             </div>
           </div>
           {showToTopButton && (
-            <button
-              id="to-top-button"
-              onClick={goToTop}
-              title="Go To Top"
-              className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-14 h-14 rounded-full drop-shadow-2xl bg-customColor text-white text-3xl font-bold"
-            >
-              &uarr;
-            </button>
+            <div className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-gray-300 text-2xl font-bold flex items-center justify-center">
+              <IoIosArrowDown
+                id="to-top-button"
+                onClick={goToTop}
+                title="Go To Top"
+                className="w-5 h-5 text-black"
+              >
+                &uarr;
+              </IoIosArrowDown>
+            </div>
           )}
         </footer>
       </div>

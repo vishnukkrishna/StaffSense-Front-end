@@ -79,8 +79,8 @@ function OutNavBar() {
       <div className="pt-24">
         <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
           <div className="flex items-center justify-between text-blue-gray-900">
-            <div className="w-40 h-30">
-              <img src={logo} alt="Logo" />
+            <div className="">
+              <img src={logo} alt="Logo" className="w-60 h-15"/>
             </div>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>

@@ -21,6 +21,7 @@ import { BiLogoFacebookCircle, BiDownArrow } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { fetchAnnouncements } from '../../data/AnnouncementApi'
 import { Typography } from "@material-tailwind/react";
+import { IoIosArrowDown } from 'react-icons/io'
 
 const LINKS = [
   {
@@ -39,6 +40,33 @@ const currentYear = new Date().getFullYear();
 function OutHomePage() {
   const [showToTopButton, setShowToTopButton] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
+
+  const [showContent1, setShowContent1] = useState(false);
+  const [showContent2, setShowContent2] = useState(false);
+  const [showContent3, setShowContent3] = useState(false);
+  const customBgColorClass1 = showContent1 ? "bg-customColor" : "bg-white";
+  const customBgColorClass2 = showContent2 ? "bg-customColor" : "bg-white";
+  const customBgColorClass3 = showContent3 ? "bg-customColor" : "bg-white";
+
+
+
+  const toggleContent1 = () => {
+    setShowContent1(!showContent1);
+    setShowContent2(false);
+    setShowContent3(false);
+  };
+
+  const toggleContent2 = () => {
+    setShowContent2(!showContent2);
+    setShowContent1(false);
+    setShowContent3(false);
+  };
+
+  const toggleContent3 = () => {
+    setShowContent3(!showContent3);
+    setShowContent1(false);
+    setShowContent2(false);
+  };
 
   const goToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -79,22 +107,22 @@ function OutHomePage() {
       <Helmet>
         <title>HomePage | Staffsense</title>
       </Helmet>
-      <div className="font-hubballi">
-        <div className="font-hubballi w-full">
+      <div className="font-hubballi bg-backGround">
+        <div className="w-full">
           <OutNavBar />
         </div>
         <div className="flex flex-col lg:flex-row items-center">
-          <div className="lg:mr-10 mr-20 ml-20 font-hubballi">
-            <h1 className="font-bold text-xl lg:text-3xl xl:text-4xl mb-4">
+          <div className="lg:mr-10 xl:ml-24 mr-4 ml-4 font-hubballi">
+            <h1 className="font-bold text-lg lg:text-xl xl:text-2xl 2xl:text-3xl mb-4">
               As a members’ life and priority changes, so should their saving
               priorities.
             </h1>
-            <h1 className="text-base lg:text-xl xl:text-2xl mb-4">
+            <h1 className="text-sm lg:text-base xl:text-lg 2xl:text-xl mb-4">
               Mango creates a customized employee savings benefit to build member
               financial wellness. By aligning their life-stages and financial
               profile.
             </h1>
-            <h1 className="text-base lg:text-xl xl:text-2xl">
+            <h1 className="text-sm lg:text-base xl:text-lg 2xl:text-xl">
               Members will be able to apportion savings between long-term,
               short-term, and group risk (death and disability).
             </h1>
@@ -103,38 +131,40 @@ function OutHomePage() {
           <img
             src={img}
             alt="Image"
-            className="w-full lg:w-1/3 h-auto lg:h-1/4 mt-4 lg:mt-0"
+            className="w-full lg:w-1/3 h-auto lg:h-auto mt-4 xl:ml-64 lg:mt-0"
           />
         </div>
+
         <div className="flex flex-col-reverse lg:flex-row items-center lg:px-4">
           <img
             src={img1}
             alt="Image"
-            className="w-full lg:w-1/3 h-auto lg:h-1/4 ml-8 mt-4 lg:ml-0 lg:mt-0"
+            className="w-full lg:w-1/3 h-auto lg:h-auto ml-4 mt-4 lg:ml-0 lg:mt-0"
           />
-          <div className="lg:mr-10 mr-4 lg:ml-20 font-hubballi">
-            <h1 className="mb-2 text-lg lg:text-xl xl:text-2xl lg:mb-4">
+          <div className="lg:mr-10 mr-4 lg:ml-4 font-hubballi text-center lg:text-left">
+            <h1 className="mb-2 text-base lg:text-xl xl:text-2xl">
               FUTURE NEXT-----------------
             </h1>
             <h1 className="lg:text-3xl xl:text-4xl font-bold mb-4">About Us</h1>
-            <p className="text-base lg:text-xl xl:text-2xl">
+            <p className="text-sm lg:text-base xl:text-xl">
               At StaffSense, we solidly endeavor towards making an incentive for
               our clients and that we associate. StaffSense is the leading and
               best software company in Kerala dealing with solutions like ERP,
-              e-commerce, mobile application and so on. This goal is reflected in
-              the entirety of our solutions- every one of them standing tall as an
+              e-commerce, mobile application, and so on. This goal is reflected in
+              the entirety of our solutions - every one of them standing tall as an
               industry signal in its classification, consistently conveying worth
               to our clients, for many years.
             </p>
-            <div className="flex items-center">
+            <div className="flex items-center cursor-pointer">
               <span className="mr-2">Learn more</span>
               <AiOutlineArrowRight className="" />
             </div>
           </div>
         </div>
 
+
         <div className="font-hubballi px-4 lg:px-0 text-center mt-10">
-          <div className="text-center font-extrabold text-3xl lg:text-4xl xl:text-5xl">
+          <div className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
             Our Features
           </div>
           <div>
@@ -196,7 +226,7 @@ function OutHomePage() {
         </div>
         {/* .............................................. */}
         <div className="font-hubballi px-4 lg:px-0 text-center mt-10">
-          <div className="text-center font-extrabold text-3xl lg:text-4xl xl:text-5xl">
+          <div className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
             Our Leaders
           </div>
           <div>
@@ -264,70 +294,115 @@ function OutHomePage() {
             </div>
           </div>
         </div>
-        {/* .......................................................... */}
-        <div className="flex font-hubballi h-[600px] mt-8 bg-bgColor">
-          <div className="w-1/2 p-4">
+
+        {/* ................................................... */}
+        <div className="flex flex-col lg:flex-row font-hubballi mt-8 bg-bgColor">
+          <div className="w-full lg:w-1/2 p-4">
             <img
               src={b1}
               alt="User Uploaded Image"
               className="w-full h-full object-cover"
             />
           </div>
-
-          <div className="w-1/2 p-4">
-            <h1 className="text-center font-extrabold text-2xl lg:text-3xl xl:text-5xl mt-6">
+          <div className="w-full lg:w-1/2 p-4 mt-32">
+            <h1 className="w-4/5 ml-24 font-sansserif text-start text-xl font-black lg:text-3xl xl:text-5xl">
               Our Service Approach
             </h1>
-            <p className="p-10 font-thin text-1xl lg:text-1xl xl:text-2xl">
-              Our approach in handling a project is designed in a flow that can
-              ensure the requirement of the client is fulfilled intact.
-            </p>
-            <div className="flex flex-col cursor-pointer">
-              <div className="flex justify-between bg-white  h-16">
-                <p className="p-4 text-2xl">Develop a Concept</p>
-                <BiDownArrow className="mr-8 mt-6" />
+            <div className="w-4/5 mt-4 ml-24">
+              <p className="text-sm font-thin text-gray-600 lg:text-xl xl:text-2xl">
+                Our approach in handling a project is designed in a flow that can
+                ensure the requirement of the client is fulfilled intact.
+              </p>
+            </div>
+            <div className="group w-4/5 mt-12 mx-auto cursor-pointer">
+              <div
+                className={`flex justify-between cursor-pointer ${customBgColorClass1} rounded-lg p-4 transition duration-300 transform hover:scale-105`}
+                onClick={toggleContent1}
+              >
+                <p className={`text-xl font-bold ${showContent1 ? 'text-white' : 'text-black'}`}>
+                  Develop a Concept
+                </p>
+                <div className="arrow">
+                  <IoIosArrowDown
+                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${showContent1 ? 'transform rotate-180' : ''}`}
+                  />
+                </div>
               </div>
-              <div className="flex justify-between bg-white mt-6 h-16">
-                <p className="p-4 text-2xl">Build and Evolve</p>
-                <BiDownArrow className="mr-8 mt-6" />
+              <div className={`${showContent1 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600`}>
+                <p className="p-4 text-base lg:text-lg xl:text-xl">
+                  Drafting the extent of the need and making a rundown of the
+                  highlights and prerequisites wanted in the project.
+                </p>
               </div>
-              <div className="flex justify-between bg-white mt-6 h-16">
-                <p className="p-4 text-2xl">Implement</p>
-                <BiDownArrow className="mr-8 mt-6" />
+            </div>
+            <div className="group mt-6 w-4/5 mx-auto cursor-pointer">
+              <div
+                className={`flex justify-between cursor-pointer ${customBgColorClass2} rounded-lg p-4 transition duration-300 transform hover:scale-105`}
+                onClick={toggleContent2}
+              >
+                <p className={`text-xl font-bold ${showContent2 ? 'text-white' : 'text-black'}`}>
+                  Build and Evolve
+                </p>
+                <div className="arrow">
+                  <IoIosArrowDown
+                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${showContent2 ? 'transform rotate-180' : ''}`}
+                  />
+                </div>
+              </div>
+              <div className={`${showContent2 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600`}>
+                <p className="p-4 text-base lg:text-lg xl:text-xl">Structuring the parts of the solutions, doing operational and functional tests and consolidating the required output.</p>
+              </div>
+            </div>
+            <div className="group mt-6 w-4/5 mx-auto cursor-pointer">
+              <div
+                className={`flex justify-between cursor-pointer ${customBgColorClass3} rounded-lg p-4 transition duration-300 transform hover:scale-105`}
+                onClick={toggleContent3}
+              >
+                <p className={`text-xl font-bold ${showContent3 ? 'text-white' : 'text-black'}`}>
+                  Implement
+                </p>
+                <div className="arrow">
+                  <IoIosArrowDown
+                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${showContent3 ? 'transform rotate-180' : ''}`}
+                  />
+                </div>
+              </div>
+              <div className={`${showContent3 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600`}>
+                <p className="p-4 text-base lg:text-lg xl:text-xl">Launch of the solution in the environment and setting up to make the product run effectively and up to the standards.</p>
               </div>
             </div>
           </div>
         </div>
+
+
         {/* ................................................... */}
-        <div className="flex font-hubballi h-[600px] mt-0 bg-bgColor">
-          <div className="w-1/2 p-4">
-            <h1 className="text-center font-extrabold text-2xl lg:text-3xl xl:text-5xl mt-6">
+        <div className="flex flex-col lg:flex-row font-hubballi mt-0 bg-bgColor">
+          <div className="w-full lg:w-1/2 p-4">
+            <h1 className="text-center font-sansserif text-xl font-black lg:text-3xl xl:text-5xl mt-6">
               Announcements
             </h1>
             {announcements.map((announcement) => (
-              <div key={announcement.id} className="flex flex-col p-20">
+              <div key={announcement.id} className="flex flex-col p-4">
                 <div className="mt-5 flex items-center">
                   <FaStar className="mr-2" />
-                  <h1 className="text-3xl"> {announcement.event}</h1>
+                  <h1 className="text-2xl"> {announcement.event}</h1>
                 </div>
-                <p className="p-2 ml-7 text-2xl"> {announcement.note}</p>
+                <p className="p-2 ml-7 text-base lg:text-xl xl:text-2xl"> {announcement.note}</p>
               </div>
             ))}
           </div>
-          <div className="w-1/2 p-4">
+          <div className="w-full lg:w-1/2 p-4">
             <img
               src={b2}
               alt="User Uploaded Image"
-              className="w-full h-full object-cover"
+              className="w-full lg:h-auto object-cover"
             />
           </div>
         </div>
+
         {/* ................................................... */}
-        {/* <div className="h-[200px] mt-10">
-          <h1 className="text-3xl m-20 p-10">OUR CLIENTELE</h1>
-        </div> */}
         <footer className="relative w-full mt-10">
-          <div className="mx-auto w-full max-w-7xl px-8">
+          <div className="mx-auto w-full max-w-7xl px-4">
             <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
               <div className="w-40 h-30">
                 <img src={logo} alt="Logo" />
@@ -370,14 +445,16 @@ function OutHomePage() {
             </div>
           </div>
           {showToTopButton && (
-            <button
-              id="to-top-button"
-              onClick={goToTop}
-              title="Go To Top"
-              className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-14 h-14 rounded-full drop-shadow-2xl bg-customColor text-white text-3xl font-bold"
-            >
-              &uarr;
-            </button>
+            <div className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-gray-300 text-2xl font-bold flex items-center justify-center">
+              <IoIosArrowDown
+                id="to-top-button"
+                onClick={goToTop}
+                title="Go To Top"
+                className="w-5 h-5 text-black"
+              >
+                &uarr;
+              </IoIosArrowDown>
+            </div>
           )}
         </footer>
       </div>

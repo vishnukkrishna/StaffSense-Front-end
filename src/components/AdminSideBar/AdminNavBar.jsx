@@ -12,8 +12,9 @@ function AdminNavBar() {
     console.log("Logout");
     localStorage.removeItem("access_token");
     setUser(null);
-
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    })
   };
   return (
     <div className="bg-indigo-500 h-28 font-fontHubballi text-xl">
@@ -28,9 +29,9 @@ function AdminNavBar() {
             alt=""
           />
           <div className="font-semibold text-white  cursor-pointer mr-4 mt-9">
-            <div>Vishnu Krishnakumar</div>
+            <div>StaffSense</div>
             <div className="text-sm text-gray-500 dark:text-gray-400">
-              Joined in August 2023
+              Admin
             </div>
           </div>
           <Button className="w-23 text-center h-10 mt-9 mr-7" onClick={handleLogout}>Logout</Button>

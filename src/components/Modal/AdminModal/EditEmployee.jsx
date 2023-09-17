@@ -34,6 +34,9 @@ function EditEmployee({ id, Action }) {
         employee_last_name: "",
     });
 
+    // State variable to track phone number validation
+    const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
+
     const fetchDepartments = async () => {
         try {
             const response = await axios.get(`${BACKEND_BASE_URL}/user/departments/`);
@@ -81,11 +84,30 @@ function EditEmployee({ id, Action }) {
             ...formData,
             [e.target.name]: e.target.value,
         });
-        console.log(formData);
+
+        // Validate phone number
+        if (e.target.name === "contact_number") {
+            setIsPhoneNumberValid(validatePhoneNumber(e.target.value));
+        }
+    };
+
+    // Validation function for phone number
+    const validatePhoneNumber = (phoneNumber) => {
+        // Implement your phone number validation logic here
+        // Return true if valid, false otherwise
+        // For example, you can check if it's a valid format or length
+        // For simplicity, this example checks if it's a 10-digit number
+        return /^\d{10}$/.test(phoneNumber);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Check if phone number is valid
+        if (!isPhoneNumberValid) {
+            toast.error("Please enter a valid 10-digit phone number.");
+            return;
+        }
 
         try {
             const formDataToSend = new FormData();
@@ -108,15 +130,17 @@ function EditEmployee({ id, Action }) {
                 }
             );
 
+            toast.success("Employee details updated successfully!");
+
             console.log(response.data);
-            Action()
-            handleOpen()
+            Action();
+            handleOpen();
             Navigate("/userlist");
-
-
         } catch (error) {
-            console.log(error);
-            // Handle error
+            console.error(error);
+            toast.error(
+                "An error occurred while updating employee details. Please try again."
+            );
         }
     };
 
@@ -271,6 +295,7 @@ function EditEmployee({ id, Action }) {
                     </form>
                 </DialogBody>
             </Dialog>
+            <ToastContainer />
         </>
     )
 }

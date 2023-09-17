@@ -21,6 +21,7 @@ export const AuthProvider = ({ children }) => {
         username,
         user_id,
         email,
+        profile_pic,
         is_active,
         is_admin,
         department,
@@ -39,9 +40,11 @@ export const AuthProvider = ({ children }) => {
         designation: designation,
         seating_location: seating_location,
         username: username,
+        profile_pic: profile_pic,
       };
       console.log(user);
       console.log(is_admin);
+      console.log("profile:pic:",profile_pic);
       setUser(decoded_token);
     }
   }, []);

@@ -7,14 +7,18 @@ import { Button } from "@material-tailwind/react";
 
 function MenuComponent() {
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
+  console.log("user:", user); // Add this line for debugging
+
   const handleLogout = () => {
     console.log("Logout");
     localStorage.removeItem("access_token");
     setUser(null);
-
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    });
   };
+
   return (
     <div className="bg-indigo-500 h-28 font-fontHubballi text-xl">
       <div className="flex justify-between">
@@ -22,18 +26,30 @@ function MenuComponent() {
           <img src={logo} alt="Logo" />
         </div>
         <div className="flex">
-          <img
+          {/* <img
             className="w-14 h-14 space-x-4 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-5 mt-7"
             src={profile}
             alt=""
-          />
-          <div className="font-semibold text-white  cursor-pointer mr-4 mt-9">
-            <div>Vishnu Krishnakumar</div>
-            <div className="text-sm text-gray-500 dark:text-gray-400">
-              Joined in August 2023
-            </div>
+          /> */}
+          <div className="font-semibold text-white cursor-pointer mr-4 mt-9">
+            {user ? (
+              <>
+                <div>{user.name}</div>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  Joined in August 2023
+                </div>
+              </>
+            ) : (
+              <div>Loading user data...</div>
+            )}
           </div>
-          <Button className="w-23 text-center h-10 mt-9 mr-7 hover:bg-gray-800" onClick={handleLogout}>Logout</Button>
+
+          <Button
+            className="w-23 text-center h-10 mt-9 mr-7 hover:bg-gray-800"
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </div>
       </div>
     </div>
