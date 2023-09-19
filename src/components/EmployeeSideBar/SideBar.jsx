@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { BACKEND_BASE_URL } from "../../api/Api";
 import { BiUserCircle, BiMessageDetail } from "react-icons/bi";
 import { SlCalender } from "react-icons/sl";
 import { AiOutlineClockCircle } from "react-icons/ai";
@@ -7,6 +9,28 @@ import { Link } from "react-router-dom";
 import { BsCaretLeftSquareFill } from 'react-icons/bs';
 
 function SideBar() {
+
+
+  const [open, setOpen] = useState(true);
+  const [activeLink, setActiveLink] = useState('');
+
+  // Chat .....................................
+  const [adminId, setAdminId] = useState(null);
+  const fetchAdminId = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_BASE_URL}/chat/getAdminId`);
+      console.log(response.data, "hhhhhhhhhhhhhhhhh");
+      setAdminId(response.data.admin_id);
+    } catch (error) {
+      console.error("Error fetching admin ID:", error);
+    }
+  };
+  useEffect(() => {
+    fetchAdminId();
+  }, []);
+  // .........................................
+
+
   const menus = [
     {
       name: "Profile",
@@ -30,13 +54,16 @@ function SideBar() {
     },
     {
       name: "Help Desk",
-      link: "/userchats",
+      link: `/userchats?adminId=${adminId}`,
       icon: BiMessageDetail
     },
   ];
 
-  const [open, setOpen] = useState(true);
-  const [activeLink, setActiveLink] = useState('');
+
+
+
+
+
 
   const handleLinkClick = (menu) => {
     setActiveLink(menu.link);

@@ -80,19 +80,19 @@ function EmployeeLandingPage() {
           <img
             src={img1}
             alt="Image"
-            className="w-full lg:w-1/3 h-auto lg:h-1/4 ml-8 mt-4 lg:ml-0 lg:mt-0"
+            className="w-full lg:w-1/3 h-auto lg:h-auto ml-4 mt-4 lg:ml-0 lg:mt-0"
           />
-          <div className="lg:mr-10 mr-4 lg:ml-20 font-hubballi">
-            <h1 className="mb-2 text-lg lg:text-xl xl:text-2xl lg:mb-4">
+          <div className="lg:mr-10 mr-4 lg:ml-4 font-hubballi text-center lg:text-left">
+            <h1 className="mb-2 text-base lg:text-xl xl:text-2xl lg:mb-4">
               FUTURE NEXT-----------------
             </h1>
             <h1 className="lg:text-3xl xl:text-4xl font-bold mb-4">About Us</h1>
-            <p className="text-base lg:text-xl xl:text-2xl">
+            <p className="text-sm lg:text-base xl:text-lg">
               At StaffSense, we solidly endeavor towards making an incentive for
               our clients and that we associate. StaffSense is the leading and
               best software company in Kerala dealing with solutions like ERP,
-              e-commerce, mobile application and so on. This goal is reflected in
-              the entirety of our solutions- every one of them standing tall as an
+              e-commerce, mobile application, and so on. This goal is reflected in
+              the entirety of our solutions - every one of them standing tall as an
               industry signal in its classification, consistently conveying worth
               to our clients, for many years.
             </p>
@@ -102,6 +102,7 @@ function EmployeeLandingPage() {
             </div>
           </div>
         </div>
+
         {/* .............................................. */}
         <div className="font-hubballi px-4 lg:px-0 text-center mt-10">
           <div className="text-center font-extrabold text-3xl lg:text-4xl xl:text-5xl">
@@ -165,17 +166,19 @@ function EmployeeLandingPage() {
           <div className="flex font-hubballi mt-10 bg-bgColor flex-col-reverse lg:flex-row">
             <div className="w-full lg:w-1/2 p-4">
               <div className="text-center">
-                <h1 className="font-extrabold text-2xl lg:text-3xl xl:text-5xl mt-6">
+                <h1 className="font-extrabold text-xl lg:text-3xl xl:text-5xl mt-6">
                   Announcements
                 </h1>
               </div>
               {announcements.map((announcement) => (
-                <div key={announcement.id} className="flex flex-col p-20">
-                  <div className="mt-5 flex items-center">
-                    <FaStar className="mr-2" />
-                    <h1 className="text-3xl">{announcement.event}</h1>
+                <div key={announcement.id} className="flex flex-col p-2 lg:p-4">
+                  <div className="mt-2 lg:mt-5 flex items-center">
+                    <FaStar className="mr-2 text-xl lg:text-xl" />
+                    <h1 className="text-lg lg:text-3xl">{announcement.event}</h1>
                   </div>
-                  <p className="p-2 ml-7 text-2xl">{announcement.note}</p>
+                  <p className="p-2 ml-2 lg:ml-7 text-base lg:text-2xl">
+                    {announcement.note}
+                  </p>
                 </div>
               ))}
             </div>
@@ -183,10 +186,11 @@ function EmployeeLandingPage() {
               <img
                 src={b2}
                 alt="User Uploaded Image"
-                className="w-full h-full object-cover"
+                className="w-full h-auto lg:h-full object-cover"
               />
             </div>
           </div>
+
         </div>
         {/* ................................................... */}
         <footer className="relative w-full mt-10">
@@ -233,12 +237,12 @@ function EmployeeLandingPage() {
             </div>
           </div>
           {showToTopButton && (
-            <div className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-gray-300 text-2xl font-bold flex items-center justify-center">
+            <div className="cursor-pointer fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-customColor text-2xl font-bold flex items-center justify-center">
               <IoIosArrowDown
                 id="to-top-button"
                 onClick={goToTop}
                 title="Go To Top"
-                className="w-5 h-5 text-black"
+                className="w-5 h-5 text-white animate-bounce"
               >
                 &uarr;
               </IoIosArrowDown>

@@ -1,14 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../Contexts/AuthContext";
 import profile from "../../images/profile-pic.jpg";
 import logo from "../../images/staffsense-transparent.png";
 import { Button } from "@material-tailwind/react";
+// import { BACKEND_BASE_URL } from "../../api/Api";
+// import axios from "axios";
+
 
 function MenuComponent() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
   console.log("user:", user); // Add this line for debugging
+  // const [recipientdetails, setRecipientDetails] = useState([])
+
+  // const setUserProfileDetails = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       `${BACKEND_BASE_URL}/user/userdetails/`
+  //     );
+  //     setRecipientDetails(response.data)
+  //     console.log(response, "llllllllllllllllllllllll");
+  //   } catch (error) {
+  //     console.error("Error fetching user data:", error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   setUserProfileDetails();
+  // }, []);
 
   const handleLogout = () => {
     console.log("Logout");
@@ -28,6 +47,7 @@ function MenuComponent() {
         <div className="flex">
           {/* <img
             className="w-14 h-14 space-x-4 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mr-5 mt-7"
+            // src={BACKEND_BASE_URL + recipientdetails?.profile_pic || '/path/to/default-image.jpg'}
             src={profile}
             alt=""
           /> */}

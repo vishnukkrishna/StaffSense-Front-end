@@ -445,12 +445,12 @@ function OutHomePage() {
             </div>
           </div>
           {showToTopButton && (
-            <div className="fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-gray-300 text-2xl font-bold flex items-center justify-center">
+            <div className="cursor-pointer fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-customColor text-2xl font-bold flex items-center justify-center">
               <IoIosArrowDown
                 id="to-top-button"
                 onClick={goToTop}
                 title="Go To Top"
-                className="w-5 h-5 text-black"
+                className="w-5 h-5 text-white animate-bounce"
               >
                 &uarr;
               </IoIosArrowDown>

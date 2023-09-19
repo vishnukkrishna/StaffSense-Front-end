@@ -1,81 +1,201 @@
-import React from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
+import { useLocation, useParams } from 'react-router-dom';
+import AuthContext from "../../components/Contexts/AuthContext";
+import { BACKEND_BASE_URL, wsApiUrl } from "../../api/Api";
+import { w3cwebsocket as W3CWebSocket } from 'websocket';
+import axios from "axios";
+import AdminChatSearch from '../Admin/AdminChatSearch';
 
 function AdminChat() {
+
+    const [recipientdetails, setRecipientDetails] = useState({})
+    const [senderdetails, setSenderDetails] = useState({});
+    const [senderid, setSenderId] = useState(null);
+    const [recipientid, setRecipientId] = useState(null)
+    const [clientstate, setClientState] = useState('');
+    const [messages, setMessages] = useState([]);
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const adminId = queryParams.get('adminId');
+    const { user } = useContext(AuthContext);
+    const [userId, setUserId] = useState(null);
+    // const [userData, setUserData] = useState(null);
+    const user_id = user && user.user_id;
+    const messageRef = useRef()
+
+
+    const { employeeId } = useParams();
+    useEffect(() => {
+        console.log(employeeId, 'emkdhfkfhkdkfd');
+    })
+
+    const setUserProfileDetails = async () => {
+        try {
+            const response = await axios.get(
+                `${BACKEND_BASE_URL}/user/userdetails/${user_id}/`
+            );
+            setRecipientDetails(response.data)
+            console.log(response, "llllllllllllllllllllllll");
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    };
+
+    const setSenderProfile = async () => {
+        try {
+            const response = await axios.get(
+                `${BACKEND_BASE_URL}/user/userdetails/${employeeId}/`
+            );
+            setSenderDetails(response.data)
+            console.log(response, "eeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+        }
+    };
+
+    useEffect(() => {
+        setUserProfileDetails()
+        setSenderProfile()
+    }, [])
+
+    const setUpChat = () => {
+        axios.get(`${BACKEND_BASE_URL}/chat/user-previous-chats/${senderid}/${recipientid}/`).then((response) => {
+            if (response.status == 200) {
+                console.log(response.data, "qwertyyyyyyyyyyyyyyyyy");
+                setMessages(response.data)
+            }
+        })
+
+        const client = new W3CWebSocket(`${wsApiUrl}/ws/chat/${senderid}/?${recipientid}`);
+        setClientState(client);
+        client.onopen = () => {
+            console.log('WebSocket Client Connected');
+        };
+
+        client.onmessage = (message) => {
+            const dataFromServer = JSON.parse(message.data);
+            console.log(dataFromServer, "dataFrommmmmmmmmmmmmmmmmmmmmmmmmmm");
+            if (dataFromServer) {
+                setMessages((prevMessages) => [
+                    ...prevMessages,
+                    {
+                        message: dataFromServer.message,
+                        sender_username: dataFromServer.senderUsername,
+                    },
+                ]);
+            }
+        };
+
+        client.onclose = () => {
+            console.log('Websocket disconnected');
+        }
+
+        return () => {
+            client.close();
+        };
+    }
+
+    useEffect(() => {
+        if (user) {
+            setUserId(user.user_id);
+            setUserProfileDetails();
+        }
+    }, [user]);
+
+    useEffect(() => {
+        if (userId && employeeId) {
+            setSenderId(employeeId);
+            setRecipientId(userId);
+            setUpChat();
+        }
+    }, [userId, employeeId]);
+
+    useEffect(() => {
+        if (senderid != null && recipientid != null) {
+            setUpChat()
+        }
+    }, [senderid, recipientid, employeeId])
+
+    const onButtonClicked = () => {
+        if (!clientstate || !clientstate.send || messageRef.current.value.trim() === "") {
+            return;
+        }
+
+        console.log(messageRef.current.value, senderdetails.username, recipientdetails.username, "reachedddddddddddddddddd");
+
+        clientstate.send(
+            JSON.stringify({
+                message: messageRef.current.value,
+                senderUsername: recipientdetails.username,
+                receiverUsername: senderdetails.username,
+            })
+        );
+
+        messageRef.current.value = '';
+    };
+
     return (
         <div className="w-9/12 border rounded lg:grid lg:grid-cols-3 m-3">
-            <div className="border-r border-gray-300 lg:col-span-1">
-                <div className="mx-3 my-3">
-                    <div className="relative text-gray-600">
-                        <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                            <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                viewBox="0 0 24 24" className="w-6 h-6 text-gray-300">
-                                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </span>
-                        <input type="search" className="block w-full py-2 pl-10 bg-gray-100 rounded-xl outline-none" name="search"
-                            placeholder="Search" required />
-                    </div>
-                </div>
-
-                <ul className="overflow-auto h-[32rem]">
-                    <h2 className="my-2 mb-2 ml-2 text-xl font-bold text-gray-600">Chats</h2>
-                    <li>
-                        <a
-                            className="flex items-cBckgroundColor: #f5f5f5;enter px-3 py-2 text-sm transition duration-150 ease-in-out bg-gray-100 border-b border-gray-300 cursor-pointer focus:outline-none">
-                            <img className="object-cover w-10 h-10 rounded-full"
-                                src="https://cdn.pixabay.com/photo/2016/06/15/15/25/loudspeaker-1459128__340.png" alt="username" />
-                            <div className="w-full pb-2">
-                                <div className="flex justify-between">
-                                    <span className="block ml-2 font-bold text-gray-600">Vishnu Krishnakumar</span>
-                                    <span className="block ml-2 text-sm text-gray-600">50 minutes</span>
-                                </div>
-                                <span className="block ml-2 text-sm text-gray-600">Good night</span>
-                            </div>
-                        </a>
-                        {/* <a
-                            className="flex items-center px-3 py-2 text-sm transition duration-150 ease-in-out border-b border-gray-300 cursor-pointer hover:bg-gray-100 focus:outline-none">
-                            <img className="object-cover w-10 h-10 rounded-full"
-                                src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg" alt="username" />
-                            <div className="w-full pb-2">
-                                <div className="flex justify-between">
-                                    <span className="block ml-2 font-bold text-gray-600">Arun</span>
-                                    <span className="block ml-2 text-sm text-gray-600">6 hours</span>
-                                </div>
-                                <span className="block ml-2 text-sm text-gray-600">Good Morning</span>
-                            </div>
-                        </a> */}
-                    </li>
-                </ul>
-            </div>
+            <AdminChatSearch />
             <div className="hidden lg:col-span-2 lg:block">
                 <div className="w-full">
                     <div className="relative flex items-center p-3 border-b border-gray-300">
                         <img className="object-cover w-10 h-10 rounded-full"
-                            src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083383__340.jpg" alt="username" />
-                        <span className="block ml-2 font-bold text-gray-600">Vishnu Krishnakumar</span>
+                            src={BACKEND_BASE_URL+senderdetails.profile_pic} alt="username" />
+                        <span className="block ml-2 font-bold text-gray-600">{senderdetails.first_name} {senderdetails.last_name}</span>
                         <span className="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
                         </span>
                     </div>
                     <div className="relative w-full p-6 overflow-y-auto h-[40rem]">
                         <ul className="space-y-2">
-                            <li className="flex justify-start">
-                                <div className="relative max-w-xl px-6 py-2 text-gray-700 rounded-lg shadow">
-                                    <span className="block">Hi</span>
-                                </div>
-                            </li>
-                            <li className="flex justify-end">
-                                <div className="relative max-w-xl px-6 py-2 text-gray-700 bg-gray-100 rounded-lg shadow">
-                                    <span className="block">Hiiii</span>
-                                </div>
-                            </li>
+                            {
+
+                                messages.map((message) => {
+                                    console.log('recepedent,sender', recipientdetails, senderdetails);
+
+                                    if (message.sender_username == senderdetails.username) {
+
+                                        return (
+
+                                            <li className="flex justify-start">
+                                                <div>
+                                                    <img
+                                                        src={BACKEND_BASE_URL + senderdetails?.profile_pic}
+                                                        alt="My profile"
+                                                        className="w-7 h-7 rounded-full order-1"
+                                                    />
+                                                </div>
+                                                <div className="relative max-w-xl px-6 py-2 text-gray-700 rounded-lg shadow">
+                                                    <span className="block">{message.message}</span>
+                                                </div>
+                                            </li>
+                                        )
+                                    }
+                                    else {
+                                        return (
+                                            <li className="flex justify-end">
+                                                <div className="relative max-w-xl px-6 py-2 text-gray-700 bg-gray-100 rounded-lg shadow">
+                                                    <span className="block">{message.message}</span>
+                                                </div>
+                                                <div>
+                                                    <img
+                                                        src={BACKEND_BASE_URL + recipientdetails?.profile_pic}
+                                                        className="w-7 h-7 rounded-full order-2"
+                                                    />
+                                                </div>
+                                            </li>
+                                        )
+                                    }
+                                })
+                            }
                         </ul>
                     </div>
 
                     <div className="flex items-center justify-between w-full p-4 border-t border-gray-300 mt-12">
-                        <input type="text" placeholder="Message"
+                        <input ref={messageRef} type="text" placeholder="Message"
                             className="block w-full py-3 pl-4 mx-4 bg-gray-200 rounded-full outline-none focus:text-gray-700"
                             name="message" required />
-                        <button type="submit">
+                        <button type="submit" onClick={(e) => onButtonClicked()}>
                             <svg className="w-8 h-8 text-customColor origin-center transform rotate-90"
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path

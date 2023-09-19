@@ -119,6 +119,14 @@ function App() {
               }
             />
             <Route
+              path="/adminchat/chatbox/:employeeId"
+              element={
+                <AdminProtectedRoutes>
+                  <AdminChatsPage/>
+                </AdminProtectedRoutes>
+              }
+            />
+            <Route
               path="/leave"
               element={
                 <AdminTasksPage />
