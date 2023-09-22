@@ -33,9 +33,11 @@ function AdminComplaints() {
                     status: newStatus,
                 }
             );
+            toast.error("Failed to update complaint status");
             fetchComplaints();
         } catch (error) {
             console.error(error);
+            toast.error("Failed to update complaint status");
         }
     };
 

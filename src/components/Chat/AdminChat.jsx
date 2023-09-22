@@ -16,10 +16,8 @@ function AdminChat() {
     const [messages, setMessages] = useState([]);
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const adminId = queryParams.get('adminId');
     const { user } = useContext(AuthContext);
     const [userId, setUserId] = useState(null);
-    // const [userData, setUserData] = useState(null);
     const user_id = user && user.user_id;
     const messageRef = useRef()
 
@@ -141,7 +139,7 @@ function AdminChat() {
                 <div className="w-full">
                     <div className="relative flex items-center p-3 border-b border-gray-300">
                         <img className="object-cover w-10 h-10 rounded-full"
-                            src={BACKEND_BASE_URL+senderdetails.profile_pic} alt="username" />
+                            src={BACKEND_BASE_URL + senderdetails.profile_pic} alt="username" />
                         <span className="block ml-2 font-bold text-gray-600">{senderdetails.first_name} {senderdetails.last_name}</span>
                         <span className="absolute w-3 h-3 bg-green-600 rounded-full left-10 top-3">
                         </span>

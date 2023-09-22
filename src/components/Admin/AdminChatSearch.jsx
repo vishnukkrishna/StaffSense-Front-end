@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { BACKEND_BASE_URL } from "../../api/Api";
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function AdminChatSearch() {
     const [recipientdet, setRecipientDet] = useState([]);
     const [activeEmployeeId, setActiveEmployeeId] = useState(null);
-    const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
 
     const setUserProfileDet = async () => {
         try {
@@ -28,6 +28,15 @@ function AdminChatSearch() {
         setActiveEmployeeId(employeeId);
     };
 
+    const handleSearchInputChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const filteredRecipients = recipientdet.filter((employee) =>
+        employee.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        employee.last_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div className="border-r border-gray-300 lg:col-span-1">
             <div className="mx-3 my-3">
@@ -38,34 +47,35 @@ function AdminChatSearch() {
                             <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                     </span>
-                    <input type="search" className="block w-full py-2 pl-10 bg-gray-100 rounded-xl outline-none" name="search"
-                        placeholder="Search" required />
+                    <input
+                        type="search"
+                        className="block w-full py-2 pl-10 bg-gray-100 rounded-xl outline-none"
+                        name="search"
+                        placeholder="Search"
+                        value={searchQuery}
+                        onChange={handleSearchInputChange}
+                    />
                 </div>
             </div>
 
             <ul className="overflow-auto h-[32rem]">
                 <h2 className="my-2 mb-2 ml-2 text-xl font-bold text-gray-600">Chats</h2>
 
-                {recipientdet.map((employee) => (
+                {filteredRecipients.map((employee) => (
                     <li key={employee.id}>
                         <a
                             onClick={() => handleEmployeeClick(employee.id)}
                             className={`flex items-center rounded-xl px-3 mb-3 py-2 text-sm transition duration-150 ease-in-out  cursor-pointer focus:outline-none ${activeEmployeeId === employee.id ? ' bg-indigo-300' : 'bg-gray-100 text-gray-600 border-black'
                                 }`}
                         >
-                            {/* onClick={() => navigate(`/adminchat/${employee.username}`)} */}
                             <img className="object-cover w-10 h-10 rounded-full" src={BACKEND_BASE_URL + employee.profile_pic} alt="username" />
-
                             <Link to={`/adminchat/chatbox/${employee.id}`}>
                                 <div className="w-full pb-2">
                                     <div className="flex justify-between">
                                         <span className="block ml-2 font-bold">{employee.first_name} {employee.last_name}</span>
-                                        {/* <span className="block ml-2 text-sm">50 minutes</span> */}
                                     </div>
-                                    {/* <span className="block ml-2 text-sm">Messages</span> */}
                                 </div>
                             </Link>
-                            
                         </a>
                     </li>
                 ))}
