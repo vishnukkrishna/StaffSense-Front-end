@@ -113,8 +113,8 @@ function EmployeeProfile() {
               </div>
               <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
                 <EditEmployeeProfile Action={fetchUserData} />
-                {/* <ToastContainer /> */}
                 <EditEmployeePassword />
+                <ToastContainer />
               </div>
             </div>
 

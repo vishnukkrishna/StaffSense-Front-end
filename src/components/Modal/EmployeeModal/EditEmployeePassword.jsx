@@ -28,7 +28,6 @@ function EditEmployeePassword() {
     console.log(user, "hiiiiiiiiiiiii");
     const ChangePass = async (e) => {
         e.preventDefault();
-
         // Password validation rules
         const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
@@ -37,29 +36,46 @@ function EditEmployeePassword() {
                 if (!passwordPattern.test(pass1)) {
                     toast.error("Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, and one digit.");
                 } else {
-                    const res = await axios.post(`${BACKEND_BASE_URL}/user/changepass/`, {
+                    const response = await axios.post(`${BACKEND_BASE_URL}/user/changepass/`, {
                         oldpass,
                         password: pass1,
                         user_id: user.user_id,
                     });
-                    if (res.data.msg === 500) {
+                    console.log("Response:", response.data);
+
+                    if (response.data.msg === 500) {
                         toast.error("Old Password Not match");
-                    } else {
-                        e.target.reset();
-                        localStorage.removeItem("access_token");
-                        setUser(null);
-                        toast.success("Password changed");
+                    } else if (response.data.msg === 200) {
+                        // Use toast.promise to wait for the success message
+                        const successPromise = toast.promise(
+                            () => new Promise((resolve) => {
+                                e.target.reset();
+                                localStorage.removeItem("access_token");
+                                setUser(null);
+                                resolve();
+                            }),
+                            {
+                                pending: "Changing password...",
+                                success: "Password changed",
+                            }
+                        );
+
+                        // Wait for the success message to be displayed before navigating
+                        await successPromise;
                         navigate("/user");
+                    } else {
+                        toast.error("Password change failed");
                     }
-                    console.log(res.data);
                 }
             } else {
                 toast.error("Passwords didn't match");
             }
         } catch (err) {
-            toast.error("Something went wrong...");
+            console.error(err);
+            toast.error("An error occurred while changing the password.");
         }
     };
+
 
 
     return (
@@ -79,7 +95,6 @@ function EditEmployeePassword() {
 
                 <DialogHeader>Edit Employee Password</DialogHeader>
                 <DialogBody divider className="font-fontHubballi text-xl">
-                    <ToastContainer />
                     <form onSubmit={ChangePass}>
                         <div className="mb-4">
                             <label htmlFor="textareaField" className="block text-gray-700">
@@ -129,6 +144,7 @@ function EditEmployeePassword() {
                         </DialogFooter>
                     </form>
                 </DialogBody>
+                <ToastContainer />
             </Dialog>
         </>
     )
