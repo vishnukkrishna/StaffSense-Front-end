@@ -42,7 +42,9 @@ function MenuComponent() {
     <div className="bg-indigo-500 h-28 font-fontHubballi text-xl">
       <div className="flex justify-between">
         <div className="flex justify-end mt-10 ml-16 m-10 w-40 h-30 cursor-pointer">
-          <img src={logo} alt="Logo" />
+          <a href="/home">
+            <img src={logo} alt="Logo" />
+          </a>
         </div>
         <div className="flex">
           {/* <img

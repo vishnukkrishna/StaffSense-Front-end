@@ -27,7 +27,7 @@ function EmployeeComplaint() {
     };
 
     if (!user || !user.user_id) {
-        return <div>Loading user information...</div>;
+        return <div>Loading employee information...</div>;
     }
 
     return (

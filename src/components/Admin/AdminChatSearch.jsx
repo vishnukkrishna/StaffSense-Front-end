@@ -32,11 +32,12 @@ function AdminChatSearch() {
         setSearchQuery(event.target.value);
     };
 
-    const filteredRecipients = recipientdet.filter((employee) =>
-        employee.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        employee.last_name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
+    const filteredRecipients = recipientdet
+        .filter((employee) =>
+            employee.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            employee.last_name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .sort((a, b) => a.first_name.localeCompare(b.first_name));
     return (
         <div className="border-r border-gray-300 lg:col-span-1">
             <div className="mx-3 my-3">

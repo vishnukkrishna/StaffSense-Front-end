@@ -8,7 +8,7 @@ function AdminChatsPage() {
     return (
         <div>
             <Helmet>
-                <title>Admin Complaints | Staffsense</title>
+                <title>Admin Chat | Staffsense</title>
             </Helmet>
             <div>
                 <AdminNavBar />

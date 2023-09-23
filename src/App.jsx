@@ -30,6 +30,8 @@ import EmployeeAppliedLeavePage from "./pages/Employee/EmployeeAppliedLeavePage"
 import AdminLeavesPage from "./pages/Admin/AdminLeavesPage";
 import EmployeeChatPage from "./pages/Employee/EmployeeChatPage";
 import AdminChatsPage from "./pages/Admin/AdminChatsPage";
+import AdminMeetingsPage from "./pages/Admin/AdminMeetingsPage";
+import EmployeeMeetingPage from "./pages/Employee/EmployeeMeetingPage";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -107,7 +109,7 @@ function App() {
             <Route
               path="/meeting"
               element={
-                <AdminTasksPage />
+                <AdminMeetingsPage />
               }
             />
             <Route
@@ -122,14 +124,8 @@ function App() {
               path="/adminchat/chatbox/:employeeId"
               element={
                 <AdminProtectedRoutes>
-                  <AdminChatsPage/>
+                  <AdminChatsPage />
                 </AdminProtectedRoutes>
-              }
-            />
-            <Route
-              path="/leave"
-              element={
-                <AdminTasksPage />
               }
             />
             <Route
@@ -215,6 +211,14 @@ function App() {
               element={
                 <UserProtectedRoutes>
                   <EmployeeChatPage />
+                </UserProtectedRoutes>
+              }
+            />
+            <Route
+              path="/addmeeting"
+              element={
+                <UserProtectedRoutes>
+                  <EmployeeMeetingPage />
                 </UserProtectedRoutes>
               }
             />

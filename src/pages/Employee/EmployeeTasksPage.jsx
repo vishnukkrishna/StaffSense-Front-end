@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet'
 
 function EmployeeTasksPage() {
   return (
-    // <div className="bg-red-500 h-screen">
     <div className="h-screen">
       <Helmet>
         <title>
@@ -14,16 +13,13 @@ function EmployeeTasksPage() {
         </title>
       </Helmet>
       <div className="w-full">
-          <MenuComponent />
+        <MenuComponent />
       </div>
       <div className="flex min-h-screen">
         <SideBar />
         <EmployeeTasks />
-        
       </div>
     </div>
-
-    // </div>
   );
 }
 

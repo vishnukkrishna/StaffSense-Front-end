@@ -84,7 +84,7 @@ function InNavList() {
         color="blue-gray"
         className="p-1 font-semibold text-2xl font-fontHubballi"
       >
-        <a href="#" className="flex items-center">
+        <a href="/addmeeting" className="flex items-center">
           Hall Booking
         </a>
       </Typography>
@@ -117,8 +117,10 @@ function InNavList() {
       <div className="pt-24">
         <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
           <div className="flex items-center justify-between text-blue-gray-900">
-            <div className="">
-              <img src={logo} alt="Logo" className="w-60 h-15" />
+            <div className="cursor-pointer smooth-scroll">
+              <a href="#" className="">
+                <img src={logo} alt="Logo" className="w-60 h-15 smooth-scroll" />
+              </a>
             </div>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>

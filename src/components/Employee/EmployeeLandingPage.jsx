@@ -125,7 +125,7 @@ function EmployeeLandingPage() {
                   <img className="w-50 h-50 mt-4" src={image1} alt="" />
                 </div>
                 <Button className="bg-customColor mt-4">
-                  Book your Meeting Room
+                  <Link to="/addmeeting">Book your Meeting Room</Link>
                 </Button>
                 <div className="flex justify-center items-center space-x-4 cursor-pointer"></div>
               </div>
