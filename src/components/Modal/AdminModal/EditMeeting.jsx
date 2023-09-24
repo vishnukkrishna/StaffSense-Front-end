@@ -73,9 +73,8 @@ function EditMeeting({ id, Action }) {
     const validateForm = () => {
         const errors = {};
         const currentDate = new Date();
-        const selectedDate = new Date(formData.date);
-        const startTime = new Date(`1970-01-01T${formData.start_time}`);
-        const endTime = new Date(`1970-01-01T${formData.end_time}`);
+        const selectedDate = new Date(`${formData.date}T${formData.start_time}`);
+        const endTime = new Date(`${formData.date}T${formData.end_time}`);
 
         if (!formData.title.trim()) {
             errors.title = "Title is required";
@@ -83,8 +82,8 @@ function EditMeeting({ id, Action }) {
 
         if (!formData.date) {
             errors.date = "Date is required";
-        } else if (selectedDate < currentDate) {
-            errors.date = "Date must be in the future";
+        } else if (selectedDate <= currentDate) {
+            errors.date = "Date and time must be in the future";
         }
 
         if (!formData.start_time) {
@@ -93,7 +92,7 @@ function EditMeeting({ id, Action }) {
 
         if (!formData.end_time) {
             errors.end_time = "End time is required";
-        } else if (endTime <= startTime) {
+        } else if (endTime <= selectedDate) {
             errors.end_time = "End time must be after start time";
         }
 

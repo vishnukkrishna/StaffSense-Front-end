@@ -14,7 +14,6 @@ import axios from "axios";
 
 function AddMeeting({ Action }) {
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(!open);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
@@ -39,7 +38,6 @@ function AddMeeting({ Action }) {
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-        // Clear any previous validation errors when the user makes changes.
         setFormErrors({});
     };
 
@@ -67,7 +65,7 @@ function AddMeeting({ Action }) {
                     organizer: "",
                 });
                 toast.success("Meeting added successfully");
-
+                setOpen(false);
             } catch (error) {
                 console.error(error);
                 toast.error("Failed to add meeting. Please try again.");
@@ -78,9 +76,8 @@ function AddMeeting({ Action }) {
     const validateForm = () => {
         const errors = {};
         const currentDate = new Date();
-        const selectedDate = new Date(formData.date);
-        const startTime = new Date(`1970-01-01T${formData.start_time}`);
-        const endTime = new Date(`1970-01-01T${formData.end_time}`);
+        const selectedDate = new Date(`${formData.date}T${formData.start_time}`);
+        const endTime = new Date(`${formData.date}T${formData.end_time}`);
 
         if (!formData.title.trim()) {
             errors.title = "Title is required";
@@ -88,8 +85,8 @@ function AddMeeting({ Action }) {
 
         if (!formData.date) {
             errors.date = "Date is required";
-        } else if (selectedDate < currentDate) {
-            errors.date = "Date must be in the future";
+        } else if (selectedDate <= currentDate) {
+            errors.date = "Date and time must be in the future";
         }
 
         if (!formData.start_time) {
@@ -98,13 +95,14 @@ function AddMeeting({ Action }) {
 
         if (!formData.end_time) {
             errors.end_time = "End time is required";
-        } else if (endTime <= startTime) {
+        } else if (endTime <= selectedDate) {
             errors.end_time = "End time must be after start time";
         }
 
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
     };
+
 
     return (
         <>
@@ -245,7 +243,6 @@ function AddMeeting({ Action }) {
                             <Button
                                 type="submit"
                                 className="bg-indigo-500"
-                                onClick={handleOpen}
                             >
                                 <span>Submit</span>
                             </Button>
