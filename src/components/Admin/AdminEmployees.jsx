@@ -281,13 +281,13 @@ function AdminEmployees() {
             </tr>
           </thead>
           <tbody>
-            {employees.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((employee) => (
+            {employees.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((employee, index) => (
               <tr key={employee.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                 >
-                  {employee.id}
+                  {index + 1}
                 </th>
                 <td className="px-6 py-4">{employee.first_name} {employee.last_name}</td>
                 <td className="px-6 py-4">{employee.department_name}</td>

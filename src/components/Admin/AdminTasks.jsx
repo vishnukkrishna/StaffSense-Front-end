@@ -82,13 +82,13 @@ function AdminTasks() {
             </tr>
           </thead>
           <tbody>
-            {tasks.map((task) => (
+            {tasks.map((task, index) => (
               <tr key={task.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
                 {/* <th
                   scope="row"
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                 >
-                  {task.id}
+                  {index + 1}
                 </th> */}
                 <td className="px-6 py-4">{task.project.name}</td>
                 <td className="px-6 py-4">{task.name}</td>

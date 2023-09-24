@@ -106,13 +106,13 @@ function AdminProjects() {
             </tr>
           </thead>
           <tbody>
-            {project.map((project) => (
+            {project.map((project, index) => (
               <tr className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700" key={project.id}>
                 {/* <th
                   scope="row"
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                 >
-                  {project.id}
+                  {index + 1}
                 </th> */}
                 <td className="px-6 py-4">{project.name}</td>
                 <td className="px-6 py-4">{project.description}</td>

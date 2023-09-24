@@ -32,6 +32,8 @@ import EmployeeChatPage from "./pages/Employee/EmployeeChatPage";
 import AdminChatsPage from "./pages/Admin/AdminChatsPage";
 import AdminMeetingsPage from "./pages/Admin/AdminMeetingsPage";
 import EmployeeMeetingPage from "./pages/Employee/EmployeeMeetingPage";
+import AdminVisitorPage from "./pages/Admin/AdminVisitorPage";
+import EmployeeVisitorsPage from "./pages/Employee/EmployeeVisitorsPage";
 
 function App() {
   const token = localStorage.getItem("access_token");
@@ -109,7 +111,9 @@ function App() {
             <Route
               path="/meeting"
               element={
-                <AdminMeetingsPage />
+                <AdminProtectedRoutes>
+                  <AdminMeetingsPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
@@ -131,19 +135,25 @@ function App() {
             <Route
               path="/visitor"
               element={
-                <AdminTasksPage />
+                <AdminProtectedRoutes>
+                  <AdminVisitorPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
               path="/complaint"
               element={
-                <AdminComplaintsPage />
+                <AdminProtectedRoutes>
+                  <AdminComplaintsPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
               path="/announcement"
               element={
-                <AdminAnnouncementsPage />
+                <AdminProtectedRoutes>
+                  <AdminAnnouncementsPage />
+                </AdminProtectedRoutes>
               }
             />
             <Route
@@ -219,6 +229,14 @@ function App() {
               element={
                 <UserProtectedRoutes>
                   <EmployeeMeetingPage />
+                </UserProtectedRoutes>
+              }
+            />
+            <Route
+              path="/visitorpage"
+              element={
+                <UserProtectedRoutes>
+                  <EmployeeVisitorsPage />
                 </UserProtectedRoutes>
               }
             />

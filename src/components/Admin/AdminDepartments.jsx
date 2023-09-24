@@ -67,12 +67,12 @@ function AdminDepartments() {
             </tr>
           </thead>
           <tbody>
-            {department.map((dept) => (
+            {department.map((dept, index) => (
               <tr className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700" key={dept.id}>
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
-                >{dept.id}
+                >{index + 1}
                 </th>
                 <td className="px-6 py-4">{dept.name}</td>
                 <td className="px-6 py-4">

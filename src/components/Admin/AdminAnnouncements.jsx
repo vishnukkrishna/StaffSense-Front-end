@@ -81,13 +81,13 @@ function AdminAnnouncements() {
             </tr>
           </thead>
           <tbody>
-            {announcements.map((announcement) => (
+            {announcements.map((announcement, index) => (
               <tr key={announcement.id} className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                 >
-                  {announcement.id}
+                  {index + 1}
                 </th>
                 <td className="px-6 py-4">{announcement.event}</td>
                 <td className="px-6 py-4">{announcement.note}</td>

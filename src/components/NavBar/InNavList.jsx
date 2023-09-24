@@ -94,7 +94,7 @@ function InNavList() {
         color="blue-gray"
         className="p-1 font-semibold text-2xl font-fontHubballi"
       >
-        <a href="#" className="flex items-center">
+        <a href="/visitorpage" className="flex items-center">
           Visitor Registration
         </a>
       </Typography>
