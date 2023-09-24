@@ -165,7 +165,7 @@ function AddVisitors() {
                             <input
                                 type="email"
                                 name="email"
-                                placeholder="email"
+                                placeholder="Email"
                                 value={formData.email}
                                 onChange={handleChange}
                                 required

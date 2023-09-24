@@ -164,7 +164,7 @@ function OutHomePage() {
 
 
         <div className="font-hubballi px-4 lg:px-0 text-center mt-10">
-          <div className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
+          <div id="feature" className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
             Our Features
           </div>
           <div>

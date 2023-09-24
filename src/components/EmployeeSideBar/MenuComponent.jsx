@@ -43,7 +43,7 @@ function MenuComponent() {
       <div className="flex justify-between">
         <div className="flex justify-end mt-10 ml-16 m-10 w-40 h-30 cursor-pointer">
           <a href="/home">
-            <img src={logo} alt="Logo" />
+            <img src={logo} alt="Logo" className="flex items-center transition-transform duration-300 hover:translate-x-4" />
           </a>
         </div>
         <div className="flex">

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import img from '../../images/profile-pic.jpg'
 import {
@@ -48,6 +48,12 @@ function InNavList() {
   //   }
   // };
 
+  const location = useLocation();
+
+  const isRouteActive = (route) => {
+    return location.pathname === route;
+  };
+
 
   console.log(user, "data");
   const handleLogout = () => {
@@ -67,59 +73,75 @@ function InNavList() {
     );
   }, []);
   const navList = (
-    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 drop-shadow-2xl ">
+    <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 drop-shadow-2xl">
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-semibold text-2xl font-fontHubballi"
+        className={`p-1 font-semibold text-2xl font-fontHubballi ${isRouteActive("/home") ? "text-red-800" : ""
+          }`}
       >
-        <a href="#" className="flex items-center">
+        <Link
+          to="/home"
+          className="flex items-center transition-transform duration-300 hover:translate-x-2"
+        >
           Home
-        </a>
+        </Link>
+
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-semibold text-2xl font-fontHubballi"
+        className={`p-1 font-semibold text-2xl font-fontHubballi ${isRouteActive("/addmeeting") ? "text-red-800" : ""
+          }`}
       >
-        <a href="/addmeeting" className="flex items-center">
+        <Link
+          to="/addmeeting"
+          className="flex items-center transition-transform duration-300 hover:translate-x-2"
+        >
           Hall Booking
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-semibold text-2xl font-fontHubballi"
+        className={`p-1 font-semibold text-2xl font-fontHubballi ${isRouteActive("/visitorpage") ? "text-red-800" : ""
+          }`}
       >
-        <a href="/visitorpage" className="flex items-center">
+        <Link
+          to="/visitorpage"
+          className="flex items-center transition-transform duration-300 hover:translate-x-2"
+        >
           Visitor Registration
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="p-1 font-semibold text-2xl font-fontHubballi"
+        className={`p-1 font-semibold text-2xl font-fontHubballi ${isRouteActive("/usercomplaints") ? "text-red-800" : ""
+          }`}
       >
-        <a href="/usercomplaints" className="flex items-center">
+        <Link
+          to="/usercomplaints"
+          className="flex items-center transition-transform duration-300 hover:translate-x-2"
+        >
           Requests & Complaints
-        </a>
+        </Link>
       </Typography>
     </ul>
   );
-  if (userData) {
-  }
+
   return (
     <div>
       <div className="pt-24">
         <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
           <div className="flex items-center justify-between text-blue-gray-900">
             <div className="cursor-pointer smooth-scroll">
-              <a href="#" className="">
-                <img src={logo} alt="Logo" className="w-60 h-15 smooth-scroll" />
+              <a href="/home" className="">
+                <img src={logo} alt="Logo" className="w-60 h-15 flex items-center transition-transform duration-300 hover:translate-x-4" />
               </a>
             </div>
             <div className="flex items-center gap-4">

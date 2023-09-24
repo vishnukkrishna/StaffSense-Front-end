@@ -83,11 +83,11 @@ function EmployeeLandingPage() {
             className="w-full lg:w-1/3 h-auto lg:h-auto ml-4 mt-4 lg:ml-0 lg:mt-0"
           />
           <div className="lg:mr-10 mr-4 lg:ml-4 font-hubballi text-center lg:text-left">
-            <h1 className="mb-2 text-base lg:text-xl xl:text-2xl lg:mb-4">
-              FUTURE NEXT-----------------
+            <h1 className="mb-2 text-base lg:text-xl xl:text-2xl lg:mb-4 font-style: italic">
+              FUTURE NEXT
             </h1>
             <h1 className="lg:text-3xl xl:text-4xl font-bold mb-4">About Us</h1>
-            <p className="text-sm lg:text-base xl:text-lg">
+            <p className="text-sm lg:text-base xl:text-xl">
               At StaffSense, we solidly endeavor towards making an incentive for
               our clients and that we associate. StaffSense is the leading and
               best software company in Kerala dealing with solutions like ERP,
@@ -104,12 +104,12 @@ function EmployeeLandingPage() {
         </div>
 
         {/* .............................................. */}
-        <div className="font-hubballi px-4 lg:px-0 text-center mt-10">
+        <div className="font-hubballi px-4 lg:px-0 text-center mt-16">
           <div className="text-center font-extrabold text-3xl lg:text-4xl xl:text-5xl">
             Our Services
           </div>
           <div>
-            <h1 className="text-center">
+            <h1 className="text-center text-xl mt-4">
               "As a data solutions partner to companies, we've focused on creating
               value for our employees"
             </h1>
@@ -118,7 +118,7 @@ function EmployeeLandingPage() {
             {/* Card 1 */}
             <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4">
-                <h5 className="text-blue-gray text-xl font-semibold mb-2">
+                <h5 className="text-blue-gray text-2xl font-semibold mb-2">
                   Hall Booking
                 </h5>
                 <div className="p-4 bg-gray-100 border-t flex justify-center items-center">
@@ -134,13 +134,15 @@ function EmployeeLandingPage() {
             {/* Card 2 */}
             <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4">
-                <h5 className="text-blue-gray text-xl font-semibold mb-2">
+                <h5 className="text-blue-gray text-2xl font-semibold mb-2">
                   Visitor Registration
                 </h5>
                 <div className="p-4 bg-gray-100 border-t flex justify-center items-center">
                   <img className="w-50 h-50" src={image2} alt="" />
                 </div>
-                <Button className="bg-customColor">Register your visitor</Button>
+                <Button className="bg-customColor mt-4">
+                  <Link to="/visitorpage">Register your visitor</Link>
+                </Button>
                 <div className="flex justify-center items-center space-x-4 cursor-pointer"></div>
               </div>
             </div>
@@ -148,7 +150,7 @@ function EmployeeLandingPage() {
             {/* Card 3 */}
             <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4">
-                <h5 className="text-blue-gray text-xl font-semibold mb-2">
+                <h5 className="text-blue-gray text-2xl font-semibold mb-2">
                   Requests & Complaints
                 </h5>
                 <div className="p-4 bg-gray-100 mt-3 border-t flex justify-center items-center">

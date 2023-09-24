@@ -20,7 +20,7 @@ function AdminNavBar() {
     <div className="bg-indigo-500 h-28 font-fontHubballi text-xl">
       <div className="flex justify-between">
         <div className="flex justify-end mt-10 ml-16 m-10 w-40 h-30 cursor-pointer">
-          <img src={logo} alt="Logo" />
+          <img src={logo} alt="Logo" className="flex items-center transition-transform duration-300 hover:translate-x-4" />
         </div>
         <div className="flex">
           {/* <img
