@@ -74,7 +74,7 @@ function EmployeeLandingPage() {
       <Helmet>
         <title>Employee Home | Staffsense</title>
       </Helmet>
-      <div className="font-hubballi">
+      <div className="font-hubballi bg-newColor">
         <InNavList />
         <div className="flex flex-col-reverse lg:flex-row items-center lg:px-4 mt-10">
           <img
@@ -116,31 +116,32 @@ function EmployeeLandingPage() {
           </div>
           <div className="flex flex-col space-y-6 mt-10 lg:space-y-0 lg:flex-row lg:justify-center lg:space-x-4">
             {/* Card 1 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-white">
               <div className="p-4">
                 <h5 className="text-blue-gray text-2xl font-semibold mb-2">
                   Hall Booking
                 </h5>
-                <div className="p-4 bg-gray-100 border-t flex justify-center items-center">
+                <div className="p-4 bg-white border-t flex justify-center items-center">
                   <img className="w-50 h-50 mt-4" src={image1} alt="" />
                 </div>
-                <Button className="bg-customColor mt-4">
+                <Button className="bg-customColor mt-10 transition duration-300 ease-linear transform hover:scale-110">
                   <Link to="/addmeeting">Book your Meeting Room</Link>
                 </Button>
+
                 <div className="flex justify-center items-center space-x-4 cursor-pointer"></div>
               </div>
             </div>
 
             {/* Card 2 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-white">
               <div className="p-4">
                 <h5 className="text-blue-gray text-2xl font-semibold mb-2">
                   Visitor Registration
                 </h5>
-                <div className="p-4 bg-gray-100 border-t flex justify-center items-center">
+                <div className="p-4 bg-white border-t flex justify-center items-center">
                   <img className="w-50 h-50" src={image2} alt="" />
                 </div>
-                <Button className="bg-customColor mt-4">
+                <Button className="bg-customColor mt-6 transition duration-300 ease-linear transform hover:scale-110">
                   <Link to="/visitorpage">Register your visitor</Link>
                 </Button>
                 <div className="flex justify-center items-center space-x-4 cursor-pointer"></div>
@@ -148,15 +149,15 @@ function EmployeeLandingPage() {
             </div>
 
             {/* Card 3 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-white">
               <div className="p-4">
                 <h5 className="text-blue-gray text-2xl font-semibold mb-2">
                   Requests & Complaints
                 </h5>
-                <div className="p-4 bg-gray-100 mt-3 border-t flex justify-center items-center">
-                  <img className="w-full h-5/6 mt-4" src={image3} alt="" />
+                <div className="p-4 bg-white mt-3 border-t flex justify-center items-center">
+                  <img className="w-full h-5/6 mt-5" src={image3} alt="" />
                 </div>
-                <Button className="bg-customColor mt-14" >
+                <Button className="bg-customColor mt-20 transition duration-300 ease-linear transform hover:scale-110">
                   <Link to="/usercomplaints">Register your Complaints</Link>
                 </Button>
                 <div className="flex justify-center items-center space-x-4 cursor-pointer"></div>
@@ -165,22 +166,24 @@ function EmployeeLandingPage() {
           </div>
           {/* ................................................... */}
           {/* Announcement blocks */}
-          <div className="flex font-hubballi mt-10 bg-bgColor flex-col-reverse lg:flex-row">
+          <div className="flex font-hubballi mt-10 rounded-3xl bg-white flex-col-reverse lg:flex-row">
             <div className="w-full lg:w-1/2 p-4">
               <div className="text-center">
-                <h1 className="font-extrabold text-xl lg:text-3xl xl:text-5xl mt-6">
+                <h1 className="text-center font-sansserif text-lg md:text-xl lg:text-3xl xl:text-5xl mt-6">
                   Announcements
                 </h1>
               </div>
               {announcements.map((announcement) => (
-                <div key={announcement.id} className="flex flex-col p-2 lg:p-4">
-                  <div className="mt-2 lg:mt-5 flex items-center">
-                    <FaStar className="mr-2 text-xl lg:text-xl" />
-                    <h1 className="text-lg lg:text-3xl">{announcement.event}</h1>
+                <div key={announcement.id} className="flex flex-col p-2 md:p-4">
+                  <div className="mt-2 md:mt-5 flex items-center">
+                    <FaStar className="mr-2 text-lg md:text-xl lg:text-xl" />
+                    <h1 className="text-lg lg:text-3xl xl:text-3xl">{announcement.event}</h1>
                   </div>
-                  <p className="p-2 ml-2 lg:ml-7 text-base lg:text-2xl">
-                    {announcement.note}
-                  </p>
+                  <div className="text-start ml-24">
+                    <p className="p-3 md:ml-7 text-sm md:text-base lg:text-2xl xl:text-xl">
+                      {announcement.note}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -198,7 +201,7 @@ function EmployeeLandingPage() {
         <footer className="relative w-full mt-10">
           <div className="mx-auto w-full max-w-7xl px-8">
             <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
-              <div className="w-40 h-30">
+              <div className="w-40 h-30 cursor-pointer">
                 <img src={logo} alt="Logo" />
               </div>
               <div className="grid grid-cols-3 justify-between gap-4">

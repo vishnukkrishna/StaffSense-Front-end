@@ -57,13 +57,13 @@ function EmployeeComplaint() {
                         </tr>
                     </thead>
                     <tbody>
-                        {complaints.map((complaint) => (
+                        {complaints.map((complaint, index) => (
                             <tr key={complaint.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
                                 <th
                                     scope="row"
                                     className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                                 >
-                                    {complaint.id}
+                                    {index + 1}
                                 </th>
                                 <td className="px-6 py-4">{user.username}</td>
                                 <td className="px-6 py-4">{user.email}</td>

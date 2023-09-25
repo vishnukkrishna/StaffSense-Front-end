@@ -10,14 +10,13 @@ import b1 from "../../images/b1.png";
 import b2 from "../../images/b2.png";
 import logo from "../../images/Logo.png";
 import { Helmet } from 'react-helmet'
-
 import {
   AiFillInstagram,
   AiOutlineArrowRight,
   AiFillLinkedin,
   AiFillTwitterCircle,
 } from "react-icons/ai";
-import { BiLogoFacebookCircle, BiDownArrow } from "react-icons/bi";
+import { BiLogoFacebookCircle } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
 import { fetchAnnouncements } from '../../data/AnnouncementApi'
 import { Typography } from "@material-tailwind/react";
@@ -107,7 +106,7 @@ function OutHomePage() {
       <Helmet>
         <title>HomePage | Staffsense</title>
       </Helmet>
-      <div className="font-hubballi bg-backGround">
+      <div className="font-hubballi bg-bgColor">
         <div className="w-full">
           <OutNavBar />
         </div>
@@ -143,7 +142,7 @@ function OutHomePage() {
           />
           <div className="lg:mr-10 mr-4 lg:ml-4 font-hubballi text-center lg:text-left">
             <h1 className="mb-2 text-base lg:text-xl xl:text-2xl">
-              FUTURE NEXT-----------------
+              FUTURE NEXT
             </h1>
             <h1 className="lg:text-3xl xl:text-4xl font-bold mb-4">About Us</h1>
             <p className="text-sm lg:text-base xl:text-xl">
@@ -163,12 +162,12 @@ function OutHomePage() {
         </div>
 
 
-        <div className="font-hubballi px-4 lg:px-0 text-center mt-10">
+        <div className="font-hubballi px-4 lg:px-0 text-center mt-20">
           <div id="feature" className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
             Our Features
           </div>
-          <div>
-            <h1 className="text-center">
+          <div className="mt-5">
+            <h1 className="text-center text-lg">
               We can offer to our solutions to our current and forthcoming clients
               so both our current and future client can pursue an educated
               speculation choice.
@@ -176,7 +175,7 @@ function OutHomePage() {
           </div>
           <div className="flex flex-col space-y-6 mt-10 lg:space-y-0 lg:flex-row lg:justify-center lg:space-x-4">
             {/* Card 1 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-white">
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-2">
                   Collaborate
@@ -192,7 +191,7 @@ function OutHomePage() {
             </div>
 
             {/* Card 2 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-white">
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-2">
                   Innovate
@@ -208,7 +207,7 @@ function OutHomePage() {
             </div>
 
             {/* Card 3 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-white">
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-2">
                   Deliver
@@ -225,11 +224,11 @@ function OutHomePage() {
           </div>
         </div>
         {/* .............................................. */}
-        <div className="font-hubballi px-4 lg:px-0 text-center mt-10">
+        <div className="font-hubballi px-4 lg:px-0 text-center mt-24">
           <div className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
             Our Leaders
           </div>
-          <div>
+          <div className="text-lg mt-5">
             <h1 className="text-center">
               "As a data solutions partner to companies, we've focused on creating
               value for our clients"
@@ -237,8 +236,8 @@ function OutHomePage() {
           </div>
           <div className="flex flex-col space-y-6 mt-10 lg:space-y-0 lg:flex-row lg:justify-center lg:space-x-4">
             {/* Card 1 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
-              <div className="p-4 bg-gray-100 border-t flex justify-center items-center">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
+              <div className="p-4 bg-white border-t flex justify-center items-center">
                 <img className="w-36 h-36" src={profile} alt="" />
               </div>
               <div className="p-4">
@@ -256,8 +255,8 @@ function OutHomePage() {
             </div>
 
             {/* Card 2 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
-              <div className="p-4 bg-gray-100 border-t flex justify-center items-center">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
+              <div className="p-4 bg-white border-t flex justify-center items-center">
                 <img className="w-36 h-36" src={profile} alt="" />
               </div>
               <div className="p-4">
@@ -275,8 +274,8 @@ function OutHomePage() {
             </div>
 
             {/* Card 3 */}
-            <div className="w-full lg:w-96 border rounded-lg overflow-hidden shadow-lg bg-gray-100">
-              <div className="p-4 bg-gray-100 border-t flex justify-center items-center">
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
+              <div className="p-4 bg-white border-t flex justify-center items-center">
                 <img className="w-36 h-36" src={profile} alt="" />
               </div>
               <div className="p-4">
@@ -296,7 +295,7 @@ function OutHomePage() {
         </div>
 
         {/* ................................................... */}
-        <div className="flex flex-col lg:flex-row font-hubballi mt-8 bg-bgColor">
+        <div className="flex flex-col lg:flex-row font-hubballi mt-20 bg-bgColor rounded-3xl">
           <div className="w-full lg:w-1/2 p-4">
             <img
               src={b1}
@@ -305,18 +304,18 @@ function OutHomePage() {
             />
           </div>
           <div className="w-full lg:w-1/2 p-4 mt-32">
-            <h1 className="w-4/5 ml-24 font-sansserif text-start text-xl font-black lg:text-3xl xl:text-5xl">
+            <h1 className="w-4/5 ml-4 md:w-4/5 md:ml-24 font-sansserif text-start text-xl font-black lg:text-3xl xl:text-5xl">
               Our Service Approach
             </h1>
-            <div className="w-4/5 mt-4 ml-24">
-              <p className="text-sm font-thin text-gray-600 lg:text-xl xl:text-2xl">
-                Our approach in handling a project is designed in a flow that can
-                ensure the requirement of the client is fulfilled intact.
+            <div className="w-4/5 mt-4 ml-4 md:w-4/5 md:ml-24">
+              <p className="text-xs md:text-sm lg:text-xl xl:text-2xl text-gray-600">
+                Our approach in handling a project is designed in a flow that can ensure the requirement of the client is fulfilled intact.
               </p>
             </div>
+
             <div className="group w-4/5 mt-12 mx-auto cursor-pointer">
               <div
-                className={`flex justify-between cursor-pointer ${customBgColorClass1} rounded-lg p-4 transition duration-300 transform hover:scale-105`}
+                className={`flex justify-between cursor-pointer ${customBgColorClass1} rounded-lg p-4 transition duration-300`}
                 onClick={toggleContent1}
               >
                 <p className={`text-xl font-bold ${showContent1 ? 'text-white' : 'text-black'}`}>
@@ -328,7 +327,7 @@ function OutHomePage() {
                   />
                 </div>
               </div>
-              <div className={`${showContent1 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600`}>
+              <div className={`${showContent1 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}>
                 <p className="p-4 text-base lg:text-lg xl:text-xl">
                   Drafting the extent of the need and making a rundown of the
                   highlights and prerequisites wanted in the project.
@@ -337,7 +336,7 @@ function OutHomePage() {
             </div>
             <div className="group mt-6 w-4/5 mx-auto cursor-pointer">
               <div
-                className={`flex justify-between cursor-pointer ${customBgColorClass2} rounded-lg p-4 transition duration-300 transform hover:scale-105`}
+                className={`flex justify-between cursor-pointer ${customBgColorClass2} rounded-lg p-4 transition duration-300`}
                 onClick={toggleContent2}
               >
                 <p className={`text-xl font-bold ${showContent2 ? 'text-white' : 'text-black'}`}>
@@ -349,13 +348,13 @@ function OutHomePage() {
                   />
                 </div>
               </div>
-              <div className={`${showContent2 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600`}>
+              <div className={`${showContent2 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}>
                 <p className="p-4 text-base lg:text-lg xl:text-xl">Structuring the parts of the solutions, doing operational and functional tests and consolidating the required output.</p>
               </div>
             </div>
             <div className="group mt-6 w-4/5 mx-auto cursor-pointer">
               <div
-                className={`flex justify-between cursor-pointer ${customBgColorClass3} rounded-lg p-4 transition duration-300 transform hover:scale-105`}
+                className={`flex justify-between cursor-pointer ${customBgColorClass3} rounded-lg p-4 transition duration-300`}
                 onClick={toggleContent3}
               >
                 <p className={`text-xl font-bold ${showContent3 ? 'text-white' : 'text-black'}`}>
@@ -367,7 +366,7 @@ function OutHomePage() {
                   />
                 </div>
               </div>
-              <div className={`${showContent3 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600`}>
+              <div className={`${showContent3 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}>
                 <p className="p-4 text-base lg:text-lg xl:text-xl">Launch of the solution in the environment and setting up to make the product run effectively and up to the standards.</p>
               </div>
             </div>
@@ -376,18 +375,24 @@ function OutHomePage() {
 
 
         {/* ................................................... */}
-        <div className="flex flex-col lg:flex-row font-hubballi mt-0 bg-bgColor">
+        <div className="flex font-hubballi mt-10 rounded-3xl bg-white flex-col-reverse lg:flex-row">
           <div className="w-full lg:w-1/2 p-4">
-            <h1 className="text-center font-sansserif text-xl font-black lg:text-3xl xl:text-5xl mt-6">
-              Announcements
-            </h1>
+            <div className="text-center">
+              <h1 className="text-center font-sansserif text-lg md:text-xl lg:text-3xl xl:text-5xl mt-6">
+                Announcements
+              </h1>
+            </div>
             {announcements.map((announcement) => (
-              <div key={announcement.id} className="flex flex-col p-4">
-                <div className="mt-5 flex items-center">
-                  <FaStar className="mr-2" />
-                  <h1 className="text-2xl"> {announcement.event}</h1>
+              <div key={announcement.id} className="flex flex-col p-2 md:p-4">
+                <div className="mt-2 md:mt-5 flex items-center">
+                  <FaStar className="mr-2 text-lg md:text-xl lg:text-xl" />
+                  <h1 className="text-base md:text-lg lg:text-3xl xl:text-3xl">{announcement.event}</h1>
                 </div>
-                <p className="p-2 ml-7 text-base lg:text-xl xl:text-2xl"> {announcement.note}</p>
+                <div className="text-start">
+                  <p className="p-3 md:ml-7 text-sm md:text-base lg:text-2xl xl:text-xl">
+                    {announcement.note}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -395,7 +400,7 @@ function OutHomePage() {
             <img
               src={b2}
               alt="User Uploaded Image"
-              className="w-full lg:h-auto object-cover"
+              className="w-full h-auto lg:h-full object-cover"
             />
           </div>
         </div>

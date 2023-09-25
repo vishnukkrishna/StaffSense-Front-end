@@ -22,48 +22,23 @@ import { BsBell } from 'react-icons/bs'
 import { Badge } from "@material-tailwind/react";
 
 function InNavList() {
-  // let { userProfile } = useContext(AuthContext)
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { setUser } = useContext(AuthContext);
-  // const user_id = user && user.user_id;
-
-
-  const [userData, setUserData] = useState(null);
-  // useEffect(() => {
-  //   fetchUserData();
-  // }, []);
-
-
-  // const fetchUserData = async () => {
-  //   try {
-  //     const response = await axios.get(
-  //       `${BACKEND_BASE_URL}/user/userdetails/`
-  //     );
-
-  //     setUserData(response.data);
-  //     console.log(response.data, "llllllllllllllllllllllll");
-  //   } catch (error) {
-  //     console.error("Error fetching user data:", error);
-  //   }
-  // };
-
   const location = useLocation();
 
   const isRouteActive = (route) => {
     return location.pathname === route;
   };
 
-
-  console.log(user, "data");
   const handleLogout = () => {
-    console.log("Logout button clicked");
     localStorage.removeItem("access_token");
     setUser(null);
     setTimeout(() => {
       navigate("/");
-    })
+    });
   };
+
   const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
@@ -72,6 +47,7 @@ function InNavList() {
       () => window.innerWidth >= 960 && setOpenNav(false)
     );
   }, []);
+
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 drop-shadow-2xl">
       <Typography
@@ -87,7 +63,6 @@ function InNavList() {
         >
           Home
         </Link>
-
       </Typography>
       <Typography
         as="li"
@@ -136,7 +111,7 @@ function InNavList() {
 
   return (
     <div>
-      <div className="pt-24">
+      <div className="pt-24 bg-newColor">
         <Navbar className="fixed top-0 z-10 h-max max-w-full rounded-none py-2 px-4 lg:px-8 lg:py-4">
           <div className="flex items-center justify-between text-blue-gray-900">
             <div className="cursor-pointer smooth-scroll">
@@ -146,48 +121,45 @@ function InNavList() {
             </div>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
-              <div className="mr-3 cursor-pointer">
+              <div className="mr-3 mt-2 cursor-pointer">
                 <Menu
                   animate={{
-                    mount: { y: 0 },
-                    unmount: { y: 25 },
+                    mount: { opacity: 1, scale: 1 },
+                    unmount: { opacity: 0, scale: 0.9 },
                   }}
                 >
                   <MenuHandler>
                     <div>
-
                       <Badge content={0} className="" max={999} color="red">
-                        <BsBell className="w-7 h-7 text-customColor" />
+                        <BsBell className="w-7 h-7 text-customColor transition-transform duration-300 ease-in-out transform hover:scale-110" />
                       </Badge>
                     </div>
                   </MenuHandler>
-                  <MenuList className="mt-5">
+                  <MenuList className="mt-4">
                     <MenuItem>Menu Item 1</MenuItem>
                     <MenuItem>Menu Item 2</MenuItem>
                   </MenuList>
                 </Menu>
               </div>
+
+
               <Link
                 to="/profileuser"
                 className="w-10 h-10 rounded-full bg-customColor flex items-center justify-center"
               >
-                {/* <FaUserCircle className="text-white text-3xl md:text-4xl" /> */}
-                <img className="rounded-full w-20 h-15" src={img} alt="" />
-                {/* <Avatar
-                  size="md"
-                  variant="circular"
-                  alt="avatar"
-                  src={BACKEND_BASE_URL + userData.profile_pic}
-                  className="border border-e-light-green-100 shadow-xl shadow-green-900/20 ring-4 ring-green-500/30"
-                /> */}
+                <div className="transition-transform duration-300 hover:scale-110">
+                  <img className="rounded-full w-20 h-15" src={img} alt="" />
+                </div>
+
               </Link>
               <Button
                 size="sm"
-                className="hidden lg:inline-block rounded-full w-36 bg-customColor h-12 text-lg drop-shadow-md"
+                className="hidden lg:inline-block rounded-full w-36 bg-customColor h-12 text-lg drop-shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110"
                 onClick={handleLogout}
               >
                 <span>LOGOUT</span>
               </Button>
+
               <IconButton
                 variant="text"
                 className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
