@@ -92,7 +92,7 @@ function OutNavBar() {
 
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>
-            <div className="mr-3 cursor-pointer hidden lg:block">
+            <div className="mr-3 mt-3 cursor-pointer hidden lg:block">
               <Menu
                 animate={{
                   mount: { y: 0 },
@@ -106,7 +106,7 @@ function OutNavBar() {
                     </Badge>
                   </div>
                 </MenuHandler>
-                <MenuList className="mt-5">
+                <MenuList className="mt-4">
                   <MenuItem>Menu Item 1</MenuItem>
                   <MenuItem>Menu Item 2</MenuItem>
                 </MenuList>

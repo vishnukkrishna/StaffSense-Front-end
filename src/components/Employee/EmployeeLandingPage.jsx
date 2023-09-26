@@ -15,6 +15,7 @@ import { Button } from "@material-tailwind/react";
 import { Typography } from "@material-tailwind/react";
 import { fetchAnnouncements } from '../../data/AnnouncementApi'
 import { IoIosArrowDown } from 'react-icons/io'
+import {TiArrowUpOutline} from 'react-icons/ti'
 
 const LINKS = [
   {
@@ -166,7 +167,7 @@ function EmployeeLandingPage() {
           </div>
           {/* ................................................... */}
           {/* Announcement blocks */}
-          <div className="flex font-hubballi mt-10 rounded-3xl bg-white flex-col-reverse lg:flex-row">
+          <div className="flex font-hubballi mt-20 rounded-3xl bg-white flex-col-reverse lg:flex-row">
             <div className="w-full lg:w-1/2 p-4">
               <div className="text-center">
                 <h1 className="text-center font-sansserif text-lg md:text-xl lg:text-3xl xl:text-5xl mt-6">
@@ -243,14 +244,14 @@ function EmployeeLandingPage() {
           </div>
           {showToTopButton && (
             <div className="cursor-pointer fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-customColor text-2xl font-bold flex items-center justify-center">
-              <IoIosArrowDown
+              <TiArrowUpOutline
                 id="to-top-button"
                 onClick={goToTop}
                 title="Go To Top"
                 className="w-5 h-5 text-white animate-bounce"
               >
                 &uarr;
-              </IoIosArrowDown>
+              </TiArrowUpOutline>
             </div>
           )}
         </footer>

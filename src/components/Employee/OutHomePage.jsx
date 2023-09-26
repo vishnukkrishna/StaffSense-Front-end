@@ -21,6 +21,7 @@ import { FaStar } from "react-icons/fa";
 import { fetchAnnouncements } from '../../data/AnnouncementApi'
 import { Typography } from "@material-tailwind/react";
 import { IoIosArrowDown } from 'react-icons/io'
+import { TiArrowUpOutline } from 'react-icons/ti'
 
 const LINKS = [
   {
@@ -161,6 +162,103 @@ function OutHomePage() {
           </div>
         </div>
 
+        {/* ......................................................................... */}
+
+        <div className="font-hubballi px-4 lg:px-0 text-center mt-24">
+          <div className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
+            Our Leaders
+          </div>
+          <div className="text-lg mt-5">
+            <h1 className="text-center">
+              "As a data solutions partner to companies, we've focused on creating
+              value for our clients"
+            </h1>
+          </div>
+          <div className="flex flex-col space-y-6 mt-10 lg:space-y-0 lg:flex-row lg:justify-center lg:space-x-4">
+            {/* Card 1 */}
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
+              <div className="p-4 bg-white border-t flex justify-center items-center">
+                <img className="w-36 h-36" src={profile} alt="" />
+              </div>
+              <div className="p-4">
+                <h5 className="text-blue-gray text-xl font-semibold mb-1">
+                  Vishnu Krishnakumar
+                </h5>
+                <p className="mb-1">Founder</p>
+                <div className="flex justify-center items-center space-x-4 cursor-pointer">
+                  <a href="https://www.instagram.com/vishnu_k_krishna/">
+                    <AiFillInstagram className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/vishnukrishnakumar/">
+                    <AiFillLinkedin className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://www.facebook.com/profile.php?id=100008371385629">
+                    <BiLogoFacebookCircle className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://twitter.com/_v_i_c_h_o_o_z_">
+                    <AiFillTwitterCircle className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2 */}
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
+              <div className="p-4 bg-white border-t flex justify-center items-center">
+                <img className="w-36 h-36" src={profile} alt="" />
+              </div>
+              <div className="p-4">
+                <h5 className="text-blue-gray text-xl font-semibold mb-1">
+                  Vishnu Krishnakumar
+                </h5>
+                <p className="mb-1">CEO</p>
+                <div className="flex justify-center items-center space-x-4 cursor-pointer">
+                  <a href="https://www.instagram.com/vishnu_k_krishna/">
+                    <AiFillInstagram className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/vishnukrishnakumar/">
+                    <AiFillLinkedin className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://www.facebook.com/profile.php?id=100008371385629">
+                    <BiLogoFacebookCircle className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://twitter.com/_v_i_c_h_o_o_z_">
+                    <AiFillTwitterCircle className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 3 */}
+            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
+              <div className="p-4 bg-white border-t flex justify-center items-center">
+                <img className="w-36 h-36" src={profile} alt="" />
+              </div>
+              <div className="p-4">
+                <h5 className="text-blue-gray text-xl font-semibold mb-1">
+                  Vishnu Krishnakumar
+                </h5>
+                <p className="mb-1">SEO Expert</p>
+                <div className="flex justify-center items-center space-x-4 cursor-pointer">
+                  <a href="https://www.instagram.com/vishnu_k_krishna/">
+                    <AiFillInstagram className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/vishnukrishnakumar/">
+                    <AiFillLinkedin className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://www.facebook.com/profile.php?id=100008371385629">
+                    <BiLogoFacebookCircle className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                  <a href="https://twitter.com/_v_i_c_h_o_o_z_">
+                    <AiFillTwitterCircle className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ................................................................................. */}
 
         <div className="font-hubballi px-4 lg:px-0 text-center mt-20">
           <div id="feature" className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
@@ -224,77 +322,7 @@ function OutHomePage() {
           </div>
         </div>
         {/* .............................................. */}
-        <div className="font-hubballi px-4 lg:px-0 text-center mt-24">
-          <div className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
-            Our Leaders
-          </div>
-          <div className="text-lg mt-5">
-            <h1 className="text-center">
-              "As a data solutions partner to companies, we've focused on creating
-              value for our clients"
-            </h1>
-          </div>
-          <div className="flex flex-col space-y-6 mt-10 lg:space-y-0 lg:flex-row lg:justify-center lg:space-x-4">
-            {/* Card 1 */}
-            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
-              <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={profile} alt="" />
-              </div>
-              <div className="p-4">
-                <h5 className="text-blue-gray text-xl font-semibold mb-2">
-                  Vishnu Krishnakumar
-                </h5>
-                <p>Founder</p>
-                <div className="flex justify-center items-center space-x-4 cursor-pointer">
-                  <AiFillInstagram className="text-2xl" />
-                  <AiFillLinkedin className="text-2xl" />
-                  <BiLogoFacebookCircle className="text-2xl" />
-                  <AiFillTwitterCircle className="text-2xl" />
-                </div>
-              </div>
-            </div>
 
-            {/* Card 2 */}
-            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
-              <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={profile} alt="" />
-              </div>
-              <div className="p-4">
-                <h5 className="text-blue-gray text-xl font-semibold mb-2">
-                  Vishnu Krishnakumar
-                </h5>
-                <p>CEO</p>
-                <div className="flex justify-center items-center space-x-4 cursor-pointer">
-                  <AiFillInstagram className="text-2xl" />
-                  <AiFillLinkedin className="text-2xl" />
-                  <BiLogoFacebookCircle className="text-2xl" />
-                  <AiFillTwitterCircle className="text-2xl" />
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3 */}
-            <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
-              <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={profile} alt="" />
-              </div>
-              <div className="p-4">
-                <h5 className="text-blue-gray text-xl font-semibold mb-2">
-                  Vishnu Krishnakumar
-                </h5>
-                <p>SEO Expert</p>
-                <div className="flex justify-center items-center space-x-4 cursor-pointer">
-                  <AiFillInstagram className="text-2xl" />
-                  <AiFillLinkedin className="text-2xl" />
-                  <BiLogoFacebookCircle className="text-2xl" />
-                  <AiFillTwitterCircle className="text-2xl" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* ................................................... */}
         <div className="flex flex-col lg:flex-row font-hubballi mt-20 bg-bgColor rounded-3xl">
           <div className="w-full lg:w-1/2 p-4">
             <img
@@ -451,14 +479,14 @@ function OutHomePage() {
           </div>
           {showToTopButton && (
             <div className="cursor-pointer fixed z-90 animate-bounce bottom-8 right-8 border-0 w-10 h-10 rounded-full shadow-lg bg-customColor text-2xl font-bold flex items-center justify-center">
-              <IoIosArrowDown
+              <TiArrowUpOutline
                 id="to-top-button"
                 onClick={goToTop}
                 title="Go To Top"
                 className="w-5 h-5 text-white animate-bounce"
               >
                 &uarr;
-              </IoIosArrowDown>
+              </TiArrowUpOutline>
             </div>
           )}
         </footer>
