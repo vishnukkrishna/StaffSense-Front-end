@@ -66,16 +66,19 @@ function EmployeeProfile() {
             <div className="grid grid-cols-1 md:grid-cols-3">
               <div className="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
                 <div>
-                  <p className="font-bold text-gray-700 text-xl">22</p>
-                  <p className="text-gray-500">Completed Tasks</p>
+                  {/* <p className="font-bold text-gray-700 text-xl">22</p> */}
+                  {/* <p className="text-gray-500">Completed Tasks</p> */}
                 </div>
                 <div>
-                  <p className="font-bold text-gray-700 text-xl">10</p>
-                  <p className="text-gray-500">Leaves</p>
+                  {/* <p className="font-bold text-gray-700 text-xl">10</p>/ */}
+                  {/* <p className="text-gray-500">Leaves</p> */}
                 </div>
               </div>
+
               <div className="relative">
+
                 <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+
                   <div className="flex justify-end h-30 w-30 cursor-pointer">
                     {userData.profile_pic ? (
                       <img

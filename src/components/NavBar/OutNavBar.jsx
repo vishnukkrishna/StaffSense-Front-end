@@ -81,11 +81,7 @@ function OutNavBar() {
         <div className="flex items-center justify-between text-blue-gray-900">
           <div className="cursor-pointer">
             <a href="#">
-              <img
-                src={logo}
-                alt="Logo"
-                className="w-1/2 h-1/2 max-w-full max-h-full md:w-60 sm:h-40 sm:w-20 md:h-15 xl:w-56 xl:h-14 flex items-center transition-transform duration-300 hover:translate-x-4"
-              />
+              <img src={logo} alt="Logo" className="w-60 h-15 flex items-center transition-transform duration-300 hover:translate-x-4" />
             </a>
 
           </div>

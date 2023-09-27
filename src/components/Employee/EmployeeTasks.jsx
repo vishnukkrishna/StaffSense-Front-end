@@ -8,14 +8,16 @@ function EmployeeTasks() {
   const [tasks, setTasks] = useState([]);
   const { user } = useContext(AuthContext);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const tasksPerPage = 3;
+
   useEffect(() => {
     fetchUserTasks();
-  }, [user]);
+  }, [user, currentPage]);
 
   const fetchUserTasks = async () => {
     try {
       const userId = user.user_id;
-
       const response = await axios.get(
         `${BACKEND_BASE_URL}/project/individualtasks/${userId}/`
       );
@@ -30,23 +32,14 @@ function EmployeeTasks() {
   const updateTaskStatus = async (taskId, newStatus) => {
     try {
       console.log(taskId, newStatus, "GGGGGGG");
-
       const response = await axios.patch(
         `${BACKEND_BASE_URL}/project/usertasks/${taskId}/`,
         {
           status: newStatus,
         }
       );
-
       console.log("Response:", response.data);
-
       fetchUserTasks();
-
-      setTasks((prevTasks) =>
-        prevTasks.map((task) =>
-          task.id === taskId ? { ...task, status: newStatus } : task
-        )
-      );
     } catch (error) {
       console.error("Error updating task status:", error);
     }
@@ -67,9 +60,18 @@ function EmployeeTasks() {
     }
   };
 
+  const indexOfLastTask = currentPage * tasksPerPage;
+  const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+  const currentTasks = tasks.slice(indexOfFirstTask, indexOfLastTask);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+
   return (
 
-    <div className="font-fontHubballi mt-52 px-10 overflow-x-auto w-full h-full">
+    <div className="font-fontHubballi mt-52 px-32 overflow-x-auto w-full h-full">
       <table className="w-full shadow-md sm:rounded-lg text-sm text-left text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr className="text-lg text-center">
@@ -103,7 +105,7 @@ function EmployeeTasks() {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task) => (
+          {currentTasks.map((task) => (
             <tr key={task.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
               {/* <th
                 scope="row"
@@ -149,6 +151,53 @@ function EmployeeTasks() {
           ))}
         </tbody>
       </table>
+      <div className="flex justify-end items-center mt-4 mr-10">
+        <nav aria-label="Page navigation">
+          <ul className="inline-flex">
+            <li>
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage === 1 ? "cursor-not-allowed" : ""
+                  }`}
+                disabled={currentPage === 1}
+              >
+                Prev
+              </button>
+            </li>
+            {Array.from({ length: Math.ceil(tasks.length / tasksPerPage) }).map(
+              (item, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => paginate(index + 1)}
+                    className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
+                      ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
+                      : "hover:bg-red-200 hover:text-red-500"
+                      }`}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              )
+            )}
+            <li>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
+                  Math.ceil(tasks.length / tasksPerPage)
+                  ? "cursor-not-allowed"
+                  : ""
+                  }`}
+                disabled={
+                  currentPage ===
+                  Math.ceil(tasks.length / tasksPerPage)
+                }
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 }
