@@ -39,6 +39,9 @@ function EmployeeVisitors() {
                                     Visitor Name
                                 </th>
                                 <th scope="col" className="px-6 py-3">
+                                    Reason
+                                </th>
+                                <th scope="col" className="px-6 py-3">
                                     Email
                                 </th>
                                 <th scope="col" className="px-6 py-3">
@@ -54,18 +57,19 @@ function EmployeeVisitors() {
                         </thead>
                         <tbody>
                             {visitors.map((visitor, index) => (
-                                <tr className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
+                                <tr key={visitor.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
                                     <th
                                         scope="row"
                                         className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
                                     >
                                         {index + 1}
                                     </th>
-                                    <td className="px-6 py-4">11</td>
-                                    <td className="px-6 py-4">22</td>
-                                    <td className="px-6 py-4">33</td>
-                                    <td className="px-6 py-4">44</td>
-                                    <td className="px-6 py-4">55</td>
+                                    <td className="px-6 py-4">{visitor.name}</td>
+                                    <td className="px-6 py-4">{visitor.reason}</td>
+                                    <td className="px-6 py-4">{visitor.email}</td>
+                                    <td className="px-6 py-4">{visitor.date}</td>
+                                    <td className="px-6 py-4">{visitor.start_time}</td>
+                                    <td className="px-6 py-4">{visitor.end_time}</td>
                                 </tr>
                             ))}
                         </tbody>

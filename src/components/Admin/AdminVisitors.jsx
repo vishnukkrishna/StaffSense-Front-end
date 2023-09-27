@@ -1,6 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchVisitors, deleteVisitor } from "../../data/VisitorApi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { BACKEND_BASE_URL } from "../../api/Api";
+import Swal from 'sweetalert2';
+import axios from "axios";
+
 
 function AdminVisitors() {
+
+  const [visitors, setVisitors] = useState([]);
+
+  useEffect(() => {
+    fetchVisitorData();
+  }, []);
+
+  const fetchVisitorData = async () => {
+    try {
+      const response = await axios.get(`${BACKEND_BASE_URL}/visitor/`, {
+        headers: {
+          Accept: "application/json",
+        },
+      });
+      setVisitors(response.data);
+    } catch (error) {
+      console.error("Error fetching visitor data:", error.message);
+    }
+  };
+
+  const handleDelete = async (visitorId) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure you want to delete this visitor?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel',
+      });
+      if (result.isConfirmed) {
+        axios.delete(`${BACKEND_BASE_URL}/visitor/${visitorId}/`);
+        console.log("Visitor deleted successfully");
+        setVisitors((prevVisitors) => prevVisitors.filter((visitor) => visitor.id !== visitorId));
+
+      }
+    }
+    catch (error) {
+      console.error("Error deleting visitor:", error);
+    }
+  };
+
   return (
     <div className="relative mt-36 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -30,20 +77,26 @@ function AdminVisitors() {
           </tr>
         </thead>
         <tbody>
-          <tr className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
-            <th
-              scope="row"
-              className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
-            >
-              1111
-            </th>
-            <td className="px-6 py-4">vishnu</td>
-            <td className="px-6 py-4">Interview</td>
-            <td className="px-6 py-4">vishnu@gmail.com</td>
-            <td className="px-6 py-4">04:55:00</td>
-            <td className="px-6 py-4">05:55:00</td>
-            <td className="px-6 py-4 text-green-600">Approved</td>
-          </tr>
+          {visitors.map((visitor, index) => (
+            <tr key={visitor.id} className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
+              <th
+                scope="row"
+                className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
+              >
+                {index + 1}
+              </th>
+              <td className="px-6 py-4">{visitor.name}</td>
+              <td className="px-6 py-4">{visitor.reason}</td>
+              <td className="px-6 py-4">{visitor.email}</td>
+              <td className="px-6 py-4">{visitor.start_time}</td>
+              <td className="px-6 py-4">{visitor.end_time}</td>
+              <td className="px-6 py-4">
+                <div className="flex flex-row justify-around">
+                  <RiDeleteBin6Line className="text-red-500 text-2xl cursor-pointer" onClick={() => handleDelete(visitor.id)} />
+                </div>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

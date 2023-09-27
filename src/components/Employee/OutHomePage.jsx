@@ -9,6 +9,7 @@ import profile from "../../images/profile-pic.jpg";
 import b1 from "../../images/b1.png";
 import b2 from "../../images/b2.png";
 import logo from "../../images/Logo.png";
+import kiei from "../../images/kiei.png"
 import { Helmet } from 'react-helmet'
 import {
   AiFillInstagram,
@@ -101,6 +102,28 @@ function OutHomePage() {
       console.error(error);
     }
   };
+
+  const MovingObject = () => {
+    useEffect(() => {
+      // JavaScript logic for animation
+      const movingElement = document.querySelector('.moving-object');
+
+      if (movingElement) {
+        const animationDuration = 5; // Animation duration in seconds
+        const animationDistance = 100; // Animation distance in pixels
+
+        movingElement.style.animation = `moveObject ${animationDuration}s linear infinite`;
+
+        // Adjust the translateX value based on your desired animation distance
+        movingElement.style.transform = `translateX(${animationDistance}rem)`;
+
+        // Reset the animation when it's completed
+        movingElement.addEventListener('animationiteration', () => {
+          movingElement.style.transform = 'translateX(0)';
+        });
+      }
+    }, []);
+  }
 
   return (
     <>
@@ -432,6 +455,12 @@ function OutHomePage() {
             />
           </div>
         </div>
+        {/* ............................... */}
+
+
+
+        {/* ............................... */}
+
 
         {/* ................................................... */}
         <footer className="relative w-full mt-10">

@@ -12,7 +12,7 @@ import AuthContext from "../../Contexts/AuthContext";
 import { BACKEND_BASE_URL } from '../../../api/Api';
 import axios from "axios";
 
-function AddVisitors() {
+function AddVisitors({ Action }) {
     const [open, setOpen] = useState(false);
     const { user } = useContext(AuthContext);
     const [formData, setFormData] = useState({
@@ -50,7 +50,6 @@ function AddVisitors() {
             organizerId: user.user_id,
         };
 
-        setShowSpinner(true);
 
         axios
             .post(`${BACKEND_BASE_URL}/visitor/`, updatedFormData)
@@ -67,6 +66,8 @@ function AddVisitors() {
                     endTime: "",
                     organizer: user.username,
                 });
+                toast.success("Visitor added successfully");
+                setOpen(false);
             })
             .catch((error) => {
                 console.error(error);
