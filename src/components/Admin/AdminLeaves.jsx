@@ -8,10 +8,12 @@ import { BACKEND_BASE_URL } from "../../api/Api";
 function AdminLeaves() {
   const [leaves, setLeaves] = useState([]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const LeavePerPage = 3;
 
   useEffect(() => {
     fetchLeaves();
-  }, []);
+  }, [currentPage]);
 
   const fetchLeaves = () => {
     axios
@@ -60,6 +62,15 @@ function AdminLeaves() {
       }
     });
   };
+
+  const indexOfLastLeave = currentPage * LeavePerPage;
+  const indexOfFirstLeave = indexOfLastLeave - LeavePerPage;
+  const currentLeave = leaves.slice(indexOfFirstLeave, indexOfLastLeave);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="relative mt-40 ml-28 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -95,7 +106,7 @@ function AdminLeaves() {
           </tr>
         </thead>
         <tbody>
-          {leaves.map((leave) => (
+          {currentLeave.map((leave) => (
             <tr key={leave.id} className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
               {/* <th
                 scope="row"
@@ -165,6 +176,53 @@ function AdminLeaves() {
           ))}
         </tbody>
       </table>
+      <div className="flex justify-end items-center mt-4 mr-10">
+        <nav aria-label="Page navigation">
+          <ul className="inline-flex">
+            <li>
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage === 1 ? "cursor-not-allowed" : ""
+                  }`}
+                disabled={currentPage === 1}
+              >
+                Prev
+              </button>
+            </li>
+            {Array.from({ length: Math.ceil(leaves.length / LeavePerPage) }).map(
+              (item, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => paginate(index + 1)}
+                    className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
+                      ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
+                      : "hover:bg-red-200 hover:text-red-500"
+                      }`}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              )
+            )}
+            <li>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
+                  Math.ceil(leaves.length / LeavePerPage)
+                  ? "cursor-not-allowed"
+                  : ""
+                  }`}
+                disabled={
+                  currentPage ===
+                  Math.ceil(leaves.length / LeavePerPage)
+                }
+              >
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
   );
 }

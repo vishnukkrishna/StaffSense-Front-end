@@ -9,11 +9,14 @@ function EmployeeComplaint() {
     const [complaints, setComplaints] = useState([]);
     const { user } = useContext(AuthContext);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const ComplaintPerPage = 3;
+
     useEffect(() => {
         if (user && user.user_id) {
             fetchComplaints();
         }
-    }, [user]);
+    }, [user, currentPage]);
 
     const fetchComplaints = async () => {
         try {
@@ -24,6 +27,14 @@ function EmployeeComplaint() {
         } catch (error) {
             console.error("Error fetching complaints:", error);
         }
+    };
+
+    const indexOfLastComplaint = currentPage * ComplaintPerPage;
+    const indexOfFirstComplaint = indexOfLastComplaint - ComplaintPerPage;
+    const currentComplaint = complaints.slice(indexOfFirstComplaint, indexOfLastComplaint);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
 
     if (!user || !user.user_id) {
@@ -57,7 +68,7 @@ function EmployeeComplaint() {
                         </tr>
                     </thead>
                     <tbody>
-                        {complaints.map((complaint, index) => (
+                        {currentComplaint.map((complaint, index) => (
                             <tr key={complaint.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
                                 <th
                                     scope="row"
@@ -73,6 +84,53 @@ function EmployeeComplaint() {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="flex justify-end items-center mt-4 mr-64">
+                <nav aria-label="Page navigation">
+                    <ul className="inline-flex">
+                        <li>
+                            <button
+                                onClick={() => paginate(currentPage - 1)}
+                                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage === 1 ? "cursor-not-allowed" : ""
+                                    }`}
+                                disabled={currentPage === 1}
+                            >
+                                Prev
+                            </button>
+                        </li>
+                        {Array.from({ length: Math.ceil(complaints.length / ComplaintPerPage) }).map(
+                            (item, index) => (
+                                <li key={index}>
+                                    <button
+                                        onClick={() => paginate(index + 1)}
+                                        className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
+                                            ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
+                                            : "hover:bg-red-200 hover:text-red-500"
+                                            }`}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                </li>
+                            )
+                        )}
+                        <li>
+                            <button
+                                onClick={() => paginate(currentPage + 1)}
+                                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
+                                    Math.ceil(complaints.length / ComplaintPerPage)
+                                    ? "cursor-not-allowed"
+                                    : ""
+                                    }`}
+                                disabled={
+                                    currentPage ===
+                                    Math.ceil(complaints.length / ComplaintPerPage)
+                                }
+                            >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     )

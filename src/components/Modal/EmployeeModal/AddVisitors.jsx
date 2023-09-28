@@ -24,6 +24,9 @@ function AddVisitors({ Action }) {
         organizer: "",
     });
 
+    // Step 1: Initialize formErrors state
+    const [formErrors, setFormErrors] = useState({});
+
     useEffect(() => {
         if (user) {
             setFormData((prevFormData) => ({
@@ -34,80 +37,86 @@ function AddVisitors({ Action }) {
     }, [user]);
 
     const handleChange = (e) => {
+        // Step 2: Clear validation errors for the corresponding input
+        const updatedFormErrors = { ...formErrors };
+        delete updatedFormErrors[e.target.name];
+
         const value =
             e.target.name === "organizer" ? user.username : e.target.value;
         setFormData({
             ...formData,
             [e.target.name]: value,
         });
+
+        // Step 2: Update formErrors state
+        setFormErrors(updatedFormErrors);
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const updatedFormData = {
-            ...formData,
-            organizerId: user.user_id,
-        };
+        // Step 4: Implement date and time validation
+        const currentDate = new Date();
+        const selectedDate = new Date(`${formData.date}T${formData.startTime}`);
+        const endTime = new Date(`${formData.date}T${formData.endTime}`);
 
+        const errors = {};
 
-        axios
-            .post(`${BACKEND_BASE_URL}/visitor/`, updatedFormData)
-            .then((response) => {
-                console.log(response.data);
-                toast.success(response.data.message);
+        if (!formData.date) {
+            errors.date = "Date is required";
+        } else if (selectedDate <= currentDate) {
+            errors.date = "Date and time must be in the future";
+        }
 
-                setFormData({
-                    name: "",
-                    reason: "",
-                    email: "",
-                    date: "",
-                    startTime: "",
-                    endTime: "",
-                    organizer: user.username,
+        if (!formData.startTime) {
+            errors.startTime = "Start time is required";
+        }
+
+        if (!formData.endTime) {
+            errors.endTime = "End time is required";
+        } else if (endTime <= selectedDate) {
+            errors.endTime = "End time must be after start time";
+        }
+
+        // Step 4: Set formErrors state with validation errors
+        setFormErrors(errors);
+
+        // Step 4: Check if there are any validation errors before submitting
+        if (Object.keys(errors).length === 0) {
+            const updatedFormData = {
+                ...formData,
+                organizerId: user.user_id,
+            };
+
+            axios
+                .post(`${BACKEND_BASE_URL}/visitor/`, updatedFormData)
+                .then((response) => {
+                    console.log(response.data);
+                    toast.success(response.data.message);
+
+                    setFormData({
+                        name: "",
+                        reason: "",
+                        email: "",
+                        date: "",
+                        startTime: "",
+                        endTime: "",
+                        organizer: user.username,
+                    });
+                    toast.success("Visitor added successfully");
+                    setOpen(false);
+                    Action()
+                })
+                .catch((error) => {
+                    console.error(error);
+                    if (error.response) {
+                        toast.error(error.response.data);
+                    } else {
+                        toast.error("An error occurred");
+                    }
                 });
-                toast.success("Visitor added successfully");
-                setOpen(false);
-            })
-            .catch((error) => {
-                console.error(error);
-                if (error.response) {
-                    toast.error(error.response.data);
-                } else {
-                    toast.error("An error occurred");
-                }
-            });
+        }
     };
-
-    // const validateForm = () => {
-    //     const errors = {};
-    //     const currentDate = new Date();
-    //     const selectedDate = new Date(`${formData.date}T${formData.start_time}`);
-    //     const endTime = new Date(`${formData.date}T${formData.end_time}`);
-
-    //     if (!formData.title.trim()) {
-    //         errors.title = "Title is required";
-    //     }
-
-    //     if (!formData.date) {
-    //         errors.date = "Date is required";
-    //     } else if (selectedDate <= currentDate) {
-    //         errors.date = "Date and time must be in the future";
-    //     }
-
-    //     if (!formData.start_time) {
-    //         errors.start_time = "Start time is required";
-    //     }
-
-    //     if (!formData.end_time) {
-    //         errors.end_time = "End time is required";
-    //     } else if (endTime <= selectedDate) {
-    //         errors.end_time = "End time must be after start time";
-    //     }
-
-    //     setFormErrors(errors);
-    //     return Object.keys(errors).length === 0;
-    // };
 
     return (
         <>
@@ -183,8 +192,12 @@ function AddVisitors({ Action }) {
                                 value={formData.date}
                                 onChange={handleChange}
                                 required
-                                className="border border-gray-300 rounded-md p-2 w-full"
+                                className={`border border-gray-300 rounded-md p-2 w-full ${formErrors.date ? "border-red-500" : ""}`}
                             />
+                            {/* Step 2: Display date validation error */}
+                            {formErrors.date && (
+                                <div className="text-red-500">{formErrors.date}</div>
+                            )}
                         </div>
                         <div>
                             <label
@@ -199,8 +212,12 @@ function AddVisitors({ Action }) {
                                 value={formData.startTime}
                                 onChange={handleChange}
                                 required
-                                className="border border-gray-300 rounded-md p-2 w-full"
+                                className={`border border-gray-300 rounded-md p-2 w-full ${formErrors.startTime ? "border-red-500" : ""}`}
                             />
+                            {/* Step 2: Display start time validation error */}
+                            {formErrors.startTime && (
+                                <div className="text-red-500">{formErrors.startTime}</div>
+                            )}
                         </div>
                         <div>
                             <label
@@ -215,8 +232,12 @@ function AddVisitors({ Action }) {
                                 value={formData.endTime}
                                 onChange={handleChange}
                                 required
-                                className="border border-gray-300 rounded-md p-2 w-full"
+                                className={`border border-gray-300 rounded-md p-2 w-full ${formErrors.endTime ? "border-red-500" : ""}`}
                             />
+                            {/* Step 2: Display end time validation error */}
+                            {formErrors.endTime && (
+                                <div className="text-red-500">{formErrors.endTime}</div>
+                            )}
                         </div>
 
                         <DialogFooter>

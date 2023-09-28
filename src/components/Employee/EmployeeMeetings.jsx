@@ -9,9 +9,12 @@ function EmployeeMeetings() {
 
     const [meeting, setMeeting] = useState([]);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const ComplaintPerPage = 3;
+
     useEffect(() => {
         fetchMeetingData();
-    }, []);
+    }, [currentPage]);
 
     const fetchMeetingData = async () => {
         try {
@@ -20,6 +23,14 @@ function EmployeeMeetings() {
         } catch (error) {
             console.error("Error fetching meeting data:", error);
         }
+    };
+
+    const indexOfLastComplaint = currentPage * ComplaintPerPage;
+    const indexOfFirstComplaint = indexOfLastComplaint - ComplaintPerPage;
+    const currentMeeting = meeting.slice(indexOfFirstComplaint, indexOfLastComplaint);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
 
     return (
@@ -57,7 +68,7 @@ function EmployeeMeetings() {
                             </tr>
                         </thead>
                         <tbody>
-                            {meeting.map((meeting, index) => (
+                            {currentMeeting.map((meeting, index) => (
                                 <tr key={meeting.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
                                     <th
                                         scope="row"
@@ -76,6 +87,53 @@ function EmployeeMeetings() {
                         </tbody>
                     </table>
                 </div>
+            </div>
+            <div className="flex justify-end items-center mt-4 mr-64">
+                <nav aria-label="Page navigation">
+                    <ul className="inline-flex">
+                        <li>
+                            <button
+                                onClick={() => paginate(currentPage - 1)}
+                                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage === 1 ? "cursor-not-allowed" : ""
+                                    }`}
+                                disabled={currentPage === 1}
+                            >
+                                Prev
+                            </button>
+                        </li>
+                        {Array.from({ length: Math.ceil(meeting.length / ComplaintPerPage) }).map(
+                            (item, index) => (
+                                <li key={index}>
+                                    <button
+                                        onClick={() => paginate(index + 1)}
+                                        className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
+                                            ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
+                                            : "hover:bg-red-200 hover:text-red-500"
+                                            }`}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                </li>
+                            )
+                        )}
+                        <li>
+                            <button
+                                onClick={() => paginate(currentPage + 1)}
+                                className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
+                                    Math.ceil(meeting.length / ComplaintPerPage)
+                                    ? "cursor-not-allowed"
+                                    : ""
+                                    }`}
+                                disabled={
+                                    currentPage ===
+                                    Math.ceil(meeting.length / ComplaintPerPage)
+                                }
+                            >
+                                Next
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </>
     )

@@ -240,7 +240,6 @@ function App() {
                 </UserProtectedRoutes>
               }
             />
-
           </Routes>
         </Router>
       </AuthProvider>

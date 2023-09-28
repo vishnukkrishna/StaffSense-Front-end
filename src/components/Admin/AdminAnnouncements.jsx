@@ -7,7 +7,9 @@ import Swal from 'sweetalert2';
 
 function AdminAnnouncements() {
   const [announcements, setAnnouncements] = useState([]);
-  const [refresh, setRefresh] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const AnnouncementPerPage = 3;
 
   const fetchAnnouncementData = async () => {
     try {
@@ -20,7 +22,7 @@ function AdminAnnouncements() {
 
   useEffect(() => {
     fetchAnnouncementData();
-  }, []);
+  }, [currentPage]);
 
   const handleAddAnnouncement = async (newAnnouncement) => {
     try {
@@ -57,6 +59,14 @@ function AdminAnnouncements() {
     }
   };
 
+  const indexOfLastAnnouncement = currentPage * AnnouncementPerPage;
+  const indexOfFirstAnnouncement = indexOfLastAnnouncement - AnnouncementPerPage;
+  const currentAnnouncement = announcements.slice(indexOfFirstAnnouncement, indexOfLastAnnouncement);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <>
       <div className="mt-10 pl-20">
@@ -81,7 +91,7 @@ function AdminAnnouncements() {
             </tr>
           </thead>
           <tbody>
-            {announcements.map((announcement, index) => (
+            {currentAnnouncement.map((announcement, index) => (
               <tr key={announcement.id} className="text-black border-b text-base text-center dark:bg-gray-800 dark:border-gray-700">
                 <th
                   scope="row"
@@ -100,6 +110,53 @@ function AdminAnnouncements() {
             ))}
           </tbody>
         </table>
+        <div className="flex justify-end items-center mt-4 mr-10">
+          <nav aria-label="Page navigation">
+            <ul className="inline-flex">
+              <li>
+                <button
+                  onClick={() => paginate(currentPage - 1)}
+                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage === 1 ? "cursor-not-allowed" : ""
+                    }`}
+                  disabled={currentPage === 1}
+                >
+                  Prev
+                </button>
+              </li>
+              {Array.from({ length: Math.ceil(announcements.length / AnnouncementPerPage) }).map(
+                (item, index) => (
+                  <li key={index}>
+                    <button
+                      onClick={() => paginate(index + 1)}
+                      className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
+                        ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
+                        : "hover:bg-red-200 hover:text-red-500"
+                        }`}
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                )
+              )}
+              <li>
+                <button
+                  onClick={() => paginate(currentPage + 1)}
+                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
+                    Math.ceil(announcements.length / AnnouncementPerPage)
+                    ? "cursor-not-allowed"
+                    : ""
+                    }`}
+                  disabled={
+                    currentPage ===
+                    Math.ceil(announcements.length / AnnouncementPerPage)
+                  }
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </>
   );
