@@ -6,26 +6,12 @@ import AddEmployee from "../Modal/AdminModal/AddEmployee";
 import { BACKEND_BASE_URL } from "../../api/Api";
 import Swal from 'sweetalert2';
 import EditEmployee from "../Modal/AdminModal/EditEmployee";
-import { FaSearch } from "react-icons/fa";
-// import { logout } from "../../pages/Authentication/Auth";
 
 function AdminEmployees() {
   const [employees, setEmployees] = useState([]);
-  // const [search, setSearch] = useState("");
-  // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemPerPage = 3
-
-  // async function searchUser(keyword) {
-  //   try {
-  //     const response = await axios.get(`${BACKEND_BASE_URL}/user/adminsearchEmployee/?search=${keyword}`);
-  //     setEmployees(response.data);
-  //   } catch (error) {
-  //     console.error("Error searching employees:", error);
-  //   }
-  // }
-
-
+  const itemPerPage = 3;
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleBlockUser = () => {
     Swal.fire({
@@ -46,24 +32,36 @@ function AdminEmployees() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${BACKEND_BASE_URL}/user/employelist/`
-      );
-      setEmployees(response.data);
+      const response = await axios.get(`${BACKEND_BASE_URL}/user/employelist/`);
       const sortedEmployees = response.data.sort((a, b) => a.id - b.id);
-      setEmployees(sortedEmployees);
+
+      if (searchQuery.trim() === "") {
+        setEmployees(sortedEmployees);
+      } else {
+        const filteredEmployees = sortedEmployees.filter((employee) => {
+          return (
+            employee.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            employee.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            employee.department_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            employee.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            employee.designation.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        });
+        setEmployees(filteredEmployees);
+      }
+
       console.log("Employee data:", response.data);
     } catch (error) {
       console.error("Error fetching employee data:", error);
     }
   };
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [searchQuery]);
 
   const BlockModal = ({ employeeId, isBlocked }) => {
     const [isOpen, setIsOpen] = useState(false);
-    // const [shouldReload, setShouldReload] = useState(false);
 
     const openModal = (e) => {
       e.preventDefault();
@@ -73,26 +71,17 @@ function AdminEmployees() {
     const closeModal = (e) => {
       e.preventDefault();
       setIsOpen(false);
-      // setShouldReload(true);
     };
 
-    // useEffect(() => {
-    //   if (shouldReload) {
-    //     window.location.reload();
-    //     setShouldReload(false);
-    //   }
-    // }, [shouldReload]);
 
     const handleBlockEmployee = () => {
       setIsOpen(false);
       blockEmployee(employeeId);
-      // window.location.reload();
     };
 
     const handleUnblockEmployee = () => {
       setIsOpen(false);
       unblockEmployee(employeeId);
-      // window.location.reload();
     };
 
     const blockEmployee = (employeeId) => {
@@ -100,7 +89,7 @@ function AdminEmployees() {
         .put(`${BACKEND_BASE_URL}/user/blockemployees/${employeeId}/`)
         .then((response) => {
           console.log("Employee blocked successfully");
-          fetchData()
+          fetchData();
         })
         .catch((error) => {
           console.error("Error blocking employee:", error);
@@ -117,76 +106,6 @@ function AdminEmployees() {
           console.error("Error unblocking employee:", error);
         });
     };
-
-
-    // const [isOpen, setIsOpen] = useState(false);
-    // const [shouldReload, setShouldReload] = useState(false);
-
-    // const openModal = (e) => {
-    //   e.preventDefault();
-    //   setIsOpen(true);
-    // };
-
-    // const closeModal = (e) => {
-    //   e.preventDefault();
-    //   setIsOpen(false);
-    //   setShouldReload(true);
-    // };
-
-    // useEffect(() => {
-    //   if (shouldReload) {
-    //     window.location.reload();
-    //     setShouldReload(false);
-    //   }
-    // }, [shouldReload]);
-
-    // const blockEmployee = async (employeeId) => {
-    //   try {
-    //     const response = await axios.put(
-    //       `${BACKEND_BASE_URL}/user/blockemployees/${employeeId}/`
-    //     );
-    //     console.log("Employee blocked successfully", response.data);
-
-    //     // Logout the user after blocking
-    //     // const logoutAction = logout();
-    //     // return logoutAction;
-    //   } catch (error) {
-    //     console.error("Error blocking employee:", error);
-    //   }
-    // };
-
-    // const unblockEmployee = async (employeeId) => {
-    //   try {
-    //     const response = await axios.put(
-    //       `${BACKEND_BASE_URL}/user/unblockemployees/${employeeId}/`
-    //     );
-    //     console.log("Employee unblocked successfully", response.data);
-
-    //     // Logout the user after unblocking
-    //     // const logoutAction = logout();
-    //     // return logoutAction;
-    //   } catch (error) {
-    //     console.error("Error unblocking employee:", error);
-    //   }
-    // };
-
-    // const handleBlockEmployee = () => {
-    //   setIsOpen(false);
-    //   blockEmployee(employeeId).then((logoutAction) => {
-    //     // Redirect to the login page
-    //     return logoutAction;
-    //   });
-    // };
-
-    // const handleUnblockEmployee = () => {
-    //   setIsOpen(false);
-    //   unblockEmployee(employeeId).then((logoutAction) => {
-    //     // Redirect to the login page
-    //     return logoutAction;
-    //   });
-    // };
-
-
 
     return (
       <div>
@@ -241,19 +160,49 @@ function AdminEmployees() {
       <div className="mt-10 pl-20">
         <AddEmployee />
       </div>
-      <div className="font-fontHubballi relative mt-36 mr-44 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
-        {/* <div className="relative flex w-full gap-2 md:w-max ml-96 mt-2">
-          <Input
-            type="search"
-            label="Type here..."
-            className="pr-20"
-            onChange={e => searchUser(e.target.value)}
-            containerProps={{
-              className: "min-w-[288px]",
-            }}
-            icon={<FaSearch className="h-5 w-5" />}
-          />
-        </div> */}
+      <div className="font-fontHubballi border-none relative mt-2 mr-44 overflow-x-auto shadow-md sm:rounded-lg w-3/4 h-full">
+        <form style={{ maxWidth: "700px", margin: "100px auto" }}>
+          <label
+            htmlFor="default-search"
+            className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
+          >
+            Search
+          </label>
+          <div className="relative">
+            <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+              <svg
+                aria-hidden="true"
+                className="w-5 h-5 text-gray-500 dark:text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="search"
+              id="default-search"
+              className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Search Mockups, Logos..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              required
+            />
+            <button
+              type="submit"
+              className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Search
+            </button>
+          </div>
+        </form>
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-7">
           <thead className="text-xl text-gray-700 text-center uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr className="text-lg">
