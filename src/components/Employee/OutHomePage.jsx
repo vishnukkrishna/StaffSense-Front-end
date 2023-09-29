@@ -168,7 +168,7 @@ function OutHomePage() {
             <h1 className="mb-2 text-base lg:text-xl xl:text-2xl">
               FUTURE NEXT
             </h1>
-            <h1 className="lg:text-3xl xl:text-4xl font-bold mb-4">About Us</h1>
+            <h1 className="lg:text-3xl xl:text-5xl font-extrabold mb-4">About Us</h1>
             <p className="text-sm lg:text-base xl:text-xl">
               At StaffSense, we solidly endeavor towards making an incentive for
               our clients and that we associate. StaffSense is the leading and
