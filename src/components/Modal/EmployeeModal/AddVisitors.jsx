@@ -103,7 +103,6 @@ function AddVisitors({ Action }) {
                         endTime: "",
                         organizer: user.username,
                     });
-                    toast.success("Visitor added successfully");
                     setOpen(false);
                     Action()
                 })
@@ -258,6 +257,7 @@ function AddVisitors({ Action }) {
                         </DialogFooter>
                     </form>
                 </DialogBody>
+                <ToastContainer />
             </Dialog>
         </>
     )

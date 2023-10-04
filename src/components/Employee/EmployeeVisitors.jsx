@@ -62,7 +62,6 @@ function EmployeeVisitors() {
 
     return (
         <>
-            <ToastContainer />
             <div>
                 <div className="mt-10 pl-20">
                     <AddVisitors Action={fetchVisitorData} />
