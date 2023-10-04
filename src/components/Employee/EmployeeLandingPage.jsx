@@ -15,7 +15,7 @@ import { Button } from "@material-tailwind/react";
 import { Typography } from "@material-tailwind/react";
 import { fetchAnnouncements } from '../../data/AnnouncementApi'
 import { IoIosArrowDown } from 'react-icons/io'
-import {TiArrowUpOutline} from 'react-icons/ti'
+import { TiArrowUpOutline } from 'react-icons/ti'
 
 const LINKS = [
   {
@@ -63,7 +63,6 @@ function EmployeeLandingPage() {
   const fetchAnnouncementData = async () => {
     try {
       const data = await fetchAnnouncements();
-      console.log(data, "anithing");
       setAnnouncements(data);
     } catch (error) {
       console.error(error);

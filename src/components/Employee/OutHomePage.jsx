@@ -96,7 +96,6 @@ function OutHomePage() {
   const fetchAnnouncementData = async () => {
     try {
       const data = await fetchAnnouncements();
-      console.log(data, "anithing");
       setAnnouncements(data);
     } catch (error) {
       console.error(error);

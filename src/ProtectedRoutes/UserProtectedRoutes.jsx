@@ -21,10 +21,8 @@ const UserProtectedRoutes = ({ children, ...rest }) => {
   // }, []);
 
   const token = localStorage.getItem("access_token");
-  console.log("token in protected", token);
   if (token) {
     const usertoken = jwt_decode(token);
-    console.log("user token", usertoken);
     // if (usertoken.is_active === false) {
     //   <Navigate to="/user" />
     // }

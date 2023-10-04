@@ -8,12 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    console.log("helooo there");
     // console.log(Cookies)
     // const access_token = Cookies.get("access_token")
     const access_token = localStorage.getItem("access_token");
 
-    console.log(access_token, "Employeeeeeee");
     if (access_token) {
       const decoded_token = jwt_decode(access_token);
       const {
@@ -42,9 +40,6 @@ export const AuthProvider = ({ children }) => {
         username: username,
         profile_pic: profile_pic,
       };
-      console.log(user);
-      console.log(is_admin);
-      console.log("profile:pic:",profile_pic);
       setUser(decoded_token);
     }
   }, []);

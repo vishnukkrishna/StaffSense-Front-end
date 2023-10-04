@@ -44,12 +44,8 @@ function AddEmployee() {
 
     const handleSubmit = (values) => {
 
-        console.log("welcome", values);
         const generatedTemporaryPassword = Math.random().toString(36).slice(-8);
 
-        console.log(generatedTemporaryPassword, "bbbbbbbbb");
-
-        console.log(values.designation, values.username, "xzxzxz");
         const employeeData = {
             designation: values.designation,
             username: values.username,
@@ -63,10 +59,6 @@ function AddEmployee() {
     };
 
     const registerEmployee = async (employeeData) => {
-        console.log("employeeData:", employeeData);
-
-        console.log("ffffffffffffffffffffffffffffffffffffffff");
-
         await axios
             .post(`${BACKEND_BASE_URL}/user/registration/`, employeeData)
             .then((response) => {
@@ -74,9 +66,6 @@ function AddEmployee() {
                     const tokens = response.data.tokens;
                     console.log("Tokens:", tokens);
                     toast.success("Employee added successfully");
-                    // setTimeout(() => {
-                    //     closeModal();
-                    // }, 1000);
                 } else {
                     console.log("Received unexpected status code:", response.status);
                     toast.error("Failed to add employee. Please try again.");
@@ -88,15 +77,12 @@ function AddEmployee() {
             });
     };
 
-
     const formik = useFormik({
         initialValues: {
             designation: "",
             username: "",
             email: "",
         },
-
-
 
         validationSchema: EmployeeValidationSchema,
         onSubmit: handleSubmit,
@@ -128,7 +114,7 @@ function AddEmployee() {
             >
                 <DialogHeader>Add Employee</DialogHeader>
                 <DialogBody divider className="font-fontHubballi text-lg font-bold">
-                    <form action="" onSubmit={formik.handleSubmit}>
+                    <form onSubmit={formik.handleSubmit}>
                         <div className="mb-4">
                             <label htmlFor="inputField1" className="block text-gray-700">Username</label>
                             <input
@@ -201,7 +187,6 @@ function AddEmployee() {
                     </form>
                     <ToastContainer />
                 </DialogBody>
-
             </Dialog>
         </>
     );

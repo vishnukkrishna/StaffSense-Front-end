@@ -34,10 +34,10 @@ import AdminMeetingsPage from "./pages/Admin/AdminMeetingsPage";
 import EmployeeMeetingPage from "./pages/Employee/EmployeeMeetingPage";
 import AdminVisitorPage from "./pages/Admin/AdminVisitorPage";
 import EmployeeVisitorsPage from "./pages/Employee/EmployeeVisitorsPage";
+import PageNotFound from "./pages/Employee/PageNotFound";
 
 function App() {
   const token = localStorage.getItem("access_token");
-  console.log("token here got", token);
   return (
     <div className="App">
       <AuthProvider>
@@ -240,6 +240,7 @@ function App() {
                 </UserProtectedRoutes>
               }
             />
+            <Route path="/*" element={<PageNotFound />} />
           </Routes>
         </Router>
       </AuthProvider>

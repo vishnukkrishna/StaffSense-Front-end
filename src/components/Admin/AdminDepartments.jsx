@@ -7,26 +7,26 @@ import Swal from 'sweetalert2';
 
 
 function AdminDepartments() {
-  const [department, setDepartment] = useState([]);
-
+  const [departments, setDepartments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(""); // Step 1: Search query state
   const deptPerPage = 3;
 
   useEffect(() => {
     fetchDepartments();
-  }, [currentPage]);
+  }, [currentPage, searchQuery]); // Listen to changes in currentPage and searchQuery
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get(`${BACKEND_BASE_URL}/user/departments/`);
-      setDepartment(response.data);
+      const response = await axios.get(`${BACKEND_BASE_URL}/user/departments`);
+      setDepartments(response.data);
     } catch (error) {
       console.error("Error fetching department data:", error);
     }
   };
 
   const handleDepartmentAdded = (newDepartment) => {
-    setDepartment([...department, newDepartment]);
+    setDepartments([...departments, newDepartment]);
   };
 
   const handleDelete = async (id) => {
@@ -40,22 +40,33 @@ function AdminDepartments() {
       });
 
       if (result.isConfirmed) {
-        await axios.delete(`${BACKEND_BASE_URL}/user/departments/${id}/`);
+        await axios.delete(`${BACKEND_BASE_URL}/user/departments/${id}`);
         console.log('Department deleted successfully');
 
-        setDepartment((prevDepartments) => prevDepartments.filter(dept => dept.id !== id));
+        setDepartments((prevDepartments) => prevDepartments.filter(dept => dept.id !== id));
       }
     } catch (error) {
       console.error('Error deleting department:', error);
     }
   };
 
+  // Step 2: Filter departments based on the search query
+  const filteredDepartments = departments.filter((dept) =>
+    dept.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const indexOfLastDept = currentPage * deptPerPage;
   const indexOfFirstDept = indexOfLastDept - deptPerPage;
-  const currentDept = department.slice(indexOfFirstDept, indexOfLastDept);
+  const currentDept = filteredDepartments.slice(indexOfFirstDept, indexOfLastDept);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+  };
+
+  // Step 3: Add an event handler for the search input
+  const handleSearchInputChange = (e) => {
+    setSearchQuery(e.target.value);
+    setCurrentPage(1); // Reset to the first page when searching
   };
 
   return (
@@ -93,7 +104,9 @@ function AdminDepartments() {
               type="search"
               id="default-search"
               className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search Mockups, Logos..."
+              placeholder="Search Department Name..."
+              value={searchQuery}
+              onChange={handleSearchInputChange}
               required
             />
             <button
@@ -149,7 +162,7 @@ function AdminDepartments() {
                   Prev
                 </button>
               </li>
-              {Array.from({ length: Math.ceil(department.length / deptPerPage) }).map(
+              {Array.from({ length: Math.ceil(departments.length / deptPerPage) }).map(
                 (item, index) => (
                   <li key={index}>
                     <button
@@ -168,13 +181,13 @@ function AdminDepartments() {
                 <button
                   onClick={() => paginate(currentPage + 1)}
                   className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
-                    Math.ceil(department.length / deptPerPage)
+                    Math.ceil(departments.length / deptPerPage)
                     ? "cursor-not-allowed"
                     : ""
                     }`}
                   disabled={
                     currentPage ===
-                    Math.ceil(department.length / deptPerPage)
+                    Math.ceil(departments.length / deptPerPage)
                   }
                 >
                   Next
