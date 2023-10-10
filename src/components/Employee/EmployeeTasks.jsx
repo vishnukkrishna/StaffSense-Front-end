@@ -30,7 +30,6 @@ function EmployeeTasks() {
         `${BACKEND_BASE_URL}/project/individualtasks/${userId}/`
       );
       const data = response.data;
-      console.log(data, "user tasks");
       setTasks(data);
     } catch (error) {
       console.error("Error fetching user tasks:", error);
@@ -39,14 +38,12 @@ function EmployeeTasks() {
 
   const updateTaskStatus = async (taskId, newStatus) => {
     try {
-      console.log(taskId, newStatus, "GGGGGGG");
       const response = await axios.patch(
         `${BACKEND_BASE_URL}/project/usertasks/${taskId}/`,
         {
           status: newStatus,
         }
       );
-      console.log("Response:", response.data);
       fetchUserTasks();
     } catch (error) {
       console.error("Error updating task status:", error);
@@ -257,8 +254,8 @@ function EmployeeTasks() {
                     <button
                       onClick={() => paginate(index + 1)}
                       className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
-                          ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
-                          : "hover:bg-red-200 hover:text-red-500"
+                        ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
+                        : "hover:bg-red-200 hover:text-red-500"
                         }`}
                     >
                       {index + 1}
@@ -270,9 +267,9 @@ function EmployeeTasks() {
                 <button
                   onClick={() => paginate(currentPage + 1)}
                   className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
-                      Math.ceil(filteredTasks.length / tasksPerPage)
-                      ? "cursor-not-allowed"
-                      : ""
+                    Math.ceil(filteredTasks.length / tasksPerPage)
+                    ? "cursor-not-allowed"
+                    : ""
                     }`}
                   disabled={
                     currentPage ===

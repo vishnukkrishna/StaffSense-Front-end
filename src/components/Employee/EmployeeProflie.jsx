@@ -29,9 +29,16 @@ function EmployeeProfile() {
   };
 
   const handleUpload = async () => {
+    if (!selectedFile) {
+      console.error("No image file selected.");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("user_id", user_id);
     formData.append("profile_pic", selectedFile);
+
+    console.log("FormData:", formData);
 
     try {
       const response = await axios.put(
@@ -40,9 +47,14 @@ function EmployeeProfile() {
       );
       console.log(response.data);
     } catch (error) {
-      console.error(error);
+      console.error("Error uploading profile picture:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
     }
   };
+
+
 
   const fetchUserData = async () => {
     try {
@@ -50,13 +62,11 @@ function EmployeeProfile() {
         `${BACKEND_BASE_URL}/user/userdetails/${user_id}/`
       );
       setUserData(response.data);
-      console.log(response, "llllllllllllllllllllllll");
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
   };
 
-  console.log(userData, "---------user");
 
   return (
     <div className="w-full mt-20 font-fontHubballi">
@@ -74,22 +84,30 @@ function EmployeeProfile() {
                   {/* <p className="text-gray-500">Leaves</p> */}
                 </div>
               </div>
-
-              <div className="relative">
-
-                <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-
-                  <div className="flex justify-end h-30 w-30 cursor-pointer">
+              <div className="relative mt-3">
+                <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex flex-col items-center justify-center text-indigo-500">
+                  <div className="w-44 h-44 overflow-hidden rounded-full">
                     {userData.profile_pic ? (
                       <img
                         src={`${BACKEND_BASE_URL}${userData.profile_pic}`}
                         alt="Profile"
+                        className="w-full h-full object-cover"
                       />
                     ) : previewURL ? (
-                      <img src={profile} alt="Profile" />
+                      <img
+                        src={previewURL}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
                       <div className="w-48 h-48 bg-indigo-100 flex justify-center items-center rounded-full shadow-2xl">
                         <label htmlFor="upload" className="cursor-pointer">
+                          <input
+                            id="upload"
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={handleFileChange}
+                          />
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-24 w-24 text-indigo-500"
@@ -102,6 +120,9 @@ function EmployeeProfile() {
                               clipRule="evenodd"
                             />
                           </svg>
+                        </label>
+                        <div>
+                        <label htmlFor="upload">
                           <input
                             id="upload"
                             type="file"
@@ -109,11 +130,22 @@ function EmployeeProfile() {
                             onChange={handleFileChange}
                           />
                         </label>
+                        </div>
                       </div>
                     )}
                   </div>
+                  <div className="">
+                    <button
+                      onClick={handleUpload}
+                      className="border-black transition-colors bg-customColor text-white active:bg-gray-200 font-semibold rounded-lg hover:bg-indigo-600 disabled:opacity-50"
+                    >
+                      Upload
+                    </button>
+                  </div>
                 </div>
               </div>
+
+
               <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
                 <EditEmployeeProfile Action={fetchUserData} />
                 <EditEmployeePassword />

@@ -24,7 +24,6 @@ function EmployeeVisitors() {
     const fetchVisitorData = async () => {
         try {
             const data = await fetchVisitors();
-            console.log(data, "visitor data");
             setVisitors(data);
         } catch (error) {
             console.error("Error fetching visitor data:", error.message);

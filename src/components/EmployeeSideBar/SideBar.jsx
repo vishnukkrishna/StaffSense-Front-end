@@ -19,7 +19,6 @@ function SideBar() {
   const fetchAdminId = async () => {
     try {
       const response = await axios.get(`${BACKEND_BASE_URL}/chat/getAdminId`);
-      console.log(response.data, "hhhhhhhhhhhhhhhhh");
       setAdminId(response.data.admin_id);
     } catch (error) {
       console.error("Error fetching admin ID:", error);
@@ -29,7 +28,6 @@ function SideBar() {
     fetchAdminId();
   }, []);
   // .........................................
-
 
   const menus = [
     {
@@ -58,12 +56,6 @@ function SideBar() {
       icon: BiMessageDetail
     },
   ];
-
-
-
-
-
-
 
   const handleLinkClick = (menu) => {
     setActiveLink(menu.link);

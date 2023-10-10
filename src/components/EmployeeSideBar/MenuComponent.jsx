@@ -11,7 +11,6 @@ import { Button } from "@material-tailwind/react";
 function MenuComponent() {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
-  console.log("user:", user); // Add this line for debugging
   // const [recipientdetails, setRecipientDetails] = useState([])
 
   // const setUserProfileDetails = async () => {

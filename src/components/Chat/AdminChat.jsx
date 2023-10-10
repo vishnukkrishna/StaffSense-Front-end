@@ -6,7 +6,7 @@ import { w3cwebsocket as W3CWebSocket } from 'websocket';
 import axios from "axios";
 import AdminChatSearch from '../Admin/AdminChatSearch';
 
-function AdminChat() {
+function AdminChat(props) {
 
     const [recipientdetails, setRecipientDetails] = useState({})
     const [senderdetails, setSenderDetails] = useState({});
@@ -23,9 +23,7 @@ function AdminChat() {
 
 
     const { employeeId } = useParams();
-    useEffect(() => {
-        console.log(employeeId, 'emkdhfkfhkdkfd');
-    })
+
 
     const setUserProfileDetails = async () => {
         try {
@@ -33,7 +31,6 @@ function AdminChat() {
                 `${BACKEND_BASE_URL}/user/userdetails/${user_id}/`
             );
             setRecipientDetails(response.data)
-            console.log(response, "llllllllllllllllllllllll");
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
@@ -45,7 +42,6 @@ function AdminChat() {
                 `${BACKEND_BASE_URL}/user/userdetails/${employeeId}/`
             );
             setSenderDetails(response.data)
-            console.log(response, "eeeeeeeeeeeeeeeeeeeeeeeeeeee");
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
@@ -59,7 +55,6 @@ function AdminChat() {
     const setUpChat = () => {
         axios.get(`${BACKEND_BASE_URL}/chat/user-previous-chats/${senderid}/${recipientid}/`).then((response) => {
             if (response.status == 200) {
-                console.log(response.data, "qwertyyyyyyyyyyyyyyyyy");
                 setMessages(response.data)
             }
         })
@@ -72,7 +67,6 @@ function AdminChat() {
 
         client.onmessage = (message) => {
             const dataFromServer = JSON.parse(message.data);
-            console.log(dataFromServer, "dataFrommmmmmmmmmmmmmmmmmmmmmmmmmm");
             if (dataFromServer) {
                 setMessages((prevMessages) => [
                     ...prevMessages,
@@ -119,8 +113,6 @@ function AdminChat() {
             return;
         }
 
-        console.log(messageRef.current.value, senderdetails.username, recipientdetails.username, "reachedddddddddddddddddd");
-
         clientstate.send(
             JSON.stringify({
                 message: messageRef.current.value,
@@ -149,7 +141,6 @@ function AdminChat() {
                             {
 
                                 messages.map((message) => {
-                                    console.log('recepedent,sender', recipientdetails, senderdetails);
 
                                     if (message.sender_username == senderdetails.username) {
 

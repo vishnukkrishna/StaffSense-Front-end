@@ -30,7 +30,6 @@ function EmployeeChat() {
                 `${BACKEND_BASE_URL}/user/userdetails/${user_id}/`
             );
             setRecipientDetails(response.data)
-            console.log(response, "llllllllllllllllllllllll");
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
@@ -42,7 +41,6 @@ function EmployeeChat() {
                 `${BACKEND_BASE_URL}/user/userdetails/${adminId}/`
             );
             setSenderDetails(response.data)
-            console.log(response, "eeeeeeeeeeeeeeeeeeeeeeeeeeee");
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
@@ -56,7 +54,6 @@ function EmployeeChat() {
     const setUpChat = () => {
         axios.get(`${BACKEND_BASE_URL}/chat/user-previous-chats/${senderid}/${recipientid}/`).then((response) => {
             if (response.status == 200) {
-                console.log(response.data, "qwertyyyyyyyyyyyyyyyyy");
                 setMessages(response.data)
             }
         })
@@ -69,7 +66,6 @@ function EmployeeChat() {
 
         client.onmessage = (message) => {
             const dataFromServer = JSON.parse(message.data);
-            console.log(dataFromServer, "dataFrommmmmmmmmmmmmmmmmmmmmmmmmmm");
             if (dataFromServer) {
                 setMessages((prevMessages) => [
                     ...prevMessages,
@@ -116,8 +112,6 @@ function EmployeeChat() {
         if (!clientstate || !clientstate.send || messageRef.current.value.trim() === "") {
             return;
         }
-
-        console.log(messageRef.current.value, senderdetails.username, recipientdetails.username, "reachedddddddddddddddddd");
 
         clientstate.send(
             JSON.stringify({
@@ -172,7 +166,6 @@ function EmployeeChat() {
                     {
 
                         messages.map((message) => {
-                            console.log('recepedent,sender', recipientdetails, senderdetails);
 
                             if (message.sender_username == senderdetails.username) {
 

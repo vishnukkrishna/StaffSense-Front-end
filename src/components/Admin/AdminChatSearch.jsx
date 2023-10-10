@@ -14,7 +14,6 @@ function AdminChatSearch() {
                 `${BACKEND_BASE_URL}/user/employelist/`
             );
             setRecipientDet(response.data);
-            console.log("Employee data:", response.data);
         } catch (error) {
             console.error("Error fetching employee data:", error);
         }

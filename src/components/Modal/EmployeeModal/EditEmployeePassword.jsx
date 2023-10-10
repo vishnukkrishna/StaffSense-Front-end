@@ -25,7 +25,6 @@ function EditEmployeePassword() {
 
     const navigate = useNavigate();
 
-    console.log(user, "hiiiiiiiiiiiii");
     const ChangePass = async (e) => {
         e.preventDefault();
         // Password validation rules

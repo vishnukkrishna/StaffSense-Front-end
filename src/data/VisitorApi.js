@@ -8,7 +8,6 @@ export const fetchVisitors = async () => {
         Accept: "application/json",
       },
     });
-    console.log("Fetched visitor data:", response.data);
     return response.data;
   } catch (error) {
     throw new Error("Error fetching visitor data");
@@ -18,7 +17,6 @@ export const fetchVisitors = async () => {
 export const deleteVisitor = async (visitorId) => {
   try {
     await axios.delete(`${BACKEND_BASE_URL}/visitor/${visitorId}/`);
-    console.log("Visitor deleted successfully");
   } catch (error) {
     throw new Error("Error deleting visitor");
   }

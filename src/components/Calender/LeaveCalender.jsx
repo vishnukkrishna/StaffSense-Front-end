@@ -26,12 +26,10 @@ function LeaveCalender() {
 
     const fetchLeaveData = () => {
         const employeeId = user?.user_id || null;
-        console.log(employeeId, ".............");
 
         axios
             .get(`${BACKEND_BASE_URL}/leave/userleave/${employeeId}/`)
             .then((response) => {
-                console.log(response.data, "got response");
                 setLeaveData(response.data);
                 setIsLoading(false);
             })

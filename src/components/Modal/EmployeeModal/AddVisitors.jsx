@@ -91,7 +91,6 @@ function AddVisitors({ Action }) {
             axios
                 .post(`${BACKEND_BASE_URL}/visitor/`, updatedFormData)
                 .then((response) => {
-                    console.log(response.data);
                     toast.success(response.data.message);
 
                     setFormData({
@@ -107,7 +106,6 @@ function AddVisitors({ Action }) {
                     Action()
                 })
                 .catch((error) => {
-                    console.error(error);
                     if (error.response) {
                         toast.error(error.response.data);
                     } else {
