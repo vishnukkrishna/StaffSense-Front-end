@@ -117,11 +117,13 @@ function AdminComplaints() {
                                             onChange={(event) => handleStatusChange(event, complaint)}
                                             className={`${getStatusColor(complaint.status)} border cursor-pointer border-black rounded-md`}
                                         >
-                                            <option value="Pending" hidden={complaint.status === "In Progress" || complaint.status === "Pending"}>Pending</option>
+                                            <option value="Pending" hidden={complaint.status === "In Progress" || complaint.status === "Pending"}>
+                                                Pending
+                                            </option>
                                             <option value="In Progress" hidden={complaint.status === "In Progress"}>
                                                 In Progress
                                             </option>
-                                            <option value="Resolved" hidden={complaint.status === "In Progress"}>
+                                            <option value="Resolved" hidden={complaint.status === "Resolved"}>
                                                 Resolved
                                             </option>
                                         </select>

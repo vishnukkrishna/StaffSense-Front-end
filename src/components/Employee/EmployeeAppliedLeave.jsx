@@ -7,7 +7,7 @@ function EmployeeAppliedLeave() {
     const { user } = useContext(AuthContext);
     const [leave, setLeave] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const leavePerPage = 2;
+    const leavePerPage = 3;
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
