@@ -9,7 +9,6 @@ function AdminNavBar() {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
   const handleLogout = () => {
-    console.log("Logout");
     localStorage.removeItem("access_token");
     setUser(null);
     setTimeout(() => {

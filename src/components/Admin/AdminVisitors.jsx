@@ -41,9 +41,7 @@ function AdminVisitors() {
       });
       if (result.isConfirmed) {
         axios.delete(`${BACKEND_BASE_URL}/visitor/${visitorId}/`);
-        console.log("Visitor deleted successfully");
         setVisitors((prevVisitors) => prevVisitors.filter((visitor) => visitor.id !== visitorId));
-
       }
     }
     catch (error) {

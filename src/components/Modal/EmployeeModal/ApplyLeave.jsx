@@ -52,7 +52,6 @@ function ApplyLeave() {
         axios
             .post(`${BACKEND_BASE_URL}/leave/leaves/`, updatedFormData)
             .then((response) => {
-                console.log(response.data);
                 toast.success("Leave application submitted successfully!");
 
                 setFormData({
@@ -63,7 +62,6 @@ function ApplyLeave() {
                 });
             })
             .catch((error) => {
-                console.error("Error creating leave request:", error);
                 const responseData = error.response.data;
                 if (responseData.error === "You cannot apply for leave in the past.") {
                     toast.error(

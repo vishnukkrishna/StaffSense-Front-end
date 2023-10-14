@@ -30,7 +30,7 @@ function EditProject({ id, onEditSubmission }) {
 
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
-    const [selectedAssignedTo, setSelectedAssignedTo] = useState(""); // State to store the selected employee
+    const [selectedAssignedTo, setSelectedAssignedTo] = useState("");
 
     useEffect(() => {
         const fetchProjectData = async () => {
@@ -44,7 +44,6 @@ function EditProject({ id, onEditSubmission }) {
                         setEmployees(response.data);
                     })
                     .catch((error) => { });
-                console.log(response.data, "ghghghghghghghg");
                 setProject(response.data);
                 setFormData({
                     name: response.data.name || "",
@@ -55,7 +54,7 @@ function EditProject({ id, onEditSubmission }) {
                 });
                 setStartDate(response.data.start_date || "");
                 setEndDate(response.data.end_date || "");
-                setSelectedAssignedTo(response.data.assignedTo); // Set the selectedAssignedTo
+                setSelectedAssignedTo(response.data.assignedTo);
             } catch (error) {
                 console.error("Error fetching project data:", error);
             }
@@ -116,7 +115,6 @@ function EditProject({ id, onEditSubmission }) {
                 `${BACKEND_BASE_URL}/project/projects/${id}/`,
                 formData
             );
-            console.log("Project updated successfully");
             toast.success("Update Successfully");
             onEditSubmission();
             setOpen(false);

@@ -37,10 +37,8 @@ function AdminProjects() {
   const fetchProjectData = async () => {
     try {
       const response = await axios.get(`${BACKEND_BASE_URL}/project/projects/`);
-      console.log(response, "resposeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
       const sortedProjects = response.data.sort((a, b) => a.id - b.id);
       setProject(response.data);
-      console.log(response.data, "oooooooooooooooooooo");
     } catch (error) {
       console.error("Error fetching Project data:", error);
       return [];

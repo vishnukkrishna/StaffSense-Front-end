@@ -26,14 +26,11 @@ function AddDepartment({ onDepartmentAdded }) {
           onDepartmentAdded(response.data);
           handleOpen()
           toast.success("Add Department Successfully");
-
-
         } else {
           setErrorMessage('Error adding department.');
         }
       })
       .catch((error) => {
-        console.error(error);
         toast.error("Failed");
         setErrorMessage('Error adding department.');
       });

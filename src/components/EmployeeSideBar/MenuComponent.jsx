@@ -29,7 +29,6 @@ function MenuComponent() {
   // }, []);
 
   const handleLogout = () => {
-    console.log("Logout");
     localStorage.removeItem("access_token");
     setUser(null);
     setTimeout(() => {

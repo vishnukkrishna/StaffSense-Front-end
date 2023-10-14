@@ -23,8 +23,6 @@ function AddComplaint({ Action }) {
         description: "",
     });
 
-    console.log(user, "im hereeeee");
-
     useEffect(() => {
         setFormData({
             employee: user?.user_id || "",
@@ -42,13 +40,11 @@ function AddComplaint({ Action }) {
                 description: formData.description,
                 is_present: true,
             };
-            console.log(dataToSend, "form contains data");
             const response = await axios.post(
                 `${BACKEND_BASE_URL}/complaint/complaints/`,
                 dataToSend
             );
             Action()
-            console.log(response.data);
             toast.success("Complaint submitted successfully");
 
             setFormData({

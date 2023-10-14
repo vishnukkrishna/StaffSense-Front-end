@@ -64,7 +64,6 @@ function AddEmployee() {
             .then((response) => {
                 if (response.status === 200) {
                     const tokens = response.data.tokens;
-                    console.log("Tokens:", tokens);
                     toast.success("Employee added successfully");
                 } else {
                     console.log("Received unexpected status code:", response.status);
@@ -89,9 +88,8 @@ function AddEmployee() {
     });
 
     if (Object.keys(formik.errors).length > 0) {
-        console.log("Validation failed. Fields with errors:");
         for (const field in formik.errors) {
-            console.log(field);
+            console.log("Data added");
         }
     } else {
         console.log("Validation passed. Submitting the form...");

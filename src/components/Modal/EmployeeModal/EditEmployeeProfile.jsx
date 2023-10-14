@@ -21,7 +21,7 @@ function EditEmployeeProfile({ Action }) {
     if (user) {
         var id = user.user_id;
     } else {
-        console.log("OOps! No id gherw");
+        console.log("");
     }
     const Navigate = useNavigate();
     const [departments, setDepartments] = useState([]);
@@ -127,7 +127,6 @@ function EditEmployeeProfile({ Action }) {
                 }
             );
 
-            console.log(response.data);
             Action()
             Navigate("/profileuser");
 

@@ -49,9 +49,7 @@ function AdminLeaves() {
         axios
           .put(`${BACKEND_BASE_URL}/leave/leaves/`, data)
           .then((response) => {
-            console.log(response);
             setLeaves(response.data);
-            console.log(leaves);
             fetchLeaves()
           })
           .catch((error) => {

@@ -38,14 +38,12 @@ function EmployeeProfile() {
     formData.append("user_id", user_id);
     formData.append("profile_pic", selectedFile);
 
-    console.log("FormData:", formData);
 
     try {
       const response = await axios.put(
         `${BACKEND_BASE_URL}/user/upload-profile-picture/`,
         formData
       );
-      console.log(response.data);
     } catch (error) {
       console.error("Error uploading profile picture:", error);
       if (error.response) {
@@ -122,14 +120,14 @@ function EmployeeProfile() {
                           </svg>
                         </label>
                         <div>
-                        <label htmlFor="upload">
-                          <input
-                            id="upload"
-                            type="file"
-                            style={{ display: "none" }}
-                            onChange={handleFileChange}
-                          />
-                        </label>
+                          <label htmlFor="upload">
+                            <input
+                              id="upload"
+                              type="file"
+                              style={{ display: "none" }}
+                              onChange={handleFileChange}
+                            />
+                          </label>
                         </div>
                       </div>
                     )}

@@ -6,6 +6,7 @@ import AddEmployee from "../Modal/AdminModal/AddEmployee";
 import { BACKEND_BASE_URL } from "../../api/Api";
 import Swal from 'sweetalert2';
 import EditEmployee from "../Modal/AdminModal/EditEmployee";
+import { toast } from "react-toastify";
 
 function AdminEmployees() {
   const [employees, setEmployees] = useState([]);
@@ -49,8 +50,6 @@ function AdminEmployees() {
         });
         setEmployees(filteredEmployees);
       }
-
-      console.log("Employee data:", response.data);
     } catch (error) {
       console.error("Error fetching employee data:", error);
     }
@@ -88,7 +87,7 @@ function AdminEmployees() {
       axios
         .put(`${BACKEND_BASE_URL}/user/blockemployees/${employeeId}/`)
         .then((response) => {
-          console.log("Employee blocked successfully");
+          toast.success("Employee blocked successfully");
           fetchData();
         })
         .catch((error) => {
@@ -100,7 +99,7 @@ function AdminEmployees() {
       axios
         .put(`${BACKEND_BASE_URL}/user/unblockemployees/${employeeId}/`)
         .then((response) => {
-          console.log("Employee unblocked successfully");
+          toast.success("Employee unblocked successfully");
         })
         .catch((error) => {
           console.error("Error unblocking employee:", error);

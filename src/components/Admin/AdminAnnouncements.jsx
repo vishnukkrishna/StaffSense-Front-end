@@ -4,6 +4,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { addAnnouncement, deleteAnnouncement, fetchAnnouncements } from '../../data/AnnouncementApi'
 import AddAnnouncement from "../Modal/AdminModal/AddAnnouncement";
 import Swal from 'sweetalert2';
+import toast from "react-hot-toast";
 
 function AdminAnnouncements() {
   const [announcements, setAnnouncements] = useState([]);
@@ -47,7 +48,7 @@ function AdminAnnouncements() {
       });
       if (result.isConfirmed) {
         await deleteAnnouncement(announcementId);
-        console.log("Announcement deleted successfully");
+        toast.success("Announcement deleted successfully");
         setAnnouncements((prevAnnouncements) =>
           prevAnnouncements.filter(
             (announcement) => announcement.id !== announcementId

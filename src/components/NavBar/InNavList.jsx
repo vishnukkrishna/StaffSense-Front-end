@@ -121,7 +121,7 @@ function InNavList() {
             </div>
             <div className="flex items-center gap-4">
               <div className="mr-4 hidden lg:block">{navList}</div>
-              <div className="mr-3 mt-2 cursor-pointer">
+              {/* <div className="mr-3 mt-2 cursor-pointer">
                 <Menu
                   animate={{
                     mount: { opacity: 1, scale: 1 },
@@ -140,7 +140,7 @@ function InNavList() {
                     <MenuItem>Menu Item 2</MenuItem>
                   </MenuList>
                 </Menu>
-              </div>
+              </div> */}
 
 
               <Link
