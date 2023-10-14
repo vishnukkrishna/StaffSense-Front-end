@@ -14,7 +14,6 @@ import {
 import { FiEdit } from "react-icons/fi";
 
 function EditProject({ id, onEditSubmission }) {
-    console.log("ID received:", id);
     const navigate = useNavigate();
     const handleOpen = () => setOpen(!open);
     const [employees, setEmployees] = useState([]);
