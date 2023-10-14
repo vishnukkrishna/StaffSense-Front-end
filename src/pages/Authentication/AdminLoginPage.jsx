@@ -40,12 +40,8 @@ function AdminLoginPage() {
     };
 
     try {
-      const { data } = await axios.post(
-        `${BACKEND_BASE_URL}/user/login/`,
-        user
-      );
+      const { data } = await axios.post(`${BACKEND_BASE_URL}/user/login/`, user);
 
-      console.log(data, "hhhhhhh");
       toast.success("Login Successfully");
       localStorage.setItem("access_token", data.access_token);
 
@@ -58,13 +54,12 @@ function AdminLoginPage() {
 
         is_admin: tokenData.is_admin,
       };
-      console.log(LoggedInUser, "loged userrrrr");
+
       toast.success("Login Successfully");
       setUser(LoggedInUser);
 
       const accessToken = localStorage.getItem("access_token");
 
-      console.log("Access Token:", accessToken);
       navigate("/dashboard");
     } catch (error) {
       console.error("error in token fetch: ", error.message);
