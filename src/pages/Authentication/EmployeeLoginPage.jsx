@@ -119,6 +119,7 @@ function EmployeeLoginPage() {
           const access_token = localStorage.getItem("access_token");
 
           navigate("/home");
+          toast.success("Successfully logged")
         }
       })
       .catch((error) => {

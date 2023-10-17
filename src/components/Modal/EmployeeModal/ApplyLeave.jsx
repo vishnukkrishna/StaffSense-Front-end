@@ -52,7 +52,6 @@ function ApplyLeave() {
         axios
             .post(`${BACKEND_BASE_URL}/leave/leaves/`, updatedFormData)
             .then((response) => {
-                toast.success("Leave application submitted successfully!");
 
                 setFormData({
                     leave_type: "Sick Leave",
@@ -60,6 +59,7 @@ function ApplyLeave() {
                     start_date: "",
                     end_date: "",
                 });
+                toast.success("Leave application submitted successfully!");
             })
             .catch((error) => {
                 const responseData = error.response.data;

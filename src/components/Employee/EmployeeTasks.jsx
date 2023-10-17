@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { BACKEND_BASE_URL } from "../../api/Api";
 import axios from "axios";
 import AuthContext from "../Contexts/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
 
 function EmployeeTasks() {
   const [tasks, setTasks] = useState([]);
@@ -45,6 +46,7 @@ function EmployeeTasks() {
         }
       );
       fetchUserTasks();
+      toast.success("Status updated")
     } catch (error) {
       console.error("Error updating task status:", error);
     }
@@ -99,6 +101,7 @@ function EmployeeTasks() {
 
   return (
     <>
+      <ToastContainer />
       <div className="font-fontHubballi px-32 overflow-x-auto w-full h-full">
         <form style={{ maxWidth: "700px", margin: "100px auto" }}>
           <label

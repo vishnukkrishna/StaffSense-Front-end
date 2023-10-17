@@ -4,6 +4,7 @@ import Swal from "sweetalert";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { BACKEND_BASE_URL } from "../../api/Api";
+import { toast } from "react-toastify";
 
 function AdminLeaves() {
   const [leaves, setLeaves] = useState([]);
@@ -51,6 +52,7 @@ function AdminLeaves() {
           .then((response) => {
             setLeaves(response.data);
             fetchLeaves()
+            toast.success("Successfully updated")
           })
           .catch((error) => {
             console.error("Error updating leave request status:", error);

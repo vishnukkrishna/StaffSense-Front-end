@@ -37,7 +37,7 @@ function AdminMeetings() {
       });
       if (result.isConfirmed) {
         await axios.delete(`${BACKEND_BASE_URL}/meeting/meetings/${id}/`);
-        console.log("Meeting deleted successfully");
+        toast.success("Meeting deleted successfully");
 
         setMeeting((prevMeeting) =>
           prevMeeting.filter((meeting) => meeting.id !== id)

@@ -55,12 +55,13 @@ function AdminLoginPage() {
         is_admin: tokenData.is_admin,
       };
 
-      toast.success("Login Successfully");
       setUser(LoggedInUser);
 
       const accessToken = localStorage.getItem("access_token");
 
       navigate("/dashboard");
+
+      toast.success("Login Successfully");
     } catch (error) {
       console.error("error in token fetch: ", error.message);
       console.log("error.response: ", error.response);

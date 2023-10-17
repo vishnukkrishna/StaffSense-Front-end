@@ -14,6 +14,7 @@ function EmployeeProfile() {
   const { user } = useContext(AuthContext);
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewURL, setPreviewURL] = useState("");
+  const [isEditing, setIsEditing] = useState(false); // State for edit mode
   const user_id = user && user.user_id;
 
   useEffect(() => {
@@ -38,12 +39,19 @@ function EmployeeProfile() {
     formData.append("user_id", user_id);
     formData.append("profile_pic", selectedFile);
 
-
     try {
       const response = await axios.put(
         `${BACKEND_BASE_URL}/user/upload-profile-picture/`,
-        formData
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
+      toast.success("Successfully updated");
+      setIsEditing(false); // Exit edit mode after a successful upload
+      fetchUserData(); // Refresh user data
     } catch (error) {
       console.error("Error uploading profile picture:", error);
       if (error.response) {
@@ -52,7 +60,9 @@ function EmployeeProfile() {
     }
   };
 
-
+  const toggleEdit = () => {
+    setIsEditing(!isEditing); // Toggle between edit and upload mode
+  };
 
   const fetchUserData = async () => {
     try {
@@ -64,7 +74,6 @@ function EmployeeProfile() {
       console.error("Error fetching user data:", error);
     }
   };
-
 
   return (
     <div className="w-full mt-20 font-fontHubballi">
@@ -91,7 +100,7 @@ function EmployeeProfile() {
                         alt="Profile"
                         className="w-full h-full object-cover"
                       />
-                    ) : previewURL ? (
+                    ) : isEditing ? (
                       <img
                         src={previewURL}
                         alt="Profile"
@@ -106,18 +115,26 @@ function EmployeeProfile() {
                             style={{ display: "none" }}
                             onChange={handleFileChange}
                           />
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-24 w-24 text-indigo-500"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                              clipRule="evenodd"
+                          {isEditing ? (
+                            <img
+                              src={previewURL}
+                              alt="Profile"
+                              className="w-full h-full object-cover"
                             />
-                          </svg>
+                          ) : (
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-24 w-24 text-indigo-500"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          )}
                         </label>
                         <div>
                           <label htmlFor="upload">
@@ -132,13 +149,22 @@ function EmployeeProfile() {
                       </div>
                     )}
                   </div>
-                  <div className="">
-                    <button
-                      onClick={handleUpload}
-                      className="border-black transition-colors bg-customColor text-white active:bg-gray-200 font-semibold rounded-lg hover:bg-indigo-600 disabled:opacity-50"
-                    >
-                      Upload
-                    </button>
+                  <div className="mt-3">
+                    {userData.profile_pic ? (
+                      <button
+                        onClick={toggleEdit}
+                        className="border-black w-10 h-6 transition-colors bg-customColor text-white active:bg-gray-200 font-semibold rounded-lg hover:bg-indigo-600 disabled:opacity-50"
+                      >
+                        Edit
+                      </button>
+                    ) : (
+                      <button
+                        onClick={handleUpload}
+                        className="border-black w-14 h-6 transition-colors bg-customColor text-white active:bg-gray-200 font-semibold rounded-lg hover-bg-indigo-600 disabled:opacity-50"
+                      >
+                        Upload
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
