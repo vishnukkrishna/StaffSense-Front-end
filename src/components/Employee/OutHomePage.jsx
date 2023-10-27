@@ -6,6 +6,7 @@ import card1 from "../../images/collaboration.webp";
 import card2 from "../../images/innovation.webp";
 import card3 from "../../images/deliver.webp";
 import profile from "../../images/profile-pic.jpg";
+import adish from "../../images/adish.png";
 import b1 from "../../images/b1.png";
 import b2 from "../../images/b2.png";
 import logo from "../../images/Logo.png";
@@ -227,13 +228,13 @@ function OutHomePage() {
             {/* Card 2 */}
             <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={profile} alt="" />
+                <img className="w-36 h-36" src={adish} alt="" />
               </div>
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-1">
-                  Vishnu Krishnakumar
+                  Adish CT
                 </h5>
-                <p className="mb-1">CEO</p>
+                <p className="mb-1">SDE</p>
                 <div className="flex justify-center items-center space-x-4 cursor-pointer">
                   <a href="https://www.instagram.com/vishnu_k_krishna/">
                     <AiFillInstagram className="text-2xl social-icon transition-transform duration-300 transform hover:scale-110" />
