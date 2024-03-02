@@ -1,18 +1,10 @@
 import React from "react";
-import { Triangle } from 'react-loader-spinner'
+import { ScaleLoader } from 'react-spinners'
 
 function Spinner() {
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <Triangle
-                height="120"
-                width="120"
-                color="red"
-                ariaLabel="triangle-loading"
-                wrapperStyle={{}}
-                wrapperClassName=""
-                visible={true}
-            />
+            <ScaleLoader color="#0C1E40" />
         </div>
     )
 }

@@ -2,15 +2,13 @@ import React from "react";
 import MenuComponent from "../../components/EmployeeSideBar/MenuComponent";
 import SideBar from "../../components/EmployeeSideBar/SideBar";
 import EmployeeTasks from "../../components/Employee/EmployeeTasks";
-import { Helmet } from 'react-helmet'
+import { Helmet } from "react-helmet";
 
 function EmployeeTasksPage() {
   return (
     <div className="h-screen">
       <Helmet>
-        <title>
-          Employee Task | Staffsense
-        </title>
+        <title>Employee Task | Staffsense</title>
       </Helmet>
       <div className="w-full">
         <MenuComponent />

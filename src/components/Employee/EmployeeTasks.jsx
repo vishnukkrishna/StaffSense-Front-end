@@ -46,7 +46,7 @@ function EmployeeTasks() {
         }
       );
       fetchUserTasks();
-      toast.success("Status updated")
+      toast.success("Status updated");
     } catch (error) {
       console.error("Error updating task status:", error);
     }
@@ -84,7 +84,9 @@ function EmployeeTasks() {
           task.project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           task.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
           task.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          task.assignedTo[0].email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          task.assignedTo[0].email
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
           task.start_date.toLowerCase().includes(searchQuery.toLowerCase()) ||
           task.end_date.toLowerCase().includes(searchQuery.toLowerCase()) ||
           task.state.toLowerCase().includes(searchQuery.toLowerCase())
@@ -103,7 +105,12 @@ function EmployeeTasks() {
     <>
       <ToastContainer />
       <div className="font-fontHubballi px-32 overflow-x-auto w-full h-full">
-        <form style={{ maxWidth: "700px", margin: "100px auto" }}>
+        <form
+          style={{
+            maxWidth: "700px",
+            margin: "100px auto",
+          }}
+        >
           <label
             htmlFor="default-search"
             className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
@@ -203,7 +210,9 @@ function EmployeeTasks() {
                       onChange={(event) =>
                         updateTaskStatus(task.id, event.target.value)
                       }
-                      className={`${getStatusColor(task.state)} border cursor-pointer border-black rounded-md `}
+                      className={`${getStatusColor(
+                        task.state
+                      )} border cursor-pointer border-black rounded-md `}
                     >
                       <option
                         value="NEW"
@@ -244,36 +253,39 @@ function EmployeeTasks() {
               <li>
                 <button
                   onClick={() => paginate(currentPage - 1)}
-                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage === 1 ? "cursor-not-allowed" : ""
-                    }`}
+                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${
+                    currentPage === 1 ? "cursor-not-allowed" : ""
+                  }`}
                   disabled={currentPage === 1}
                 >
                   Prev
                 </button>
               </li>
-              {Array.from({ length: Math.ceil(filteredTasks.length / tasksPerPage) }).map(
-                (item, index) => (
-                  <li key={index}>
-                    <button
-                      onClick={() => paginate(index + 1)}
-                      className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
+              {Array.from({
+                length: Math.ceil(filteredTasks.length / tasksPerPage),
+              }).map((item, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => paginate(index + 1)}
+                    className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${
+                      currentPage === index + 1
                         ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
                         : "hover:bg-red-200 hover:text-red-500"
-                        }`}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                )
-              )}
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
               <li>
                 <button
                   onClick={() => paginate(currentPage + 1)}
-                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
+                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${
+                    currentPage ===
                     Math.ceil(filteredTasks.length / tasksPerPage)
-                    ? "cursor-not-allowed"
-                    : ""
-                    }`}
+                      ? "cursor-not-allowed"
+                      : ""
+                  }`}
                   disabled={
                     currentPage ===
                     Math.ceil(filteredTasks.length / tasksPerPage)
