@@ -10,8 +10,8 @@ import adish from "../../images/adish.png";
 import b1 from "../../images/b1.png";
 import b2 from "../../images/b2.png";
 import logo from "../../images/Logo.png";
-import kiei from "../../images/kiei.png"
-import { Helmet } from 'react-helmet'
+import kiei from "../../images/kiei.png";
+import { Helmet } from "react-helmet";
 import {
   AiFillInstagram,
   AiOutlineArrowRight,
@@ -20,10 +20,10 @@ import {
 } from "react-icons/ai";
 import { BiLogoFacebookCircle } from "react-icons/bi";
 import { FaStar } from "react-icons/fa";
-import { fetchAnnouncements } from '../../data/AnnouncementApi'
+import { fetchAnnouncements } from "../../data/AnnouncementApi";
 import { Typography } from "@material-tailwind/react";
-import { IoIosArrowDown } from 'react-icons/io'
-import { TiArrowUpOutline } from 'react-icons/ti'
+import { IoIosArrowDown } from "react-icons/io";
+import { TiArrowUpOutline } from "react-icons/ti";
 
 const LINKS = [
   {
@@ -50,8 +50,6 @@ function OutHomePage() {
   const customBgColorClass2 = showContent2 ? "bg-customColor" : "bg-white";
   const customBgColorClass3 = showContent3 ? "bg-customColor" : "bg-white";
 
-
-
   const toggleContent1 = () => {
     setShowContent1(!showContent1);
     setShowContent2(false);
@@ -71,7 +69,7 @@ function OutHomePage() {
   };
 
   const goToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleScroll = () => {
@@ -83,10 +81,10 @@ function OutHomePage() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -106,7 +104,7 @@ function OutHomePage() {
   const MovingObject = () => {
     useEffect(() => {
       // JavaScript logic for animation
-      const movingElement = document.querySelector('.moving-object');
+      const movingElement = document.querySelector(".moving-object");
 
       if (movingElement) {
         const animationDuration = 5; // Animation duration in seconds
@@ -118,12 +116,12 @@ function OutHomePage() {
         movingElement.style.transform = `translateX(${animationDistance}rem)`;
 
         // Reset the animation when it's completed
-        movingElement.addEventListener('animationiteration', () => {
-          movingElement.style.transform = 'translateX(0)';
+        movingElement.addEventListener("animationiteration", () => {
+          movingElement.style.transform = "translateX(0)";
         });
       }
     }, []);
-  }
+  };
 
   return (
     <>
@@ -141,9 +139,9 @@ function OutHomePage() {
               priorities.
             </h1>
             <h1 className="text-sm lg:text-base xl:text-lg 2xl:text-xl mb-4">
-              Mango creates a customized employee savings benefit to build member
-              financial wellness. By aligning their life-stages and financial
-              profile.
+              Mango creates a customized employee savings benefit to build
+              member financial wellness. By aligning their life-stages and
+              financial profile.
             </h1>
             <h1 className="text-sm lg:text-base xl:text-lg 2xl:text-xl">
               Members will be able to apportion savings between long-term,
@@ -168,15 +166,17 @@ function OutHomePage() {
             <h1 className="mb-2 text-base lg:text-xl xl:text-2xl">
               FUTURE NEXT
             </h1>
-            <h1 className="lg:text-3xl xl:text-5xl font-extrabold mb-4">About Us</h1>
+            <h1 className="lg:text-3xl xl:text-5xl font-extrabold mb-4">
+              About Us
+            </h1>
             <p className="text-sm lg:text-base xl:text-xl">
               At StaffSense, we solidly endeavor towards making an incentive for
               our clients and that we associate. StaffSense is the leading and
               best software company in Kerala dealing with solutions like ERP,
-              e-commerce, mobile application, and so on. This goal is reflected in
-              the entirety of our solutions - every one of them standing tall as an
-              industry signal in its classification, consistently conveying worth
-              to our clients, for many years.
+              e-commerce, mobile application, and so on. This goal is reflected
+              in the entirety of our solutions - every one of them standing tall
+              as an industry signal in its classification, consistently
+              conveying worth to our clients, for many years.
             </p>
             <div className="flex items-center cursor-pointer">
               <span className="mr-2">Learn more</span>
@@ -193,8 +193,8 @@ function OutHomePage() {
           </div>
           <div className="text-lg mt-5">
             <h1 className="text-center">
-              "As a data solutions partner to companies, we've focused on creating
-              value for our clients"
+              "As a data solutions partner to companies, we've focused on
+              creating value for our clients"
             </h1>
           </div>
           <div className="flex flex-col space-y-6 mt-10 lg:space-y-0 lg:flex-row lg:justify-center lg:space-x-4">
@@ -228,11 +228,11 @@ function OutHomePage() {
             {/* Card 2 */}
             <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={adish} alt="" />
+                <img className="w-36 h-36" src={profile} alt="" />
               </div>
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-1">
-                  Adish CT
+                  Vishnu Krishnakumar
                 </h5>
                 <p className="mb-1">SDE</p>
                 <div className="flex justify-center items-center space-x-4 cursor-pointer">
@@ -284,14 +284,17 @@ function OutHomePage() {
         {/* ................................................................................. */}
 
         <div className="font-hubballi px-4 lg:px-0 text-center mt-20">
-          <div id="feature" className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl">
+          <div
+            id="feature"
+            className="text-center font-extrabold text-xl lg:text-3xl xl:text-4xl"
+          >
             Our Features
           </div>
           <div className="mt-5">
             <h1 className="text-center text-lg">
-              We can offer to our solutions to our current and forthcoming clients
-              so both our current and future client can pursue an educated
-              speculation choice.
+              We can offer to our solutions to our current and forthcoming
+              clients so both our current and future client can pursue an
+              educated speculation choice.
             </h1>
           </div>
           <div className="flex flex-col space-y-6 mt-10 lg:space-y-0 lg:flex-row lg:justify-center lg:space-x-4">
@@ -360,7 +363,8 @@ function OutHomePage() {
             </h1>
             <div className="w-4/5 mt-4 ml-4 md:w-4/5 md:ml-24">
               <p className="text-xs md:text-sm lg:text-xl xl:text-2xl text-gray-600">
-                Our approach in handling a project is designed in a flow that can ensure the requirement of the client is fulfilled intact.
+                Our approach in handling a project is designed in a flow that
+                can ensure the requirement of the client is fulfilled intact.
               </p>
             </div>
 
@@ -369,16 +373,26 @@ function OutHomePage() {
                 className={`flex justify-between cursor-pointer ${customBgColorClass1} rounded-lg p-4 transition duration-300`}
                 onClick={toggleContent1}
               >
-                <p className={`text-xl font-bold ${showContent1 ? 'text-white' : 'text-black'}`}>
+                <p
+                  className={`text-xl font-bold ${
+                    showContent1 ? "text-white" : "text-black"
+                  }`}
+                >
                   Develop a Concept
                 </p>
                 <div className="arrow">
                   <IoIosArrowDown
-                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${showContent1 ? 'transform rotate-180' : ''}`}
+                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${
+                      showContent1 ? "transform rotate-180" : ""
+                    }`}
                   />
                 </div>
               </div>
-              <div className={`${showContent1 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}>
+              <div
+                className={`${
+                  showContent1 ? "block" : "hidden"
+                } mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}
+              >
                 <p className="p-4 text-base lg:text-lg xl:text-xl">
                   Drafting the extent of the need and making a rundown of the
                   highlights and prerequisites wanted in the project.
@@ -390,17 +404,30 @@ function OutHomePage() {
                 className={`flex justify-between cursor-pointer ${customBgColorClass2} rounded-lg p-4 transition duration-300`}
                 onClick={toggleContent2}
               >
-                <p className={`text-xl font-bold ${showContent2 ? 'text-white' : 'text-black'}`}>
+                <p
+                  className={`text-xl font-bold ${
+                    showContent2 ? "text-white" : "text-black"
+                  }`}
+                >
                   Build and Evolve
                 </p>
                 <div className="arrow">
                   <IoIosArrowDown
-                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${showContent2 ? 'transform rotate-180' : ''}`}
+                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${
+                      showContent2 ? "transform rotate-180" : ""
+                    }`}
                   />
                 </div>
               </div>
-              <div className={`${showContent2 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}>
-                <p className="p-4 text-base lg:text-lg xl:text-xl">Structuring the parts of the solutions, doing operational and functional tests and consolidating the required output.</p>
+              <div
+                className={`${
+                  showContent2 ? "block" : "hidden"
+                } mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}
+              >
+                <p className="p-4 text-base lg:text-lg xl:text-xl">
+                  Structuring the parts of the solutions, doing operational and
+                  functional tests and consolidating the required output.
+                </p>
               </div>
             </div>
             <div className="group mt-6 w-4/5 mx-auto cursor-pointer">
@@ -408,22 +435,34 @@ function OutHomePage() {
                 className={`flex justify-between cursor-pointer ${customBgColorClass3} rounded-lg p-4 transition duration-300`}
                 onClick={toggleContent3}
               >
-                <p className={`text-xl font-bold ${showContent3 ? 'text-white' : 'text-black'}`}>
+                <p
+                  className={`text-xl font-bold ${
+                    showContent3 ? "text-white" : "text-black"
+                  }`}
+                >
                   Implement
                 </p>
                 <div className="arrow">
                   <IoIosArrowDown
-                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${showContent3 ? 'transform rotate-180' : ''}`}
+                    className={`w-5 h-5 mr-5 mt-1 text-gray-500 ${
+                      showContent3 ? "transform rotate-180" : ""
+                    }`}
                   />
                 </div>
               </div>
-              <div className={`${showContent3 ? 'block' : 'hidden'} mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}>
-                <p className="p-4 text-base lg:text-lg xl:text-xl">Launch of the solution in the environment and setting up to make the product run effectively and up to the standards.</p>
+              <div
+                className={`${
+                  showContent3 ? "block" : "hidden"
+                } mt-2 space-y-6 text-gray-600 bg-white rounded-xl`}
+              >
+                <p className="p-4 text-base lg:text-lg xl:text-xl">
+                  Launch of the solution in the environment and setting up to
+                  make the product run effectively and up to the standards.
+                </p>
               </div>
             </div>
           </div>
         </div>
-
 
         {/* ................................................... */}
         <div className="flex font-hubballi mt-10 rounded-3xl bg-white flex-col-reverse lg:flex-row">
@@ -437,7 +476,9 @@ function OutHomePage() {
               <div key={announcement.id} className="flex flex-col p-2 md:p-4">
                 <div className="mt-2 md:mt-5 flex items-center">
                   <FaStar className="mr-2 text-lg md:text-xl lg:text-xl" />
-                  <h1 className="text-base md:text-lg lg:text-3xl xl:text-3xl">{announcement.event}</h1>
+                  <h1 className="text-base md:text-lg lg:text-3xl xl:text-3xl">
+                    {announcement.event}
+                  </h1>
                 </div>
                 <div className="text-start">
                   <p className="p-3 md:ml-7 text-sm md:text-base lg:text-2xl xl:text-xl">
@@ -457,10 +498,7 @@ function OutHomePage() {
         </div>
         {/* ............................... */}
 
-
-
         {/* ............................... */}
-
 
         {/* ................................................... */}
         <footer className="relative w-full mt-10">
