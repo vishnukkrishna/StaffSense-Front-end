@@ -87,7 +87,7 @@ function InNavList() {
             <div className="flex flex-col w-full font-medium border-t border-gray-200 md:hidden">
               <Link
                 onClick={handleLogout}
-                className="w-full py-2 font-bold text-base text-center text-red-600"
+                className="w-full py-2 font-extrabold text-2xl text-center text-customColor"
               >
                 Logout
               </Link>
@@ -124,17 +124,17 @@ function InNavList() {
             onClick={toggleMobileMenu}
           >
             <span
-              className={`block w-full h-1 transform bg-red-800 rounded-full ${
+              className={`block w-full h-1 transform bg-customColor rounded-full ${
                 isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
               }`}
             ></span>
             <span
-              className={`block w-full h-1 mt-1 transform bg-red-800 rounded-full ${
+              className={`block w-full h-1 mt-1 transform bg-customColor rounded-full ${
                 isMobileMenuOpen ? "opacity-0" : ""
               }`}
             ></span>
             <span
-              className={`block w-full h-1 mt-1 transform bg-red-800 rounded-full ${
+              className={`block w-full h-1 mt-1 transform bg-customColor rounded-full ${
                 isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
               }`}
             ></span>
