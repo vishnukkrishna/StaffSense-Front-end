@@ -36,7 +36,7 @@ function OutNavBar() {
             href="/"
             className="relative flex items-center h-full font-black transition-transform duration-300 hover:translate-x-2"
           >
-            <img className="w-36 h-7 sm:h-7 md:h-7 lg:h-7" src={logo} alt="" />
+            <img className="h-7 sm:h-7 md:h-7 lg:h-8" src={logo} alt="" />
             <span className="ml-3 text-xl text-gray-800 sm:text-lg md:text-xl lg:text-2xl"></span>
           </a>
 
@@ -85,10 +85,10 @@ function OutNavBar() {
               </Link>
             </div>
           </nav>
-          <div className="absolute left-0 mt-0 flex-col items-center justify-center hidden w-full pb-8 border-b border-gray-100 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
+          <div className="absolute left-0 mt-0 flex-col items-center justify-center hidden  w-full pb-8 border-b border-gray-100 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
             <Button
               size="sm"
-              className="hidden lg:inline-block rounded-full w-32 text-sm bg-customColor h-10 drop-shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110"
+              className=" lg:inline-block rounded-full w-32 text-sm bg-customColor h-10 drop-shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110"
               onClick={handleClick}
             >
               <span>Login Now</span>

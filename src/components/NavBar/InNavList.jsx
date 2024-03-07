@@ -44,7 +44,7 @@ function InNavList() {
             href="/home"
             className="relative flex items-center h-full font-black transition-transform duration-300 hover:translate-x-2"
           >
-            <img className="w-36 h-7 sm:h-7 md:h-7 lg:h-7" src={logo} alt="" />
+            <img className="h-7 sm:h-7 md:h-7 lg:h-8" src={logo} alt="" />
             <span className="ml-3 text-xl text-gray-800 sm:text-lg md:text-xl lg:text-2xl"></span>
           </a>
 
@@ -57,7 +57,7 @@ function InNavList() {
             <NavLink
               to="/home"
               activeclassname="active-link"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-base sm:text-base md:text-base lg:text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               Home
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -65,21 +65,21 @@ function InNavList() {
             <NavLink
               to="/addmeeting"
               activeclassname="active-link"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-base sm:text-base md:text-base lg:text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               Hall Booking
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </NavLink>
             <NavLink
               to="/visitorpage"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-base sm:text-base md:text-base lg:text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               Visitor Registration
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </NavLink>
             <NavLink
               to="/usercomplaints"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-base sm:text-base md:text-base lg:text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               Requests & Complaints
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
@@ -104,7 +104,7 @@ function InNavList() {
             </Link>
             <Button
               size="sm"
-              className="hidden lg:inline-block rounded-full w-32 text-sm bg-customColor h-10 drop-shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110"
+              className="lg:inline-block rounded-full w-32 text-sm bg-customColor h-10 drop-shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110"
               onClick={handleLogout}
             >
               <span>Logout</span>
