@@ -74,6 +74,8 @@ function AdminLoginPage() {
       } else {
         toast.error("An error occurred. Please try again later.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
