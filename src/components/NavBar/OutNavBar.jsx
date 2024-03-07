@@ -49,32 +49,32 @@ function OutNavBar() {
             <NavLink
               to="/"
               activeclassname="active-link"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-red-600 transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               Home
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500 transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </NavLink>
             <NavLink
               to="#"
               activeclassname="active-link"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-red-600 transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               Company
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500 transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </NavLink>
             <a
               href="#feature"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-red-600 transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               Our Features
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500 transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </a>
             <Link
               href="#"
-              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-red-600 transition-transform duration-300 hover:translate-x-1"
+              className="group relative text-xl ml-0 mr-0 font-bold md:ml-2 md:mr-2 lg:mr-4 sm:mr-4 transition-color hover:text-customColor transition-transform duration-300 hover:translate-x-1"
             >
               About us
-              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500 transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-customColor transform origin-bottom scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
             </Link>
             <div className="flex flex-col w-full font-medium border-t border-gray-200 md:hidden">
               <Link
