@@ -8,9 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import AuthContext from "../../components/Contexts/AuthContext";
 import jwt_decode from "jwt-decode";
 import { BACKEND_BASE_URL } from "../../api/Api";
-import { Helmet } from 'react-helmet'
-
-// Material Tailwind
+import { Helmet } from "react-helmet";
+import Loading from "../../components/Spinner/Spinner";
 import {
   Card,
   CardHeader,
@@ -20,11 +19,7 @@ import {
   Input,
   Button,
 } from "@material-tailwind/react";
-
-// Icons
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-
-// Images
 import img from "../../images/login.png";
 
 function EmployeeLoginPage() {
@@ -37,10 +32,11 @@ function EmployeeLoginPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const [cookies, setCookie] = useCookies(["jwt_token"]);
-  const [loading, setLoading] = useState(true);
   const [verificationError, setVerificationError] = useState(false);
   const { setUser } = useContext(AuthContext);
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
+  const handleLoading = () => setLoading((cur) => !cur);
 
   useEffect(() => {
     const token = new URLSearchParams(location.search).get("token");
@@ -54,6 +50,7 @@ function EmployeeLoginPage() {
   }, []);
 
   const verifyToken = (emailToken, userId) => {
+    setLoading(true);
     axios
       .post(`${BACKEND_BASE_URL}/user/verify-token/`, {
         token: emailToken,
@@ -87,6 +84,7 @@ function EmployeeLoginPage() {
   });
 
   const handleSubmit = (values) => {
+    setLoading(true);
     var email = values["email"];
     var password = values["password"];
     axios
@@ -119,7 +117,7 @@ function EmployeeLoginPage() {
           const access_token = localStorage.getItem("access_token");
 
           navigate("/home");
-          toast.success("Successfully logged")
+          toast.success("Successfully logged");
         }
       })
       .catch((error) => {
@@ -140,87 +138,97 @@ function EmployeeLoginPage() {
         <title>Employee Login | Staffsense</title>
       </Helmet>
       <ToastContainer />
-      <div className="flex flex-col md:flex-row h-screen items-center">
-        <div className="md:w-1/2 ml-4 md:ml-0">
-          <img
-            src={img}
-            alt="Your Alt Text"
-            className="w-full h-auto md:h-full object-cover max-w-full"
-          />
-        </div>
-        <div className="md:w-1/2">
-          <div className="h-full flex-grow">
-            <Card className="md:w-2/3 border md:mx-auto sm:w-full sm:mx-4 lg:w-1/2 xl:w-1/3 mt-8 md:mt-0">
-              <CardHeader
-                variant="gradient"
-                className="mb-4 bg-customColor grid h-28 place-items-center"
-              >
-                <Typography variant="h3" color="white">
-                  Sign In
-                </Typography>
-              </CardHeader>
-              <form onSubmit={formik.handleSubmit}>
-                <CardBody className="flex flex-col gap-4 mt-4 md:mt-16">
-                  <div className="relative">
-                    <Input
-                      type="email"
-                      label="Email"
-                      size="lg"
-                      name="email"
-                      id="email"
-                      {...formik.getFieldProps("email")}
-                      className={
-                        formik.errors.email && formik.touched.email
-                          ? "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-red-500"
-                          : "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      }
-                    />
-                    {formik.errors.email && formik.touched.email && (
-                      <p className="text-red-500 text-xs italic">
-                        {formik.errors.email}
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="relative">
-                    <Input
-                      type={passwordVisible ? "text" : "password"}
-                      label="Password"
-                      id="password"
-                      name="password"
-                      size="lg"
-                      className={
-                        formik.errors.password && formik.touched.password
-                          ? "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-red-500"
-                          : "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      }
-                      {...formik.getFieldProps("password")}
-                    />
-                    {formik.errors.password && formik.touched.password && (
-                      <p className="text-red-500 text-xs italic">
-                        {formik.errors.password}
-                      </p>
-                    )}
-                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-                      {passwordVisible ? (
-                        <AiOutlineEyeInvisible onClick={togglePasswordVisibility} />
-                      ) : (
-                        <AiOutlineEye onClick={togglePasswordVisibility} />
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="flex flex-col md:flex-row h-screen items-center">
+          <div className="md:w-1/2 ml-4 md:ml-0">
+            <img
+              src={img}
+              alt="Your Alt Text"
+              className="w-full h-auto md:h-full object-cover max-w-full"
+            />
+          </div>
+          <div className="md:w-1/2">
+            <div className="h-full flex-grow">
+              <Card className="md:w-2/3 border md:mx-auto sm:w-full sm:mx-4 lg:w-1/2 xl:w-1/3 mt-8 md:mt-0">
+                <CardHeader
+                  variant="gradient"
+                  className="mb-4 bg-customColor grid h-28 place-items-center"
+                >
+                  <Typography variant="h3" color="white">
+                    Sign In
+                  </Typography>
+                </CardHeader>
+                <form onSubmit={formik.handleSubmit}>
+                  <CardBody className="flex flex-col gap-4 mt-4 md:mt-16">
+                    <div className="relative">
+                      <Input
+                        type="email"
+                        label="Email"
+                        size="lg"
+                        name="email"
+                        id="email"
+                        {...formik.getFieldProps("email")}
+                        className={
+                          formik.errors.email && formik.touched.email
+                            ? "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-red-500"
+                            : "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        }
+                      />
+                      {formik.errors.email && formik.touched.email && (
+                        <p className="text-red-500 text-xs italic">
+                          {formik.errors.email}
+                        </p>
                       )}
                     </div>
-                  </div>
 
-                  <CardFooter className="pt-0 mt-6">
-                    <Button className="bg-customColor drop-shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110" type="submit" fullWidth>
-                      Sign In
-                    </Button>
-                  </CardFooter>
-                </CardBody>
-              </form>
-            </Card>
+                    <div className="relative">
+                      <Input
+                        type={passwordVisible ? "text" : "password"}
+                        label="Password"
+                        id="password"
+                        name="password"
+                        size="lg"
+                        className={
+                          formik.errors.password && formik.touched.password
+                            ? "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-red-500"
+                            : "form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        }
+                        {...formik.getFieldProps("password")}
+                      />
+                      {formik.errors.password && formik.touched.password && (
+                        <p className="text-red-500 text-xs italic">
+                          {formik.errors.password}
+                        </p>
+                      )}
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        {passwordVisible ? (
+                          <AiOutlineEyeInvisible
+                            onClick={togglePasswordVisibility}
+                          />
+                        ) : (
+                          <AiOutlineEye onClick={togglePasswordVisibility} />
+                        )}
+                      </div>
+                    </div>
+
+                    <CardFooter className="pt-0 mt-6">
+                      <Button
+                        className="bg-customColor drop-shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110"
+                        type="submit"
+                        fullWidth
+                      >
+                        Sign In
+                      </Button>
+                    </CardFooter>
+                  </CardBody>
+                </form>
+              </Card>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

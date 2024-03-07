@@ -3,8 +3,7 @@ import { BACKEND_BASE_URL } from "../../api/Api";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import AddDepartment from "../Modal/AdminModal/AddDepartment";
 import axios from "axios";
-import Swal from 'sweetalert2';
-
+import Swal from "sweetalert2";
 
 function AdminDepartments() {
   const [departments, setDepartments] = useState([]);
@@ -32,21 +31,23 @@ function AdminDepartments() {
   const handleDelete = async (id) => {
     try {
       const result = await Swal.fire({
-        title: 'Do you really want to delete this department?',
-        icon: 'warning',
+        title: "Do you really want to delete this department?",
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'No, cancel',
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel",
       });
 
       if (result.isConfirmed) {
         await axios.delete(`${BACKEND_BASE_URL}/user/departments/${id}`);
-        console.log('Department deleted successfully');
+        console.log("Department deleted successfully");
 
-        setDepartments((prevDepartments) => prevDepartments.filter(dept => dept.id !== id));
+        setDepartments((prevDepartments) =>
+          prevDepartments.filter((dept) => dept.id !== id)
+        );
       }
     } catch (error) {
-      console.error('Error deleting department:', error);
+      console.error("Error deleting department:", error);
     }
   };
 
@@ -57,7 +58,10 @@ function AdminDepartments() {
 
   const indexOfLastDept = currentPage * deptPerPage;
   const indexOfFirstDept = indexOfLastDept - deptPerPage;
-  const currentDept = filteredDepartments.slice(indexOfFirstDept, indexOfLastDept);
+  const currentDept = filteredDepartments.slice(
+    indexOfFirstDept,
+    indexOfLastDept
+  );
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -133,16 +137,23 @@ function AdminDepartments() {
           </thead>
           <tbody>
             {currentDept.map((dept, index) => (
-              <tr className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700" key={dept.id}>
+              <tr
+                className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700"
+                key={dept.id}
+              >
                 <th
                   scope="row"
                   className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
-                >{index + 1}
+                >
+                  {index + 1}
                 </th>
                 <td className="px-6 py-4">{dept.name}</td>
                 <td className="px-6 py-4">
                   <div className="flex flex-row justify-around">
-                    <RiDeleteBin6Line className="text-red-500 text-2xl cursor-pointer" onClick={() => handleDelete(dept.id)} />
+                    <RiDeleteBin6Line
+                      className="text-red-500 text-2xl cursor-pointer"
+                      onClick={() => handleDelete(dept.id)}
+                    />
                   </div>
                 </td>
               </tr>
@@ -155,39 +166,40 @@ function AdminDepartments() {
               <li>
                 <button
                   onClick={() => paginate(currentPage - 1)}
-                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage === 1 ? "cursor-not-allowed" : ""
-                    }`}
+                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 rounded-l-lg focus:shadow-outline hover:bg-indigo-100 ${
+                    currentPage === 1 ? "cursor-not-allowed" : ""
+                  }`}
                   disabled={currentPage === 1}
                 >
                   Prev
                 </button>
               </li>
-              {Array.from({ length: Math.ceil(departments.length / deptPerPage) }).map(
-                (item, index) => (
-                  <li key={index}>
-                    <button
-                      onClick={() => paginate(index + 1)}
-                      className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${currentPage === index + 1
+              {Array.from({
+                length: Math.ceil(departments.length / deptPerPage),
+              }).map((item, index) => (
+                <li key={index}>
+                  <button
+                    onClick={() => paginate(index + 1)}
+                    className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-r-0 border-indigo-500 focus:shadow-outline ${
+                      currentPage === index + 1
                         ? "bg-indigo-500 text-red-800 text-2xl font-extrabold"
                         : "hover:bg-red-200 hover:text-red-500"
-                        }`}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                )
-              )}
+                    }`}
+                  >
+                    {index + 1}
+                  </button>
+                </li>
+              ))}
               <li>
                 <button
                   onClick={() => paginate(currentPage + 1)}
-                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${currentPage ===
-                    Math.ceil(departments.length / deptPerPage)
-                    ? "cursor-not-allowed"
-                    : ""
-                    }`}
+                  className={`h-10 px-5 text-indigo-500 transition-colors duration-150 bg-white border border-indigo-500 rounded-r-lg focus:shadow-outline hover:bg-indigo-100 ${
+                    currentPage === Math.ceil(departments.length / deptPerPage)
+                      ? "cursor-not-allowed"
+                      : ""
+                  }`}
                   disabled={
-                    currentPage ===
-                    Math.ceil(departments.length / deptPerPage)
+                    currentPage === Math.ceil(departments.length / deptPerPage)
                   }
                 >
                   Next

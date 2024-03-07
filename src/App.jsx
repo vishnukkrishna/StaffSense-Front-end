@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  BrowserRouter as Router, 
+  BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
@@ -56,11 +56,13 @@ function App() {
             />
 
             {/* Admin Side */}
-            <Route path="/dashboard" element={
-              <AdminProtectedRoutes>
-                <AdminDashBoardPage />
-              </AdminProtectedRoutes>
-            }
+            <Route
+              path="/dashboard"
+              element={
+                <AdminProtectedRoutes>
+                  <AdminDashBoardPage />
+                </AdminProtectedRoutes>
+              }
             />
             <Route
               path="/userlist"
@@ -86,11 +88,13 @@ function App() {
                 </AdminProtectedRoutes>
               }
             />
-            <Route path="/editproject/:projectId" element={
-              <AdminProtectedRoutes>
-                <EditProject />
-              </AdminProtectedRoutes>
-            }
+            <Route
+              path="/editproject/:projectId"
+              element={
+                <AdminProtectedRoutes>
+                  <EditProject />
+                </AdminProtectedRoutes>
+              }
             />
             <Route
               path="/tasklist"

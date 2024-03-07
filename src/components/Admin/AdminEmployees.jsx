@@ -4,7 +4,7 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import AddEmployee from "../Modal/AdminModal/AddEmployee";
 import { BACKEND_BASE_URL } from "../../api/Api";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 import EditEmployee from "../Modal/AdminModal/EditEmployee";
 import { toast } from "react-toastify";
 
@@ -16,14 +16,14 @@ function AdminEmployees() {
 
   const handleBlockUser = () => {
     Swal.fire({
-      title: 'Block User',
-      text: 'Are you sure you want to block this user?',
-      icon: 'warning',
+      title: "Block User",
+      text: "Are you sure you want to block this user?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, block it!',
-      cancelButtonText: 'Cancel',
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, block it!",
+      cancelButtonText: "Cancel",
     }).then((result) => {
       if (result.isConfirmed) {
         blockUser();
@@ -41,11 +41,19 @@ function AdminEmployees() {
       } else {
         const filteredEmployees = sortedEmployees.filter((employee) => {
           return (
-            employee.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            employee.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            employee.department_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            employee.first_name
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            employee.last_name
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            employee.department_name
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
             employee.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            employee.designation.toLowerCase().includes(searchQuery.toLowerCase())
+            employee.designation
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
           );
         });
         setEmployees(filteredEmployees);
@@ -71,7 +79,6 @@ function AdminEmployees() {
       e.preventDefault();
       setIsOpen(false);
     };
-
 
     const handleBlockEmployee = () => {
       setIsOpen(false);
@@ -111,8 +118,9 @@ function AdminEmployees() {
         <Button
           onClick={openModal}
           size="sm"
-          className={`${isBlocked ? "bg-red-900" : "bg-green-700"
-            } hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded`}
+          className={`${
+            isBlocked ? "bg-red-900" : "bg-green-700"
+          } hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded`}
         >
           {isBlocked ? "Unblock" : "Block"}
         </Button>
@@ -229,30 +237,38 @@ function AdminEmployees() {
             </tr>
           </thead>
           <tbody>
-            {employees.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((employee, index) => (
-              <tr key={employee.id} className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700">
-                <th
-                  scope="row"
-                  className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
+            {employees
+              .slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage)
+              .map((employee, index) => (
+                <tr
+                  key={employee.id}
+                  className="text-black border-b text-lg text-center dark:bg-gray-800 dark:border-gray-700"
                 >
-                  {index + 1}
-                </th>
-                <td className="px-6 py-4">{employee.first_name} {employee.last_name}</td>
-                <td className="px-6 py-4">{employee.department_name}</td>
-                <td className="px-6 py-4">{employee.phone}</td>
-                <td className="px-6 py-4">{employee.email}</td>
-                <td className="px-6 py-4">{employee.designation}</td>
-                <td className="px-6 py-4">
-                  <div className="flex justify-between w-max gap-4">
-                    <EditEmployee id={employee.id} Action={fetchData} />
-                    <BlockModal Action={fetchData}
-                      employeeId={employee.id}
-                      isBlocked={employee.is_blocked}
-                    />
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  <th
+                    scope="row"
+                    className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-white"
+                  >
+                    {index + 1}
+                  </th>
+                  <td className="px-6 py-4">
+                    {employee.first_name} {employee.last_name}
+                  </td>
+                  <td className="px-6 py-4">{employee.department_name}</td>
+                  <td className="px-6 py-4">{employee.phone}</td>
+                  <td className="px-6 py-4">{employee.email}</td>
+                  <td className="px-6 py-4">{employee.designation}</td>
+                  <td className="px-6 py-4">
+                    <div className="flex justify-between w-max gap-4">
+                      <EditEmployee id={employee.id} Action={fetchData} />
+                      <BlockModal
+                        Action={fetchData}
+                        employeeId={employee.id}
+                        isBlocked={employee.is_blocked}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
         {/* Pagination */}
@@ -263,9 +279,12 @@ function AdminEmployees() {
             onClick={() => setCurrentPage((prev) => prev - 1)}
             disabled={currentPage === 1}
           >
-            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />Previous
+            <ArrowLeftIcon strokeWidth={2} className="h-4 w-4" />
+            Previous
           </Button>
-          <div className="flex items-center gap-2">pages {currentPage} of {Math.ceil(employees.length / itemPerPage)}</div>
+          <div className="flex items-center gap-2">
+            pages {currentPage} of {Math.ceil(employees.length / itemPerPage)}
+          </div>
           <Button
             variant="text"
             className="flex items-center gap-2 rounded-full"
