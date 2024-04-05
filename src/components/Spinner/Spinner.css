@@ -73,3 +73,21 @@
     left: calc(100% - 22px);
   }
 }
+
+@keyframes blink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+.dot {
+  animation: blink 1s infinite;
+}
+
+.animate-spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
