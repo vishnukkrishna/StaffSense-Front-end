@@ -141,7 +141,7 @@ function EmployeeChat() {
                             </svg>
                         </span>
                         <img
-                            src={BACKEND_BASE_URL + senderdetails?.profile_pic || '/path/to/default-image.jpg'}
+                            src={senderdetails?.profile_pic || '/path/to/default-image.jpg'}
                             alt=""
                             className="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
                         />
@@ -181,7 +181,7 @@ function EmployeeChat() {
                                                 </div>
                                             </div>
                                             <img
-                                                src={BACKEND_BASE_URL + senderdetails?.profile_pic}
+                                                src={senderdetails?.profile_pic}
                                                 alt="My profile"
                                                 className="w-8 h-8 rounded-full order-1"
                                             />
@@ -201,7 +201,7 @@ function EmployeeChat() {
                                                 </div>
                                             </div>
                                             <img
-                                                src={BACKEND_BASE_URL + recipientdetails?.profile_pic}
+                                                src={recipientdetails?.profile_pic}
                                                 className="w-8 h-8 rounded-full order-2"
                                             />
                                         </div>

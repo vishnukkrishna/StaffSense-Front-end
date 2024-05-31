@@ -68,7 +68,7 @@ function AdminChatSearch() {
                             className={`flex items-center rounded-xl px-3 mb-3 py-2 text-sm transition duration-150 ease-in-out  cursor-pointer focus:outline-none ${activeEmployeeId === employee.id ? ' bg-indigo-300' : 'bg-gray-100 text-gray-600 border-black'
                                 }`}
                         >
-                            <img className="object-cover w-10 h-10 rounded-full" src={BACKEND_BASE_URL + employee.profile_pic} alt="username" />
+                            <img className="object-cover w-10 h-10 rounded-full" src={employee.profile_pic} alt="username" />
                             <Link to={`/adminchat/chatbox/${employee.id}`}>
                                 <div className="w-full pb-2">
                                     <div className="flex justify-between">
