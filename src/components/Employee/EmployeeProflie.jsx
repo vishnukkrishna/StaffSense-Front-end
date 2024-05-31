@@ -70,6 +70,7 @@ function EmployeeProfile() {
         `${BACKEND_BASE_URL}/user/userdetails/${user_id}/`
       );
       setUserData(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching user data:", error);
     }
@@ -96,7 +97,7 @@ function EmployeeProfile() {
                   <div className="w-44 h-44 overflow-hidden rounded-full">
                     {userData.profile_pic ? (
                       <img
-                        src={`${BACKEND_BASE_URL}${userData.profile_pic}`}
+                        src={`${userData.profile_pic}`}
                         alt="Profile"
                         className="w-full h-full object-cover"
                       />
@@ -168,7 +169,6 @@ function EmployeeProfile() {
                   </div>
                 </div>
               </div>
-
 
               <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
                 <EditEmployeeProfile Action={fetchUserData} />
