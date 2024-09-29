@@ -6,8 +6,10 @@ import card1 from "../../images/collaboration.webp";
 import card2 from "../../images/innovation.webp";
 import card3 from "../../images/deliver.webp";
 // import profile from "../../images/profile-pic.jpg";
-import profile from "../../images/profile-pic3.jpg";
-import adish from "../../images/adish.png";
+import pic1 from "../../images/pic-1.jpg";
+import pic2 from "../../images/pic-2.jpg";
+import pic3 from "../../images/pic-3.jpg";
+// import adish from "../../images/adish.png";
 import b1 from "../../images/b1.png";
 import b2 from "../../images/b2.png";
 import logo from "../../images/Logo.png";
@@ -202,7 +204,7 @@ function OutHomePage() {
             {/* Card 1 */}
             <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={profile} alt="" />
+                <img className="w-44 h-44 rounded-full" src={pic1} alt="" />
               </div>
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-1">
@@ -229,7 +231,7 @@ function OutHomePage() {
             {/* Card 2 */}
             <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={profile} alt="" />
+                <img className="w-44 h-44 rounded-full" src={pic3} alt="" />
               </div>
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-1">
@@ -256,7 +258,7 @@ function OutHomePage() {
             {/* Card 3 */}
             <div className="w-full lg:w-96 border rounded-2xl overflow-hidden shadow-lg bg-gray-100">
               <div className="p-4 bg-white border-t flex justify-center items-center">
-                <img className="w-36 h-36" src={profile} alt="" />
+                <img className="w-44 h-44 rounded-full" src={pic2} alt="" />
               </div>
               <div className="p-4">
                 <h5 className="text-blue-gray text-xl font-semibold mb-1">

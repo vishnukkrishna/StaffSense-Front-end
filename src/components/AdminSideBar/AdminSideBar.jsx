@@ -53,7 +53,11 @@ function AdminSidebar() {
     { title: "Meetings", icon: <SiGotomeeting />, path: "/meeting" },
     { title: "Chat", icon: <BiMessageDetail />, path: "/adminchat" },
     { title: "Leaves", icon: <AiTwotoneCalendar />, path: "/adminleave" },
-    { title: "Live Projects", icon: <FaProjectDiagram />, path: "/projectlist" },
+    {
+      title: "Live Projects",
+      icon: <FaProjectDiagram />,
+      path: "/projectlist",
+    },
     { title: "Tasks", icon: <FaListUl />, path: "/tasklist" },
     { title: "Visitors", icon: <SlCalender />, path: "/visitor" },
     { title: "Complaints", icon: <BsHeadset />, path: "/complaint" },
@@ -62,38 +66,46 @@ function AdminSidebar() {
 
   return (
     <Card
-      className={`h-full max-w-[20rem] ${open ? "w-72" : "w-20"
-        } p-5 shadow-lg shadow-indigo-300 font-fontHubballi ${open && "border-r-8"
-        } rounded-none`}
+      className={`h-full max-w-[20rem] ${
+        open ? "w-72" : "w-20"
+      } p-5 shadow-lg shadow-indigo-300 font-fontHubballi ${
+        open && "border-r-8"
+      } rounded-none`}
     >
       <BsCaretLeftSquareFill
-        className={`bg-white text-3xl text-dark-purple absolute -right-3 top-9 border-2 cursor-pointer ${!open && "rotate-180"
-          } `}
+        className={`bg-white text-3xl text-dark-purple absolute -right-3 top-9 border-2 cursor-pointer ${
+          !open && "rotate-180"
+        } `}
         onClick={() => setOpen(!open)}
       />
       <List
-        className={`mt-1 text-lg font-black font-fontHubballi ${open && "border border-blue-gray-200 dark:border-gray-700 space-y-2"
-          }`}
+        className={`mt-1 text-lg font-black font-fontHubballi ${
+          open && "border border-blue-gray-200 dark:border-gray-700 space-y-2"
+        }`}
       >
         {Menus.map((menu, index) => (
           <ListItem
             key={index}
-            className={`${open ? 'border-b border-blue-gray-300 dark:border-gray-600' : ''} ${activeLink === menu.path && open
-              ? "bg-indigo-500 text-white font-bold rounded-lg shadow-md"
-              : ""
-              }`}
+            className={`${
+              open ? "border-b border-blue-gray-300 dark:border-gray-600" : ""
+            } ${
+              activeLink === menu.path && open
+                ? "bg-indigo-500 text-white font-bold rounded-lg shadow-md"
+                : ""
+            }`}
           >
-            <ListItemPrefix className={`${open ? '' : 'my-3'}`}>
+            <ListItemPrefix className={`${open ? "" : "my-3"}`}>
               {menu.icon}
             </ListItemPrefix>
             {open && (
               <Link
                 to={menu.path}
                 onClick={() => handleLinkClick(menu.path)}
-                className={`block py-2 px-7 transition-colors duration-300 rounded-lg ${activeLink === menu.path
-                  ? "hover:bg-indigo-500 hover:text-white"
-                  : "hover:bg-cyan-800 hover:text-white"
-                  }`}
+                className={`block py-2 px-7 transition-colors duration-300 rounded-lg ${
+                  activeLink === menu.path
+                    ? "hover:bg-indigo-500 hover:text-white"
+                    : "hover:bg-cyan-800 hover:text-white"
+                }`}
               >
                 {menu.title}
               </Link>
